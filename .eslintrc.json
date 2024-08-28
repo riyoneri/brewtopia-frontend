@@ -5,5 +5,31 @@
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
-  "ignorePatterns": ["*.json"]
+  "ignorePatterns": ["*.json"],
+  "rules": {
+    "no-console": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "arrow-body-style": ["error", "as-needed"],
+    "no-constructor-return": "error",
+    "no-duplicate-imports": "error",
+    "no-self-compare": "error",
+    "no-else-return": "error",
+    "no-lonely-if": "error",
+    "no-negated-condition": "error",
+    "no-useless-return": "error",
+    "no-var": "error",
+    "operator-assignment": ["error", "always"],
+    "prefer-arrow-callback": "error"
+  }
 }
