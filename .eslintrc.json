@@ -5,7 +5,7 @@
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
-  "ignorePatterns": ["*.json"],
+  "ignorePatterns": ["*.json", "*.md", "*.css"],
   "rules": {
     "no-console": "error",
     "no-unused-vars": [

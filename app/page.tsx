@@ -1,7 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
-  return (
-    <main>Brewtopia</main>
-  );
+  return <main>Brewtopia</main>;
 }
