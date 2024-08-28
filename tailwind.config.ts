@@ -1,3 +1,4 @@
+import daisyui from "daisyui";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -19,6 +20,12 @@ const config: Config = {
       backgroundImage: {},
     },
   },
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    themes: false,
+    darkTheme: false,
+    prefix: "dui-",
+    logs: false,
+  },
 };
 export default config;
