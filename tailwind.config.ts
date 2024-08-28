@@ -1,4 +1,5 @@
 import daisyui from "daisyui";
+import tailwindScrollbar from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -23,7 +24,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [daisyui],
+  plugins: [daisyui, tailwindScrollbar],
   daisyui: {
     themes: false,
     darkTheme: false,
