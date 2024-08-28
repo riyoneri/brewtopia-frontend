@@ -10,10 +10,11 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx,json,css,html,md}": [
+    "*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
-    ]
+    ],
+    "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
     "next": "14.2.7",
