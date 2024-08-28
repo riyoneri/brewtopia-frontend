@@ -17,6 +17,7 @@
     "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18"
