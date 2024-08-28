@@ -1,3 +1,5 @@
+import Footer from "@/components/footer";
+import classNames from "classnames";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
@@ -15,8 +17,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={dmSans.className}>{children}</body>
+    <html
+      lang="en"
+      className="scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-primary/50"
+    >
+      <body
+        className={classNames(
+          dmSans.className,
+          "text-sm sm:text-base leading-none",
+        )}
+      >
+        <main className="min-h-dvh">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
