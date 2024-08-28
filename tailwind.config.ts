@@ -19,7 +19,7 @@ const config: Config = {
       },
       backgroundImage: {},
       screens: {
-        xs: "400",
+        xs: "400px",
       },
     },
   },
