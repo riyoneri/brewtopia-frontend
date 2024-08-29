@@ -6,4 +6,8 @@
   .maximum-width {
     @apply max-w-screen-2xl mx-auto w-full px-5;
   }
+
+  .hero-height {
+    @apply h-[calc(100dvh-3.2rem)];
+  }
 }
