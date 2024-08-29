@@ -9,9 +9,7 @@ export default function HomeHeroSection() {
     <section className="hero-height maximum-width grid grid-cols-5 grid-rows-5 gap-5 *:row-span-full">
       <div className="col-span-full grid grid-rows-5 gap-5 overflow-hidden sm:gap-10 lg:col-span-3">
         <div className="row-span-1 flex flex-col justify-evenly gap-5 sm:gap-10 md:row-span-2 lg:justify-start">
-          <h1 className="text-2xl font-medium sm:text-4xl md:text-6xl xl:text-7xl">
-            Choose your Coffee & Space
-          </h1>
+          <h1 className="main-heading">Choose your Coffee & Space</h1>
           <p className="text-balance sm:text-pretty">
             BrewTopia has been serving 20,0000+ cups of coffee and providing a
             comfortable place for our customers to work since 2010.
