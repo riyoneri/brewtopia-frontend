@@ -36,7 +36,7 @@ export default function UserNavBar() {
 
   return (
     <>
-      <nav className="sticky top-0 hidden bg-white py-2 shadow-md sm:block">
+      <nav className="sticky top-0 z-50 hidden bg-white py-2 shadow-md sm:block">
         <div className="maximum-width flex items-center justify-between">
           <Link href="/" className="text-lg font-medium">
             <span>Brew</span>
@@ -74,6 +74,7 @@ export default function UserNavBar() {
             id="my-drawer"
             type="checkbox"
             checked={isDrawerOpen}
+            readOnly
             className="dui-drawer-toggle"
           />
           <div className="dui-drawer-content">
