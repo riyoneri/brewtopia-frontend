@@ -10,4 +10,8 @@
   .hero-height {
     @apply h-[calc(100dvh-3.2rem)];
   }
+
+  .main-heading {
+    @apply text-lg xs:text-2xl font-medium sm:text-4xl md:text-6xl xl:text-7xl leading-none;
+  }
 }
