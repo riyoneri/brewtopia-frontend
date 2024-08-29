@@ -27,7 +27,7 @@ export default function RootLayout({
           "text-sm sm:text-base leading-none",
         )}
       >
-        <main className="min-h-dvh">{children}</main>
+        <main className="mb-10 min-h-dvh">{children}</main>
         <Footer />
       </body>
     </html>
