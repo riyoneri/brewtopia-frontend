@@ -2,7 +2,6 @@
 
 import workspaces from "@/data/workspaces";
 import { useEffect, useState } from "react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";

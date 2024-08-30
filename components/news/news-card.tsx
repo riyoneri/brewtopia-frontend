@@ -11,7 +11,7 @@ export default function NewsCard({ id, title, date, imageUrl }: NewsDto) {
 
   return (
     <Link
-      href={`${id}`}
+      href={`/news/${id}`}
       className="flex w-full flex-col items-stretch gap-5 xs:flex-row"
     >
       <Image
