@@ -4,7 +4,7 @@
 
 @layer components {
   .maximum-width {
-    @apply max-w-screen-2xl mx-auto w-full px-5;
+    @apply max-w-screen-2xl mx-auto w-full px-5 sm:px-10;
   }
 
   .hero-height {
@@ -13,5 +13,22 @@
 
   .main-heading {
     @apply text-lg xs:text-2xl font-medium sm:text-4xl md:text-6xl xl:text-7xl leading-none;
+  }
+
+  .custom-pagination-bullet {
+    @apply size-5 bg-orange-500 rounded-full;
+    /* width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2); */
+  }
+
+  .swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
   }
 }
