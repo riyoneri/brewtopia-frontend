@@ -13,10 +13,11 @@ export default function NewsHeadingCard({
   imageUrl,
   title,
   date,
+  id,
 }: NewsDto & { className?: string }) {
   const newsDate = dayjs(date);
   return (
-    <Link href="" className="card-with-shadows flex flex-col">
+    <Link href={`/news/${id}`} className="card-with-shadows flex flex-col">
       <Image
         src={imageUrl}
         className="max-h-96 w-full object-cover object-top"

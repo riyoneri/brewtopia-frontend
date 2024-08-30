@@ -1,6 +1,6 @@
 "use client";
 
-import workspaces from "@/data/workspaces";
+import Workspaces from "@/data/workspaces";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,13 +10,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import WorkspaceCard from "./workspace-card";
 
 export default function WorkspaceCardList() {
-  const [displayWorkspaces, setDisplayWorkspaces] = useState<WorkspaceDto[]>(
-    [],
-  );
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setDisplayWorkspaces(workspaces);
+    setIsMounted(true);
   }, []);
+
+  if (!isMounted) return;
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -42,7 +42,7 @@ export default function WorkspaceCardList() {
         }}
         modules={[Pagination]}
       >
-        {displayWorkspaces.map((workspace) => (
+        {Workspaces.map((workspace) => (
           <SwiperSlide key={workspace.id}>
             <WorkspaceCard {...workspace} />
           </SwiperSlide>
