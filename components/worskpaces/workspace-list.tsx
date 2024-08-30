@@ -7,19 +7,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { PaginationOptions } from "swiper/types";
 
 import WorkspaceCard from "./workspace-card";
 
 export default function WorkspaceCardList() {
-  const pagination: PaginationOptions = {
-    clickable: true,
-    renderBullet: function (_index: number, _className: string) {
-      // return '<span class="' + "pagination-lion" + '">' + (_index + 1) + "</span>";
-      return `<span class="custom-pagination-bullet">a</span>`;
-    },
-  };
-
   const [displayWorkspaces, setDisplayWorkspaces] = useState<WorkspaceDto[]>(
     [],
   );
@@ -29,11 +20,27 @@ export default function WorkspaceCardList() {
   }, []);
 
   return (
-    <div className="">
+    <div className="space-y-4 sm:space-y-5">
       <Swiper
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+        }}
+        autoplay={true}
         loop
-        slidesPerView={3}
-        pagination={pagination}
+        slidesPerView={1}
+        spaceBetween={20}
+        pagination={{
+          el: "#containerForBullets",
+          type: "bullets",
+          bulletClass: "swiper-custom-bullet",
+          bulletActiveClass: "swiper-custom-bullet-active",
+          clickable: true,
+        }}
         modules={[Pagination]}
       >
         {displayWorkspaces.map((workspace) => (
@@ -42,6 +49,10 @@ export default function WorkspaceCardList() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div
+        id="containerForBullets"
+        className="flex justify-center gap-2 transition duration-300"
+      ></div>
     </div>
   );
 }
