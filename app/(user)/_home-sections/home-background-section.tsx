@@ -1,5 +1,6 @@
 "use client";
 
+import Coffees from "@/app/data/coffees";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -56,54 +57,15 @@ export default function HomeBackgroundSection() {
           className="flex gap-5 *:h-80 *:w-1/4 *:object-cover even:*:mt-20"
           ref={imagesContainr}
         >
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1488667499475-42a530fab02b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Image"
-            height={500}
-            width={500}
-          />
+          {Coffees.map((coffee) => (
+            <Image
+              key={coffee.id}
+              src={coffee.imageUrl}
+              alt="Image"
+              height={500}
+              width={500}
+            />
+          ))}
         </div>
       </div>
     </section>
