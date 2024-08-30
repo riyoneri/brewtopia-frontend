@@ -22,3 +22,11 @@ interface EventDto {
   date: string;
   imageUrl: string;
 }
+
+interface NewsDto {
+  id: string;
+  imageUrl: string;
+  date: string;
+  title: string;
+  description: string;
+}
