@@ -68,7 +68,7 @@ export default function UserNavBar() {
           </div>
         </div>
       </nav>
-      <nav className="sticky top-0 bg-white py-2 shadow-md sm:hidden ">
+      <nav className="sticky top-0 z-50 bg-white py-2 shadow-md sm:hidden ">
         <div className="dui-drawer dui-drawer-end">
           <input
             id="my-drawer"
