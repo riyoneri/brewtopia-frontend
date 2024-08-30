@@ -1,6 +1,21 @@
 import { faker } from "@faker-js/faker";
 
-const workspaces: WorkspaceDto[] = [
+const Workspaces: WorkspaceDto[] = [
+  {
+    id: faker.string.uuid(),
+    imageUrl: faker.image.url(),
+    name: faker.commerce.department(),
+  },
+  {
+    id: faker.string.uuid(),
+    imageUrl: faker.image.url(),
+    name: faker.commerce.department(),
+  },
+  {
+    id: faker.string.uuid(),
+    imageUrl: faker.image.url(),
+    name: faker.commerce.department(),
+  },
   {
     id: faker.string.uuid(),
     imageUrl: faker.image.url(),
@@ -28,4 +43,4 @@ const workspaces: WorkspaceDto[] = [
   },
 ];
 
-export default workspaces;
+export default Workspaces;

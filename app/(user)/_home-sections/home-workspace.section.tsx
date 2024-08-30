@@ -1,4 +1,4 @@
-import WorkspaceCardList from "@/components/worskpaces/workspace-card-list";
+import WorkspaceList from "@/components/worskpaces/workspace-list";
 
 export default function HomeWorkspaceSection() {
   return (
@@ -9,7 +9,7 @@ export default function HomeWorkspaceSection() {
           We provide many attractive and unique workplaces so you will have no
           trouble finding the workspace you want
         </p>
-        <WorkspaceCardList />
+        <WorkspaceList />
       </div>
     </section>
   );
