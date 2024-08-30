@@ -34,11 +34,8 @@ export default function HomeBackgroundSection() {
   }, []);
 
   return (
-    <section className="bg-tertiary py-10">
-      <div
-        className="maximum-width space-y-5 overflow-hidden"
-        ref={triggerContainer}
-      >
+    <section className="bg-tertiary py-8 sm:py-10" ref={triggerContainer}>
+      <div className="maximum-width space-y-5 overflow-hidden">
         <h1 className="main-heading text-pretty">
           We provide your space for your work or Mini event With Your Favorite
           coffee.

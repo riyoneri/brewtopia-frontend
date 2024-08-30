@@ -42,7 +42,7 @@ export default function HomeEventsSection() {
 
   return (
     <section
-      className="maximum-width flex flex-col gap-5 overflow-x-hidden"
+      className="maximum-width flex flex-col gap-5 overflow-x-hidden py-8 sm:py-10"
       ref={eventsContainer}
     >
       <h3 className="main-heading capitalize">
