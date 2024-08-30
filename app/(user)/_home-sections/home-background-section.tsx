@@ -1,6 +1,6 @@
 "use client";
 
-import Coffees from "@/app/data/coffees";
+import Coffees from "@/data/coffees";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";

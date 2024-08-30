@@ -1,6 +1,6 @@
-import Products from "@/app/data/products";
 import Button from "@/components/button";
 import ProductCard from "@/components/products/product-card";
+import Products from "@/data/products";
 import Link from "next/link";
 
 export default function HomeFavoriteSection() {

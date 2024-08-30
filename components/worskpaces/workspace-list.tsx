@@ -1,6 +1,6 @@
 "use client";
 
-import workspaces from "@/app/data/workspaces";
+import workspaces from "@/data/workspaces";
 import { useEffect, useState } from "react";
 // Import Swiper styles
 import "swiper/css";

@@ -1,8 +1,8 @@
 "use client";
 
-import events from "@/app/data/events";
 import Button from "@/components/button";
 import EventCard from "@/components/events/event-card";
+import events from "@/data/events";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
