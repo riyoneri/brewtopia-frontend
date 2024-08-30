@@ -9,10 +9,7 @@ export default function ProductCard({
   previousPrice,
 }: ProductDto) {
   return (
-    <Link
-      href="/"
-      className="flex flex-col gap-0.5 p-5 shadow-md transition hover:shadow-lg"
-    >
+    <Link href="/" className="card-with-shadows flex flex-col gap-0.5">
       <Image
         src={imageUrl}
         className="max-h-72 w-full object-cover sm:max-h-60"
