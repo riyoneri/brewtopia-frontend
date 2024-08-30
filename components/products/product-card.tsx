@@ -1,22 +1,32 @@
-import { faker } from "@faker-js/faker";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({}) {
+export default function ProductCard({
+  name,
+  imageUrl,
+  price,
+  hasDiscountInApp,
+  previousPrice,
+}: ProductDto) {
   return (
-    <Link href="/" className="flex flex-col gap-1">
+    <Link href="/" className="flex flex-col gap-0.5">
       <Image
-        src={faker.image.url()}
-        className="max-h-48 w-full object-cover sm:max-h-60"
+        src={imageUrl}
+        className="max-h-72 w-full object-cover sm:max-h-60"
         height={500}
         width={500}
-        alt="Image"
+        alt={`${name} Image`}
       />
-      <p className="font-medium uppercase">{faker.commerce.productName()}</p>
-      <p className="text-lg font-medium sm:text-xl">
-        ${faker.commerce.price({ min: 1, max: 50 })}
-      </p>
-      <p className="text-primary">Get 20% Off in App</p>
+      <p className="mt-1 font-medium uppercase">{name}</p>
+      <div className="flex items-center gap-1">
+        <span className="text-lg font-medium sm:text-xl">${price}</span>
+        {previousPrice && (
+          <span className="text-sm line-through">${previousPrice}</span>
+        )}
+      </div>
+      {hasDiscountInApp && (
+        <p className="text-sm text-primary">Get 20% Off in App</p>
+      )}
     </Link>
   );
 }
