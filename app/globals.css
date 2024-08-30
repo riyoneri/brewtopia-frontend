@@ -22,4 +22,8 @@
   .swiper-custom-bullet-active {
     @apply bg-primary;
   }
+
+  .card-with-shadows {
+    @apply shadow-md hover:shadow-lg p-3 xs:p-5 transition;
+  }
 }
