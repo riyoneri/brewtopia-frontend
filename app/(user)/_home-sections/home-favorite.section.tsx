@@ -1,4 +1,4 @@
-import products from "@/app/data/products";
+import Products from "@/app/data/products";
 import Button from "@/components/button";
 import ProductCard from "@/components/products/product-card";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function HomeFavoriteSection() {
         <Button>Explore Other Menu</Button>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-        {products.slice(0, 3).map((product) => (
+        {Products.slice(0, 3).map((product) => (
           <ProductCard {...product} key={product.id} />
         ))}
       </div>

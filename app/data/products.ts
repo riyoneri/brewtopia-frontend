@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-const products: ProductDto[] = [
+const Products: ProductDto[] = [
   {
     id: faker.string.uuid(),
     description: faker.commerce.productDescription(),
@@ -54,4 +54,4 @@ const products: ProductDto[] = [
   },
 ];
 
-export default products;
+export default Products;
