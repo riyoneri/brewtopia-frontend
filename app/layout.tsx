@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import classNames from "classnames";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
@@ -27,8 +26,7 @@ export default function RootLayout({
           "text-sm sm:text-base leading-none",
         )}
       >
-        <main className="min-h-dvh">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
