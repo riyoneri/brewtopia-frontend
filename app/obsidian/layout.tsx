@@ -73,7 +73,7 @@ export default function AdminRootLayout({
         </div>
         <div className="dui-drawer-side xs:text-lg">
           <label onClick={closeSidebar} className="dui-drawer-overlay"></label>
-          <div className="relative flex min-h-full w-5/6 flex-col bg-tertiary p-3 xs:w-80">
+          <div className="relative flex min-h-full w-5/6 flex-col bg-white p-3 xs:w-80 sm:bg-tertiary">
             <div className="flex items-center justify-between border-b border-b-secondary pb-3">
               <div className="text-lg font-medium">
                 <span>Brew</span>
