@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import UserNavBar from "@/components/user/user-navbar";
 
 export default function UserRootLayout({
@@ -8,7 +9,8 @@ export default function UserRootLayout({
   return (
     <main>
       <UserNavBar />
-      {children}
+      <main className="min-h-dvh">{children}</main>
+      <Footer />
     </main>
   );
 }
