@@ -29,7 +29,7 @@ export default function AdminHeader({
             as="button"
             className="dui-indicator data-[open]:bg-tertiary"
           >
-            <span className="dui-badge dui-indicator-item dui-badge-xs right-1 top-1 bg-accent-red"></span>
+            <span className="dui-badge dui-indicator-item dui-badge-xs right-1 top-1 z-0 bg-accent-red"></span>
             <FaRegBell />
           </MenuButton>
 
