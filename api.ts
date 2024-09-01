@@ -30,3 +30,9 @@ interface NewsDto {
   title: string;
   description: string;
 }
+
+interface NotificationDto {
+  id: string;
+  message: string;
+  link: string;
+}
