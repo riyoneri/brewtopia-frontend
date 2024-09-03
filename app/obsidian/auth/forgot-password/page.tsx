@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -16,7 +17,8 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function AdminLogin() {
+export default function AdminForgotPassword() {
+  const router = useRouter();
   const {
     formState: { errors },
     register,
@@ -25,6 +27,7 @@ export default function AdminLogin() {
 
   const onSubmit = (data: InputsType) => {
     data;
+    router.push("./otp");
   };
 
   return (
