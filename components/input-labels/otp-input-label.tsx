@@ -31,6 +31,7 @@ export default function OtpInputLabel({
         numInputs={4}
         shouldAutoFocus
         skipDefaultStyles
+        inputType="number"
         containerStyle="!grid grid-cols-4 text-lg xs:text-xl gap-2 xs:gap-5"
         inputStyle={classNames(
           "border-2 p-1 xs:p-2 focus:outline-primary text-center",
