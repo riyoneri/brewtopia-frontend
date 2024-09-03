@@ -2,17 +2,14 @@
 
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
-import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
 
 const inputsSchema = z
   .object({
-    name: z.string().min(1, "Enter your name please"),
-    email: z.string().email("Enter valid email"),
     password: z
       .string()
       .min(8)
@@ -29,7 +26,8 @@ const inputsSchema = z
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function AdminRegister() {
+export default function AdminNewPassword() {
+  const router = useRouter();
   const {
     formState: { errors },
     register,
@@ -39,8 +37,8 @@ export default function AdminRegister() {
 
   const passwordValue = watch("password");
 
-  const onSubmit = (data: InputsType) => {
-    data;
+  const onSubmit = (_data: InputsType) => {
+    router.replace("./done");
   };
 
   const passwordValidations = [
@@ -72,33 +70,14 @@ export default function AdminRegister() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="space-y-2">
-        <h1 className="text-3xl">Create Your Account</h1>
-        <p>Create an account to manage app data</p>
+        <h1 className="text-3xl">Set a New Password</h1>
+        <p>
+          No worries we&apos;ll make sure that it is as secured as the previous
+          one
+        </p>
       </div>
 
-      <Link
-        href=""
-        className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
-      >
-        <FcGoogle />
-        Sign up with Google
-      </Link>
-
-      <span className="dui-divider my-0">or</span>
-
       <div className="flex flex-col gap-3">
-        <TextInputLabel
-          title="Name"
-          placeholder="Enter name"
-          register={register("name")}
-          error={errors.name?.message}
-        />
-        <TextInputLabel
-          title="Email"
-          placeholder="Enter email"
-          register={register("email")}
-          error={errors.email?.message}
-        />
         <PasswordInputLabel
           title="Password"
           placeholder="Enter password"
@@ -113,13 +92,11 @@ export default function AdminRegister() {
           error={errors.confirmPassword?.message}
         />
 
-        <Button type="submit" className="mt-3">
-          Sign Up
-        </Button>
+        <Button type="submit">Reset Password</Button>
       </div>
 
       <p className="text-center">
-        Already have an account?{" "}
+        Back to{" "}
         <Link href="./login" className="font-medium underline">
           Sign In
         </Link>

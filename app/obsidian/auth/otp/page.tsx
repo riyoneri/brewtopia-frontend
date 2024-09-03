@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import OtpInputLabel from "@/components/input-labels/otp-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,6 +18,7 @@ const inputsSchema = z.object({
 type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminOTP() {
+  const router = useRouter();
   const {
     formState: { errors, submitCount },
     setValue,
@@ -31,8 +33,8 @@ export default function AdminOTP() {
     if (submitCount) trigger("otp");
   }, [submitCount, trigger, otp]);
 
-  const onSubmit = (data: InputsType) => {
-    data;
+  const onSubmit = (_data: InputsType) => {
+    router.replace("./new-password");
   };
 
   return (
