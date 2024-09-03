@@ -1,18 +1,27 @@
 "use client";
 
 import classNames from "classnames";
+import { AnimatePresence, easeOut, motion } from "framer-motion";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 import { AllInputsProperties } from "./text-input-label";
+
+interface PasswordInputLabelProperties extends AllInputsProperties {
+  validations?: { isValid: boolean; validationMessage: string }[];
+}
 
 export default function PasswordInputLabel({
   title,
   register,
   placeholder,
   error,
-}: AllInputsProperties) {
+  validations,
+}: PasswordInputLabelProperties) {
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const allValid = validations?.every((validation) => validation.isValid);
+
   return (
     <label htmlFor={title} className="grid gap-1">
       <p>{title}</p>
@@ -37,6 +46,33 @@ export default function PasswordInputLabel({
           {passwordVisible ? <IoEyeOffOutline /> : <IoEyeOutline />}
         </button>
       </div>
+
+      <AnimatePresence>
+        {validations?.length && !allValid && (
+          <motion.div
+            initial={{ height: "0" }}
+            animate={{ height: "100%" }}
+            exit={{ height: "0" }}
+            transition={{ duration: 0.2, ease: easeOut }}
+            className={classNames("space-y-1 overflow-hidden text-sm")}
+          >
+            {validations?.map((validation) => (
+              <div key={validation.validationMessage}>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    readOnly
+                    checked={validation.isValid}
+                    className="dui-checkbox dui-checkbox-xs [--chkbg:theme(colors.accent.green)] checked:border-none"
+                  />
+                  <span>{validation.validationMessage}</span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {error && (
         <p className="-mt-1 ml-0.5 text-xs text-accent-red  xs:text-sm">
           {error}
