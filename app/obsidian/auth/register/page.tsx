@@ -3,6 +3,7 @@
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
+import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -37,10 +38,12 @@ export default function AdminRegister() {
     watch,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
+  const { isPending, mutate } = useRegisterAdmin();
+
   const passwordValue = watch("password");
 
   const onSubmit = (data: InputsType) => {
-    data;
+    mutate(JSON.stringify(data));
   };
 
   const passwordValidations = [
@@ -113,8 +116,12 @@ export default function AdminRegister() {
           error={errors.confirmPassword?.message}
         />
 
-        <Button type="submit" className="mt-3">
-          Sign Up
+        <Button type="submit" className="mt-3 flex justify-center text-base">
+          {isPending ? (
+            <span className="dui-loading dui-loading-spinner"></span>
+          ) : (
+            "Sign Up"
+          )}
         </Button>
       </div>
 
