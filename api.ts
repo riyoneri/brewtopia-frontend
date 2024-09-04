@@ -36,3 +36,14 @@ interface NotificationDto {
   message: string;
   link: string;
 }
+
+interface FetcherResponse {
+  errorMessage: string;
+  statusCode: number;
+  errors: Record<string, string>;
+  message: string;
+}
+
+interface GlobalResponseError<T> extends FetcherResponse {
+  errors: Record<keyof T, string>;
+}
