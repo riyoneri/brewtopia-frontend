@@ -1,14 +1,14 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import classNames from "classnames";
-import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+const queryClient = new QueryClient();
 
-export const metadata: Metadata = {
-  title: "Brewtopia",
-};
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -16,18 +16,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-primary/50"
-    >
-      <body
-        className={classNames(
-          dmSans.className,
-          "text-sm sm:text-base leading-none",
-        )}
+    <QueryClientProvider client={queryClient}>
+      <html
+        lang="en"
+        className="scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-primary/50"
       >
-        {children}
-      </body>
-    </html>
+        <body
+          className={classNames(
+            dmSans.className,
+            "text-sm sm:text-base leading-none",
+          )}
+        >
+          {children}
+        </body>
+      </html>
+    </QueryClientProvider>
   );
 }
