@@ -1,6 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";
 import { DM_Sans } from "next/font/google";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           )}
         >
           {children}
+          <ReactQueryDevtools initialIsOpen={false} />
         </body>
       </html>
     </QueryClientProvider>
