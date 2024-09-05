@@ -5,6 +5,7 @@ import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -92,13 +93,18 @@ export default function AdminRegister() {
           <p>Create an account to manage app data</p>
         </div>
 
-        <Link
-          href=""
+        <button
+          onClick={() => {
+            signIn("google", { callbackUrl: "/obsidian" });
+          }}
+          type="button"
           className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
         >
           <FcGoogle />
           Sign up with Google
-        </Link>
+        </button>
+
+        <Button onclick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
 
         <span className="dui-divider my-0">or</span>
 

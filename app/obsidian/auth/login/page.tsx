@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -40,13 +41,14 @@ export default function AdminLogin() {
         <p>Enter your credentials to access your account.</p>
       </div>
 
-      <Link
-        href=""
+      <button
+        onClick={() => signIn("google", { callbackUrl: "/obsidian" })}
+        type="button"
         className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
       >
         <FcGoogle />
-        Sign in with Google
-      </Link>
+        Sign up with Google
+      </button>
 
       <span className="dui-divider my-0">or</span>
 
