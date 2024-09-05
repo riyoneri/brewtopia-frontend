@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";
+import { SessionProvider } from "next-auth/react";
 import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
@@ -17,21 +18,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <html
-        lang="en"
-        className="scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-primary/50"
+    <html
+      lang="en"
+      className="scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-primary/50"
+    >
+      <body
+        className={classNames(
+          dmSans.className,
+          "text-sm sm:text-base leading-none",
+        )}
       >
-        <body
-          className={classNames(
-            dmSans.className,
-            "text-sm sm:text-base leading-none",
-          )}
-        >
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </body>
-      </html>
-    </QueryClientProvider>
+        <SessionProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
