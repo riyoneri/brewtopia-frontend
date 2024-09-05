@@ -6,6 +6,7 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
@@ -28,7 +29,7 @@ const inputsSchema = z
     path: ["confirmPassword"],
   });
 
-type InputsType = z.infer<typeof inputsSchema>;
+export type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminRegister() {
   const {
@@ -36,11 +37,21 @@ export default function AdminRegister() {
     register,
     handleSubmit,
     watch,
+    setError,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
-  const { isPending, mutate } = useRegisterAdmin();
+  const { isPending, mutate, error } = useRegisterAdmin<InputsType>();
 
   const passwordValue = watch("password");
+
+  useEffect(() => {
+    if (error?.validationErrors) {
+      let key: keyof InputsType;
+
+      for (key in error.validationErrors)
+        setError(key, { message: error.validationErrors[key] });
+    }
+  }, [error?.validationErrors, setError]);
 
   const onSubmit = (data: InputsType) => {
     mutate(JSON.stringify(data));
@@ -107,7 +118,10 @@ export default function AdminRegister() {
           placeholder="Enter password"
           register={register("password")}
           validations={passwordValidations}
-          error={errors.password?.message && " "}
+          error={
+            error?.validationErrors?.password ||
+            (errors.password?.message && " ")
+          }
         />
         <PasswordInputLabel
           title="Confirm Password"
@@ -115,6 +129,12 @@ export default function AdminRegister() {
           register={register("confirmPassword")}
           error={errors.confirmPassword?.message}
         />
+
+        {error?.errorMessage && (
+          <p className="text-center text-sm font-medium text-accent-red xs:text-base">
+            {error.errorMessage}
+          </p>
+        )}
 
         <Button type="submit" className="mt-3 flex justify-center text-base">
           {isPending ? (
