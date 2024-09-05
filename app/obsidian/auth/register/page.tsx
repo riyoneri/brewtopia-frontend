@@ -81,76 +81,79 @@ export default function AdminRegister() {
   ];
 
   return (
-    <form
-      className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="space-y-2">
-        <h1 className="text-3xl">Create Your Account</h1>
-        <p>Create an account to manage app data</p>
-      </div>
-
-      <Link
-        href=""
-        className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
+    <>
+      <title>Admin Register</title>
+      <form
+        className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <FcGoogle />
-        Sign up with Google
-      </Link>
+        <div className="space-y-2">
+          <h1 className="text-3xl">Create Your Account</h1>
+          <p>Create an account to manage app data</p>
+        </div>
 
-      <span className="dui-divider my-0">or</span>
-
-      <div className="flex flex-col gap-3">
-        <TextInputLabel
-          title="Name"
-          placeholder="Enter name"
-          register={register("name")}
-          error={errors.name?.message}
-        />
-        <TextInputLabel
-          title="Email"
-          placeholder="Enter email"
-          register={register("email")}
-          error={errors.email?.message}
-        />
-        <PasswordInputLabel
-          title="Password"
-          placeholder="Enter password"
-          register={register("password")}
-          validations={passwordValidations}
-          error={
-            error?.validationErrors?.password ||
-            (errors.password?.message && " ")
-          }
-        />
-        <PasswordInputLabel
-          title="Confirm Password"
-          placeholder="Enter password"
-          register={register("confirmPassword")}
-          error={errors.confirmPassword?.message}
-        />
-
-        {error?.errorMessage && (
-          <p className="text-center text-sm font-medium text-accent-red xs:text-base">
-            {error.errorMessage}
-          </p>
-        )}
-
-        <Button type="submit" className="mt-3 flex justify-center text-base">
-          {isPending ? (
-            <span className="dui-loading dui-loading-spinner"></span>
-          ) : (
-            "Sign Up"
-          )}
-        </Button>
-      </div>
-
-      <p className="text-center">
-        Already have an account?{" "}
-        <Link href="./login" className="font-medium underline">
-          Sign In
+        <Link
+          href=""
+          className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
+        >
+          <FcGoogle />
+          Sign up with Google
         </Link>
-      </p>
-    </form>
+
+        <span className="dui-divider my-0">or</span>
+
+        <div className="flex flex-col gap-3">
+          <TextInputLabel
+            title="Name"
+            placeholder="Enter name"
+            register={register("name")}
+            error={errors.name?.message}
+          />
+          <TextInputLabel
+            title="Email"
+            placeholder="Enter email"
+            register={register("email")}
+            error={errors.email?.message}
+          />
+          <PasswordInputLabel
+            title="Password"
+            placeholder="Enter password"
+            register={register("password")}
+            validations={passwordValidations}
+            error={
+              error?.validationErrors?.password ||
+              (errors.password?.message && " ")
+            }
+          />
+          <PasswordInputLabel
+            title="Confirm Password"
+            placeholder="Enter password"
+            register={register("confirmPassword")}
+            error={errors.confirmPassword?.message}
+          />
+
+          {error?.errorMessage && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {error.errorMessage}
+            </p>
+          )}
+
+          <Button type="submit" className="mt-3 flex justify-center text-base">
+            {isPending ? (
+              <span className="dui-loading dui-loading-spinner"></span>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
+        </div>
+
+        <p className="text-center">
+          Already have an account?{" "}
+          <Link href="./login" className="font-medium underline">
+            Sign In
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }
