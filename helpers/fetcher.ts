@@ -28,7 +28,7 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
         throw { errorMessage: data.message, statusCode: response.status };
 
       throw {
-        errors: data.message,
+        validationErrors: data.message,
         statusCode: response.status,
       };
     }
