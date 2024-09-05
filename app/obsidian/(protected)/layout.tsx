@@ -8,9 +8,10 @@ import {
 } from "@headlessui/react";
 import classNames from "classnames";
 import { AnimatePresence, easeOut, motion } from "framer-motion";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
 import { AiOutlineMenuFold, AiOutlineProduct } from "react-icons/ai";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaChevronDown } from "react-icons/fa";
@@ -54,8 +55,26 @@ export default function AdminRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (status === "unauthenticated") router.replace("/obsidian/auth/login");
+  }, [status, router]);
+
+  if (status === "loading")
+    return (
+      <div className="grid min-h-dvh place-content-center">
+        <span className="dui-loading dui-loading-spinner bg-primary"></span>
+      </div>
+    );
+
+  if (status === "unauthenticated") {
+    signOut({ redirect: false });
+    return;
+  }
 
   const closeSidebar = () => setSidebarOpen(false);
   return (
