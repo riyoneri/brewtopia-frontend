@@ -40,10 +40,18 @@ interface NotificationDto {
 interface FetcherResponse {
   errorMessage: string;
   statusCode: number;
-  errors: Record<string, string>;
+  validationErrors: Partial<Record<string, string>>;
   message: string;
 }
 
-interface GlobalResponseError<T> extends FetcherResponse {
-  errors: Record<keyof T, string>;
+interface GlobalResponseError<T> extends Omit<FetcherResponse, "message"> {
+  validationErrors: Partial<Record<keyof T, string>>;
+}
+
+interface AdminDto {
+  id: string;
+  name: string;
+  email: string;
+  imageUrl?: string;
+  notifications: Array<NotificationDto>;
 }
