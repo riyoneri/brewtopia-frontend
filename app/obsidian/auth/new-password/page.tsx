@@ -65,42 +65,45 @@ export default function AdminNewPassword() {
   ];
 
   return (
-    <form
-      className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="space-y-2">
-        <h1 className="text-3xl">Set a New Password</h1>
-        <p>
-          No worries we&apos;ll make sure that it is as secured as the previous
-          one
+    <>
+      <title>Admin new password</title>
+      <form
+        className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="space-y-2">
+          <h1 className="text-3xl">Set a New Password</h1>
+          <p>
+            No worries we&apos;ll make sure that it is as secured as the
+            previous one
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <PasswordInputLabel
+            title="Password"
+            placeholder="Enter password"
+            register={register("password")}
+            validations={passwordValidations}
+            error={errors.password?.message && " "}
+          />
+          <PasswordInputLabel
+            title="Confirm Password"
+            placeholder="Enter password"
+            register={register("confirmPassword")}
+            error={errors.confirmPassword?.message}
+          />
+
+          <Button type="submit">Reset Password</Button>
+        </div>
+
+        <p className="text-center">
+          Back to{" "}
+          <Link href="./login" className="font-medium underline">
+            Sign In
+          </Link>
         </p>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <PasswordInputLabel
-          title="Password"
-          placeholder="Enter password"
-          register={register("password")}
-          validations={passwordValidations}
-          error={errors.password?.message && " "}
-        />
-        <PasswordInputLabel
-          title="Confirm Password"
-          placeholder="Enter password"
-          register={register("confirmPassword")}
-          error={errors.confirmPassword?.message}
-        />
-
-        <Button type="submit">Reset Password</Button>
-      </div>
-
-      <p className="text-center">
-        Back to{" "}
-        <Link href="./login" className="font-medium underline">
-          Sign In
-        </Link>
-      </p>
-    </form>
+      </form>
+    </>
   );
 }

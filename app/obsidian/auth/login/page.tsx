@@ -32,54 +32,57 @@ export default function AdminLogin() {
   };
 
   return (
-    <form
-      className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="space-y-2">
-        <h1 className="text-3xl">Welcome Back</h1>
-        <p>Enter your credentials to access your account.</p>
-      </div>
-
-      <button
-        onClick={() => signIn("google", { callbackUrl: "/obsidian" })}
-        type="button"
-        className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
+    <>
+      <title>Admin login</title>
+      <form
+        className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <FcGoogle />
-        Sign up with Google
-      </button>
+        <div className="space-y-2">
+          <h1 className="text-3xl">Welcome Back</h1>
+          <p>Enter your credentials to access your account.</p>
+        </div>
 
-      <span className="dui-divider my-0">or</span>
-
-      <div className="flex flex-col gap-3">
-        <TextInputLabel
-          title="Email"
-          placeholder="Enter email"
-          register={register("email")}
-          error={errors.email?.message}
-        />
-        <PasswordInputLabel
-          title="Password"
-          placeholder="Enter password"
-          register={register("password")}
-          error={errors.password?.message}
-        />
-        <Link
-          href="./forgot-password"
-          className="-mt-2 self-end text-right text-accent-blue"
+        <button
+          onClick={() => signIn("google", { callbackUrl: "/obsidian" })}
+          type="button"
+          className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
         >
-          Forgot password?
-        </Link>
-        <Button type="submit">Submit</Button>
-      </div>
+          <FcGoogle />
+          Sign up with Google
+        </button>
 
-      <p className="text-center">
-        Don&apos;t have an account?{" "}
-        <Link href="./register" className="font-medium underline">
-          Create an account
-        </Link>
-      </p>
-    </form>
+        <span className="dui-divider my-0">or</span>
+
+        <div className="flex flex-col gap-3">
+          <TextInputLabel
+            title="Email"
+            placeholder="Enter email"
+            register={register("email")}
+            error={errors.email?.message}
+          />
+          <PasswordInputLabel
+            title="Password"
+            placeholder="Enter password"
+            register={register("password")}
+            error={errors.password?.message}
+          />
+          <Link
+            href="./forgot-password"
+            className="-mt-2 self-end text-right text-accent-blue"
+          >
+            Forgot password?
+          </Link>
+          <Button type="submit">Submit</Button>
+        </div>
+
+        <p className="text-center">
+          Don&apos;t have an account?{" "}
+          <Link href="./register" className="font-medium underline">
+            Create an account
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }

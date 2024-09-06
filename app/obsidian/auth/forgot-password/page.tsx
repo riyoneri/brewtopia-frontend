@@ -31,32 +31,35 @@ export default function AdminForgotPassword() {
   };
 
   return (
-    <form
-      className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="space-y-2">
-        <h1 className="text-3xl">Forgot Password</h1>
-        <p>No worries, we&apos;ll send you reset instructions</p>
-      </div>
+    <>
+      <title>Admin forgot password</title>
+      <form
+        className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="space-y-2">
+          <h1 className="text-3xl">Forgot Password</h1>
+          <p>No worries, we&apos;ll send you reset instructions</p>
+        </div>
 
-      <div className="flex flex-col gap-3">
-        <TextInputLabel
-          title="Email"
-          placeholder="Enter email"
-          register={register("email")}
-          error={errors.email?.message}
-        />
+        <div className="flex flex-col gap-3">
+          <TextInputLabel
+            title="Email"
+            placeholder="Enter email"
+            register={register("email")}
+            error={errors.email?.message}
+          />
 
-        <Button type="submit">Reset Password</Button>
-      </div>
+          <Button type="submit">Reset Password</Button>
+        </div>
 
-      <p className="text-center">
-        Back to{" "}
-        <Link href="./login" className="font-medium underline">
-          Sign In
-        </Link>
-      </p>
-    </form>
+        <p className="text-center">
+          Back to{" "}
+          <Link href="./login" className="font-medium underline">
+            Sign In
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }

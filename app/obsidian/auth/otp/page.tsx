@@ -38,40 +38,43 @@ export default function AdminOTP() {
   };
 
   return (
-    <form
-      className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="space-y-2">
-        <h1 className="text-3xl">Enter Code</h1>
-        <p>
-          We sent a code to{" "}
-          <span className="font-medium underline">brewtopia@gmail.com</span>
+    <>
+      <title>Admin OTP Verification</title>
+      <form
+        className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="space-y-2">
+          <h1 className="text-3xl">Enter Code</h1>
+          <p>
+            We sent a code to{" "}
+            <span className="font-medium underline">brewtopia@gmail.com</span>
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center gap-3">
+          <OtpInputLabel
+            title="Otp"
+            placeholder="0000"
+            error={errors.otp?.message}
+            setValue={(value: string) => setValue("otp", value)}
+          />
+
+          <Button type="submit" className="w-full">
+            Set New Password
+          </Button>
+          <Button variant="outline" className="w-full">
+            Resend
+          </Button>
+        </div>
+
+        <p className="text-center">
+          Back to{" "}
+          <Link href="./login" className="font-medium underline">
+            Sign In
+          </Link>
         </p>
-      </div>
-
-      <div className="flex flex-col items-center gap-3">
-        <OtpInputLabel
-          title="Otp"
-          placeholder="0000"
-          error={errors.otp?.message}
-          setValue={(value: string) => setValue("otp", value)}
-        />
-
-        <Button type="submit" className="w-full">
-          Set New Password
-        </Button>
-        <Button variant="outline" className="w-full">
-          Resend
-        </Button>
-      </div>
-
-      <p className="text-center">
-        Back to{" "}
-        <Link href="./login" className="font-medium underline">
-          Sign In
-        </Link>
-      </p>
-    </form>
+      </form>
+    </>
   );
 }
