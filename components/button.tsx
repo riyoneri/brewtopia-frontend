@@ -1,12 +1,8 @@
 import classNames from "classnames";
-import { PropsWithChildren } from "react";
+import { ComponentProps, PropsWithChildren } from "react";
 
-interface ButtonProperties {
-  type: "button" | "submit";
-  variant: "outline" | "solid";
-  className?: string;
-  disabled?: boolean;
-  onclick?: () => void;
+interface ButtonProperties extends ComponentProps<"button"> {
+  variant?: "outline" | "solid";
 }
 
 export default function Button({
@@ -15,11 +11,11 @@ export default function Button({
   variant = "solid",
   children,
   disabled,
-  onclick,
-}: PropsWithChildren<Partial<ButtonProperties>>) {
+  onClick,
+}: PropsWithChildren<ButtonProperties>) {
   return (
     <button
-      onClick={onclick}
+      onClick={onClick}
       disabled={disabled}
       type={type}
       className={classNames("border transition py-1 px-4", className, {
