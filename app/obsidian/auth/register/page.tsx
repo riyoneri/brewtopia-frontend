@@ -55,7 +55,7 @@ export default function AdminRegister() {
       for (key in error.validationErrors)
         setError(key, { message: error.validationErrors[key] });
     }
-    setRedirectUrl(`http://127.0.0.1:3000/obsidian/verify`);
+    setRedirectUrl(`http://127.0.0.1:3000/obsidian/auth/verify`);
   }, [error?.validationErrors, setError]);
 
   const onSubmit = (data: InputsType) => {

@@ -23,7 +23,11 @@ export default function ConfirmEmailModal(
 
   useEffect(() => {
     if (count === 0) resetCountdown();
-  }, [count, data, resetCountdown]);
+    if (error) {
+      resetCountdown();
+      setCountDownTime(10);
+    }
+  }, [count, data, error, resetCountdown]);
 
   let buttonContent = <>Resend</>;
 
