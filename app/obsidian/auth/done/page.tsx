@@ -15,7 +15,7 @@ export default function AdminDonePasswordReset() {
           <p>Your password has been successfully reset.</p>
         </div>
 
-        <Button type="submit" onclick={() => router.replace("./login")}>
+        <Button type="submit" onClick={() => router.replace("./login")}>
           Back to Sign in
         </Button>
       </div>

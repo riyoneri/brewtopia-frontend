@@ -3,11 +3,12 @@
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
+import ConfirmEmailModal from "@/components/modals/admin/confirm-email-modal";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
@@ -33,15 +34,17 @@ const inputsSchema = z
 export type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminRegister() {
+  const [redirectUrl, setRedirectUrl] = useState("");
   const {
     formState: { errors },
     register,
     handleSubmit,
     watch,
     setError,
+    getValues,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
-  const { isPending, mutate, error } = useRegisterAdmin<InputsType>();
+  const { isPending, mutate, error, data } = useRegisterAdmin<InputsType>();
 
   const passwordValue = watch("password");
 
@@ -52,10 +55,11 @@ export default function AdminRegister() {
       for (key in error.validationErrors)
         setError(key, { message: error.validationErrors[key] });
     }
+    setRedirectUrl(`http://127.0.0.1:3000/obsidian/verify`);
   }, [error?.validationErrors, setError]);
 
   const onSubmit = (data: InputsType) => {
-    mutate(JSON.stringify(data));
+    mutate(JSON.stringify({ ...data, redirectUrl }));
   };
 
   const passwordValidations = [
@@ -84,6 +88,12 @@ export default function AdminRegister() {
   return (
     <>
       <title>Admin Register</title>
+      {data && (
+        <ConfirmEmailModal
+          email={getValues("email")}
+          redirectUrl={redirectUrl}
+        />
+      )}
       <form
         className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
         onSubmit={handleSubmit(onSubmit)}
@@ -104,7 +114,7 @@ export default function AdminRegister() {
           Sign up with Google
         </button>
 
-        <Button onclick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
+        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
 
         <span className="dui-divider my-0">or</span>
 
