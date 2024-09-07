@@ -55,3 +55,7 @@ interface AdminDto {
   imageUrl?: string;
   notifications: Array<NotificationDto>;
 }
+
+interface SimplifiedResponse {
+  message: string;
+}
