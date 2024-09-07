@@ -11,7 +11,7 @@ export default function NewsHeroSection() {
             Get the lates updates and deeper coffee experience from BrewTopia
           </p>
         </div>
-        <NewsHeadingCard {...News[0]} className="flex-1 bg-red-500" />
+        <NewsHeadingCard {...News[0]} className="flex-1" />
       </div>
     </section>
   );

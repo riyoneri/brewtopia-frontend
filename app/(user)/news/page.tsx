@@ -4,9 +4,12 @@ import NewsHeroSection from "./_news-sections/news-hero-section";
 
 export default function NewsPage() {
   return (
-    <main className="space-y-10">
-      <NewsHeroSection />
-      <NewsList />
-    </main>
+    <>
+      <title>News</title>
+      <main className="space-y-10">
+        <NewsHeroSection />
+        <NewsList />
+      </main>
+    </>
   );
 }
