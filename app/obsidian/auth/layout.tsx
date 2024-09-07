@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 import { useEffect } from "react";
 
 export default function AdminAuthLayout({
@@ -13,7 +14,10 @@ export default function AdminAuthLayout({
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "authenticated") router.replace("/obsidian");
+    if (status === "authenticated") {
+      enqueueSnackbar("You are already authenticated", { variant: "success" });
+      router.replace("/obsidian");
+    }
   }, [status, router]);
 
   if (status === "loading")

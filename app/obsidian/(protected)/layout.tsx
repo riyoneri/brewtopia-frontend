@@ -11,6 +11,7 @@ import { AnimatePresence, easeOut, motion } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 import { Fragment, useEffect, useState } from "react";
 import { AiOutlineMenuFold, AiOutlineProduct } from "react-icons/ai";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
@@ -61,7 +62,11 @@ export default function AdminRootLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (status === "unauthenticated") router.replace("/obsidian/auth/login");
+    if (status === "unauthenticated") {
+      enqueueSnackbar("Login first", { variant: "error" });
+
+      router.replace("/obsidian/auth/login");
+    }
   }, [status, router]);
 
   if (status === "loading")
