@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { GoHome } from "react-icons/go";
 import { IoCloseOutline, IoNewspaperOutline } from "react-icons/io5";
-import { MdMenu, MdOutlineRestaurantMenu } from "react-icons/md";
+import { MdEvent, MdMenu, MdOutlineRestaurantMenu } from "react-icons/md";
 
 import Button from "../button";
 
@@ -25,6 +25,11 @@ const NavLinks = [
     text: "News",
     icon: IoNewspaperOutline,
     url: "/news",
+  },
+  {
+    text: "Events",
+    icon: MdEvent,
+    url: "/events",
   },
 ];
 
