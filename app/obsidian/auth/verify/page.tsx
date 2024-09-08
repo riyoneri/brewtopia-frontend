@@ -3,20 +3,22 @@
 import Button from "@/components/button";
 import useAdminVerifyEmail from "@/hooks/admin/use-admin-verify-email";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function VerifyEmail() {
   const searchParameters = useSearchParams();
   const router = useRouter();
+  const [requestSent, setRequestSent] = useState(false);
   const { mutate, data, error, isPending } =
     useAdminVerifyEmail<Record<"token", string>>();
 
   const token = searchParameters.get("token");
 
   useEffect(() => {
-    if (token) {
+    if (token && !requestSent) {
       mutate(JSON.stringify({ token }));
     }
+    setRequestSent(true);
   }, [mutate, token]);
 
   if (!token) return notFound();
