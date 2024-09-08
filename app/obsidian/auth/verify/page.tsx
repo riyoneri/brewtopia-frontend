@@ -19,7 +19,7 @@ export default function VerifyEmail() {
       mutate(JSON.stringify({ token }));
     }
     setRequestSent(true);
-  }, [mutate, token]);
+  }, [mutate, requestSent, token]);
 
   if (!token) return notFound();
 
