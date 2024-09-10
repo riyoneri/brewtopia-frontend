@@ -8,7 +8,7 @@ export default function EventsPage() {
       <main className="maximum-width mt-5 space-y-10">
         <div className="flex flex-col gap-5 md:flex-row">
           <h2 className="main-heading flex-1 text-center sm:text-left">
-            Out Upcoming Events
+            Upcoming Events
           </h2>
           <p className="md:w-1/3">
             We believe that we are big not because of us but because of them,
