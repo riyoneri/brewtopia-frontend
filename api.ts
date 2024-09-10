@@ -8,6 +8,7 @@ interface ProductDto {
   previousPrice?: number;
   hasDiscountInApp?: boolean;
   description: string;
+  quantity: number;
 }
 
 interface WorkspaceDto {

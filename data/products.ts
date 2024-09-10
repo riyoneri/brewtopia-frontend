@@ -7,6 +7,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: 0,
   },
   {
     id: faker.string.uuid(),
@@ -15,6 +16,7 @@ const Products: ProductDto[] = [
     name: faker.commerce.productName(),
     hasDiscountInApp: true,
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
   {
     id: faker.string.uuid(),
@@ -23,6 +25,7 @@ const Products: ProductDto[] = [
     name: faker.commerce.productName(),
     previousPrice: +faker.commerce.price({ min: 10, max: 20 }),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
   {
     id: faker.string.uuid(),
@@ -30,6 +33,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
   {
     id: faker.string.uuid(),
@@ -37,6 +41,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
   {
     id: faker.string.uuid(),
@@ -44,6 +49,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
   {
     id: faker.string.uuid(),
@@ -51,6 +57,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     price: +faker.commerce.price({ min: 1, max: 10 }),
+    quantity: faker.number.int({ min: 0, max: 10_000 }),
   },
 ];
 
