@@ -60,3 +60,9 @@ interface AdminDto {
 interface SimplifiedResponse {
   message: string;
 }
+
+interface CategoryDto {
+  id: string;
+  name: string;
+  createdAt: string;
+}
