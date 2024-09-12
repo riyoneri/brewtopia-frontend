@@ -4,7 +4,7 @@ import CategoriesWithProducts from "@/components/categories-with-products";
 import PriceFilterInput from "@/components/filter/price-filter-input";
 import SearchFilterInput from "@/components/filter/search-filter-input";
 import SortInput from "@/components/filter/sort-input";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 export default function MenuPage() {
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function MenuPage() {
   }, []);
 
   return (
-    <>
+    <Suspense>
       <title>Menu</title>
       <main className="maximum-width mt-5 space-y-5">
         <h2 className="main-heading">Our Menu</h2>
@@ -30,6 +30,6 @@ export default function MenuPage() {
 
         <CategoriesWithProducts />
       </main>
-    </>
+    </Suspense>
   );
 }
