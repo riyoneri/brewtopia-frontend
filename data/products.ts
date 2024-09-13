@@ -24,6 +24,7 @@ const Products: ProductDto[] = [
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
     previousPrice: +faker.commerce.price({ min: 10, max: 20 }),
+    hasDiscountInApp: true,
     price: +faker.commerce.price({ min: 1, max: 10 }),
     quantity: faker.number.int({ min: 0, max: 10_000 }),
   },

@@ -1,6 +1,6 @@
 export default function ProductCardSkeleton() {
   return (
-    <div className="card-with-shadows flex flex-col gap-2">
+    <div className="card-with-shadows flex flex-col gap-2 bg-white">
       <div className="dui-skeleton h-72 rounded-none object-cover sm:h-60"></div>
       <div className="flex flex-1 flex-col gap-1 px-1">
         <span className="dui-skeleton h-5 rounded-none"></span>
