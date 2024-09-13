@@ -18,10 +18,11 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={classNames("border transition py-1 px-4", className, {
+      className={classNames("border-2 transition py-1 px-4", className, {
         "bg-primary border-primary hover:border-primary/0 hover:bg-primary/80 text-white":
           variant === "solid",
-        "text-primary hover:bg-primary hover:text-white": variant === "outline",
+        "text-primary border-primary/50 hover:bg-primary hover:text-white":
+          variant === "outline",
       })}
     >
       {children}
