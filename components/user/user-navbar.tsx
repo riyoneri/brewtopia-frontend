@@ -54,10 +54,10 @@ export default function UserNavBar() {
                 href={navLink.url}
                 className={classNames(
                   {
-                    "after:block": pathname === navLink.url,
-                    "after:hidden": pathname !== navLink.url,
+                    "after:w-full": pathname === navLink.url,
+                    "after:w-0": pathname !== navLink.url,
                   },
-                  "relative hover:after:block after:absolute after:bg-primary after:h-1 after:rounded-full after:-bottom-1 after:w-full after:left-1/2 after:-translate-x-1/2",
+                  "relative hover:after:w-full after:absolute after:bg-primary after:h-1 after:rounded-full after:-bottom-1 after:transition-all after:left-1/2 after:-translate-x-1/2",
                 )}
               >
                 {navLink.text}
