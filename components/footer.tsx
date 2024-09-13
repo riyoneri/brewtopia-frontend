@@ -4,8 +4,8 @@ import { FaXTwitter } from "react-icons/fa6";
 export default function Footer() {
   return (
     <footer className="mt-5 bg-neutral-900 py-5 text-center text-white sm:mt-10">
-      <div className="maximum-width items-center space-y-4">
-        <div className="flex flex-col-reverse justify-between gap-4 xs:flex-row xs:items-center ">
+      <div className="space-y-4">
+        <div className="maximum-width flex flex-col-reverse items-center justify-between gap-4 xs:flex-row xs:items-center ">
           <div className="flex flex-col items-start gap-3 xs:flex-row xs:items-center xs:gap-5">
             <span className="cursor-pointer transition hover:text-primary">
               Terms and conditions
@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
         </div>
         <hr />
-        <p className="text-left text-sm">
+        <p className="maximum-width items-center text-left text-sm">
           &copy;{new Date().getFullYear()} BrewTopia. All rights reserved
         </p>
       </div>

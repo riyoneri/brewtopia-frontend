@@ -20,8 +20,8 @@ export default function ProductDetails() {
 
   return (
     <main className="space-y-10">
-      <section className="maximum-width grid gap-5 pt-10 sm:grid-cols-2 md:gap-10">
-        <div className="dui-breadcrumbs block text-sm text-secondary/50 sm:hidden">
+      <section className="maximum-width grid gap-5 pt-5 sm:grid-cols-2 md:gap-10">
+        <div className="dui-breadcrumbs block py-0 text-sm text-secondary/50 sm:hidden">
           <ul>
             <li>
               <Link href="/">Home</Link>
@@ -42,7 +42,7 @@ export default function ProductDetails() {
 
         <div className="flex flex-col justify-between gap-5">
           <div className="sm:space-y-3">
-            <div className="dui-breadcrumbs hidden text-secondary/50 sm:block">
+            <div className="dui-breadcrumbs hidden py-0 text-secondary/50 sm:block">
               <ul>
                 <li>
                   <Link href="/">Home</Link>

@@ -21,7 +21,7 @@ export default function MenuPage() {
   return (
     <Suspense>
       <title>Menu</title>
-      <main className="maximum-width mt-5 space-y-5">
+      <main className="maximum-width space-y-5 pt-5">
         <h2 className="main-heading">Our Menu</h2>
         <p className="text-balance lg:w-4/5">
           BrewTopia provides a variety of high quality coffee and drinks and
