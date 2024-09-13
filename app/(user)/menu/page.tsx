@@ -3,12 +3,19 @@
 import CategoriesWithProducts from "@/components/categories-with-products";
 import PriceFilterInput from "@/components/filter/price-filter-input";
 import SearchFilterInput from "@/components/filter/search-filter-input";
-import SortInput from "@/components/filter/sort-input";
+import SortFilterInput from "@/components/filter/sort-filter-input";
+import { parseAsInteger, useQueryStates } from "nuqs";
 import { Suspense, useEffect } from "react";
 
 export default function MenuPage() {
+  const [, setQueries] = useQueryStates({
+    price: parseAsInteger.withDefault(0),
+    sort: parseAsInteger.withDefault(0),
+  });
+
   useEffect(() => {
-    window.history?.replaceState(undefined, "", "/menu");
+    setQueries(Object.create(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -25,7 +32,7 @@ export default function MenuPage() {
         <div className="flex flex-col gap-5 sm:flex-row">
           <SearchFilterInput />
           <PriceFilterInput />
-          <SortInput />
+          <SortFilterInput />
         </div>
 
         <CategoriesWithProducts />
