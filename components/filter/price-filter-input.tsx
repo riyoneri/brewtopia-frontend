@@ -1,6 +1,5 @@
 "use client";
 
-import useQueryParameters from "@/hooks/use-query-parameters";
 import {
   Combobox,
   ComboboxButton,
@@ -9,6 +8,7 @@ import {
   ComboboxOptions,
 } from "@headlessui/react";
 import classNames from "classnames";
+import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
@@ -37,12 +37,13 @@ const defaultSelection = {
 
 export default function PriceFilterInput() {
   const [selected, setSelected] = useState(defaultSelection);
-  const { updateOrDelete } = useQueryParameters();
+  const [, setPrice] = useQueryState("price");
 
   useEffect(() => {
-    if (selected.id) updateOrDelete("price", String(selected.id));
-    else updateOrDelete("price");
-  }, [selected.id, updateOrDelete]);
+    if (selected.id) setPrice(String(selected.id));
+    // eslint-disable-next-line unicorn/no-null
+    else setPrice(null);
+  }, [selected.id, setPrice]);
 
   return (
     <div>
@@ -64,7 +65,7 @@ export default function PriceFilterInput() {
               displayValue={(range: Range) => range.text}
             />
             <ComboboxButton className="absolute inset-0 flex items-center justify-end">
-              <FaChevronDown className="relative right-2 size-4 transition-transform data-[open]:rotate-180" />
+              <FaChevronDown className="relative right-2 size-4" />
             </ComboboxButton>
           </div>
 
