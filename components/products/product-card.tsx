@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductCard({
+  id,
   name,
   imageUrl,
   price,
@@ -9,7 +10,10 @@ export default function ProductCard({
   previousPrice,
 }: ProductDto) {
   return (
-    <Link href="/" className="card-with-shadows flex flex-col gap-0.5">
+    <Link
+      href={`/menu/${id}`}
+      className="card-with-shadows flex flex-col gap-0.5"
+    >
       <Image
         src={imageUrl}
         className="max-h-72 w-full object-cover sm:max-h-60"
