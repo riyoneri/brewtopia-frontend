@@ -7,7 +7,7 @@ import SortFilterInput from "@/components/filter/sort-filter-input";
 import { parseAsInteger, useQueryStates } from "nuqs";
 import { Suspense, useEffect } from "react";
 
-export default function MenuPage() {
+function MenuPage() {
   const [, setQueries] = useQueryStates({
     price: parseAsInteger.withDefault(0),
     sort: parseAsInteger.withDefault(0),
@@ -19,7 +19,7 @@ export default function MenuPage() {
   }, []);
 
   return (
-    <Suspense>
+    <>
       <title>Menu</title>
       <main className="maximum-width space-y-5 pt-5">
         <h2 className="main-heading">Our Menu</h2>
@@ -37,6 +37,14 @@ export default function MenuPage() {
 
         <CategoriesWithProducts />
       </main>
+    </>
+  );
+}
+
+export default function WrappedMenuPage() {
+  return (
+    <Suspense>
+      <MenuPage />
     </Suspense>
   );
 }
