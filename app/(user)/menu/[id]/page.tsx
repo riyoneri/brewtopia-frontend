@@ -19,7 +19,7 @@ export default function ProductDetails() {
   if (!isMounted) return;
 
   return (
-    <main className="space-y-10">
+    <div className="space-y-10">
       <section className="maximum-width grid gap-5 pt-5 sm:grid-cols-2 md:gap-10">
         <div className="dui-breadcrumbs block py-0 text-sm text-secondary/50 sm:hidden">
           <ul>
@@ -119,6 +119,6 @@ export default function ProductDetails() {
           <ProductsList loading />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -9,14 +9,14 @@ export default function HomePage() {
   return (
     <>
       <title>BrewTopia</title>
-      <main className="space-y-5">
+      <div className="space-y-5">
         <HomeHeroSection />
         <HomeBackgroundSection />
         <HomeFavoriteSection />
         <HomeWorkspaceSection />
         <HomeEventsSection />
         <HomeNewsSection />
-      </main>
+      </div>
     </>
   );
 }

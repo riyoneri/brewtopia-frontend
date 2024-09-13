@@ -22,7 +22,7 @@ export default function NewsDetails() {
   if (!isMounted) return;
 
   return (
-    <main className="*:py-10">
+    <div className="*:py-10">
       <div className="maximum-width flex flex-col items-center gap-3 text-center xs:gap-5">
         <h3 className="main-heading text-pretty">{news.title}</h3>
         <p className="text-neutral-500 sm:text-xl xl:text-2xl">
@@ -77,6 +77,6 @@ export default function NewsDetails() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

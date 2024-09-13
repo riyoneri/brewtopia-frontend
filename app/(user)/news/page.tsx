@@ -6,7 +6,7 @@ export default function NewsPage() {
   return (
     <>
       <title>News</title>
-      <main className="space-y-10">
+      <div className="space-y-10">
         <section className="dynamic-hero-height grid bg-tertiary py-5">
           <div className="maximum-width flex flex-col justify-between  text-center">
             <div>
@@ -20,7 +20,7 @@ export default function NewsPage() {
           </div>
         </section>
         <NewsList />
-      </main>
+      </div>
     </>
   );
 }
