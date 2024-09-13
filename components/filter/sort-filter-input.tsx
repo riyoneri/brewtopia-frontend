@@ -1,6 +1,5 @@
 "use client";
 
-import useQueryParameters from "@/hooks/use-query-parameters";
 import {
   Combobox,
   ComboboxButton,
@@ -9,6 +8,7 @@ import {
   ComboboxOptions,
 } from "@headlessui/react";
 import classNames from "classnames";
+import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
@@ -38,12 +38,14 @@ const defaultSelection = {
 
 export default function SortInput() {
   const [selected, setSelected] = useState(defaultSelection);
-  const { updateOrDelete } = useQueryParameters();
+
+  const [, setSort] = useQueryState("sort");
 
   useEffect(() => {
-    if (selected.id) updateOrDelete("sort", String(selected.id));
-    else updateOrDelete("sort");
-  }, [selected.id, updateOrDelete]);
+    if (selected.id) setSort(String(selected.id));
+    // eslint-disable-next-line unicorn/no-null
+    else setSort(null);
+  }, [selected.id, setSort]);
 
   return (
     <div>
@@ -65,7 +67,7 @@ export default function SortInput() {
               displayValue={(range: Sort) => range.text}
             />
             <ComboboxButton className="absolute inset-0 flex items-center justify-end">
-              <FaChevronDown className="relative right-2 size-4 transition-transform data-[open]:rotate-180" />
+              <FaChevronDown className="relative right-2 size-4" />
             </ComboboxButton>
           </div>
 
