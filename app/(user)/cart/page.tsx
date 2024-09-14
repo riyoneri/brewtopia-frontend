@@ -1,8 +1,11 @@
 "use client";
 
-import Products from "@/data/products";
+import Button from "@/components/button";
+import CartItem from "@/components/cart/cart-item";
+import CartItems from "@/data/cart-items";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export default function CartPage() {
   const [isMounted, setIsMounted] = useState(false);
@@ -12,62 +15,44 @@ export default function CartPage() {
   if (!isMounted) return;
 
   return (
-    <div className="maximum-width flex *:pt-5">
-      <div className="flex-1">
-        <h2 className="main-heading">My Cart</h2>
-        <div className="overflow-x-auto">
-          <table className="dui-table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{Products[0].name}</td>
-                <div className="flex border-2 border-primary/50 p-1 *:h-full *:px-1">
-                  <button className="transition-colors hover:bg-tertiary">
-                    <FaPlus />
-                  </button>
-                  <input
-                    type="number"
-                    name=""
-                    className="w-10 flex-1 text-center outline-none"
-                    id=""
-                    value={1}
-                    max="999"
-                  />
-                  <button className="transition-colors hover:bg-tertiary">
-                    <FaMinus />
-                  </button>
-                </div>
-                <td>${Products[0].price}</td>
-              </tr>
-              <tr>
-                <td>{Products[0].name}</td>
-                <td>${Products[0].price}</td>
-                <td>${Products[0].price}</td>
-              </tr>
-              <tr>
-                <td>{Products[0].name}</td>
-                <td>${Products[0].price}</td>
-                <td>${Products[0].price}</td>
-              </tr>
-              <tr>
-                <td>{Products[0].name}</td>
-                <td>1</td>
-                <td>${Products[0].price}</td>
-                <td>${Products[0].price}</td>
-              </tr>
-            </tbody>
-          </table>
+    <>
+      <title>Cart</title>
+      <div className="maximum-width dynamic-hero-height flex flex-col gap-5 *:py-5 lg:flex-row">
+        <div className="flex flex-1 flex-col">
+          <h2 className="main-heading">My Cart</h2>
+          <div className="mt-5 flex-1 overflow-x-auto">
+            <table className="dui-table dui-table-lg [&_tr]:border-b-2 [&_tr]:border-secondary/20">
+              <thead className="text-lg text-black">
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CartItems.map((cartItem) => (
+                  <CartItem key={cartItem.id} {...cartItem} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Link href="/menu" className="mt-5 block">
+            <Button variant="outline" className="flex items-center gap-2">
+              <FaArrowLeft />
+              Back to Shop
+            </Button>
+          </Link>
+        </div>
+        <div className="mx-auto mb-5 w-full space-y-5 bg-tertiary px-5 sm:w-96 lg:mb-0">
+          <div className="flex justify-between text-xl font-medium xs:text-2xl">
+            <span>Total</span>
+            <span>$15.5</span>
+          </div>
+          <Link href="/checkout" className="grid">
+            <Button>Checkout</Button>
+          </Link>
         </div>
       </div>
-      <div className="bg-tertiary px-5"></div>
-    </div>
+    </>
   );
 }
