@@ -48,7 +48,7 @@ export default function SortInput() {
   }, [selected.id, setSort]);
 
   return (
-    <div>
+    <div className="space-y-2 sm:space-y-1">
       <div className="flex items-center justify-between">
         <span>Sort By</span>
         <button onClick={() => setSelected(defaultSelection)}>Clear</button>
@@ -85,7 +85,7 @@ export default function SortInput() {
                 value={sort}
                 className="group flex cursor-pointer select-none items-center gap-2 px-2 py-1 transition data-[selected]:bg-tertiary hover:bg-tertiary"
               >
-                <FaCheck className="invisible size-4 group-data-[selected]:visible" />
+                <FaCheck className="size-4 text-neutral-200 group-data-[selected]:text-black" />
                 <div className="text-sm/6">{sort.text}</div>
               </ComboboxOption>
             ))}
