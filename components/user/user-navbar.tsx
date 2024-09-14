@@ -64,7 +64,7 @@ export default function UserNavBar() {
               </Link>
             ))}
 
-            <Link href="/news">
+            <Link href="/cart">
               <Button>Cart (0)</Button>
             </Link>
             <Link href="/news">
