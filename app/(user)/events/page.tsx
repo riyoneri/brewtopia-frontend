@@ -5,7 +5,7 @@ export default function EventsPage() {
   return (
     <>
       <title>Our events</title>
-      <div className="maximum-width space-y-10 pt-5">
+      <div className="maximum-width space-y-10 py-5">
         <div className="flex flex-col gap-5 md:flex-row">
           <h2 className="main-heading flex-1 text-center sm:text-left">
             Upcoming Events
