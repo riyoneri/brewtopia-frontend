@@ -9,7 +9,7 @@ export default function UserRootLayout({
   return (
     <main>
       <UserNavBar />
-      <div className="min-h-dvh">{children}</div>
+      <div className="dynamic-hero-height">{children}</div>
       <Footer />
     </main>
   );
