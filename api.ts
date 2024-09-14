@@ -66,3 +66,10 @@ interface CategoryDto {
   name: string;
   createdAt: string;
 }
+
+interface CartItemDto {
+  id: string;
+  quantity: number;
+  totalPrice: number;
+  product: ProductDto;
+}
