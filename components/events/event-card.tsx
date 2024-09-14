@@ -11,7 +11,7 @@ export default function EventCard({
 }: EventDto & { className?: string }) {
   const formatedDate = dayjs(date).format("D MMM YYYY");
   return (
-    <Link href="/" className={classNames(className, "relative")}>
+    <Link href="" className={classNames(className, "relative")}>
       <div className="absolute bottom-0 left-0 grid max-w-full bg-white p-1 xs:px-2">
         <span className="font-medium uppercase">{name}</span>
         <span className="text-xs text-primary xs:text-sm">{formatedDate}</span>
