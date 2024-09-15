@@ -21,6 +21,11 @@ export default function CartPage() {
         <div className="flex flex-1 flex-col">
           <h2 className="main-heading">My Cart</h2>
           <div className="mt-5 flex-1 overflow-x-auto">
+            {/* <p className="text-red-500">And error occured.</p>
+            <div>
+              <h3 className="text-xl font-medium">Your cart is currently empty.</h3>
+              <p>Please feel free to add anything you like to your cart.</p>
+            </div> */}
             <table className="dui-table dui-table-lg [&_tr]:border-b-2 [&_tr]:border-secondary/20">
               <thead className="text-lg text-black">
                 <tr>
