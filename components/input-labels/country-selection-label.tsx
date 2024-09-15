@@ -17,10 +17,7 @@ export default function CountrySelectionInputLabel({
   const [country, setCountry] = useState("");
 
   return (
-    <label
-      htmlFor={title}
-      className="grid gap-1 overflow-scroll sm:overflow-visible"
-    >
+    <label htmlFor={title} className="grid gap-1">
       <p>{title}</p>
       <CountryDropdown
         defaultOptionLabel="Select a country"
