@@ -31,7 +31,7 @@ const inputsSchema = z
     path: ["confirmPassword"],
   });
 
-export type InputsType = z.infer<typeof inputsSchema>;
+type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminRegister() {
   const [redirectUrl, setRedirectUrl] = useState("");
