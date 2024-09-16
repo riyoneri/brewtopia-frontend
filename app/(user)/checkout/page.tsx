@@ -2,10 +2,12 @@
 
 import Button from "@/components/button";
 import CountrySelectionInputLabel from "@/components/input-labels/country-selection-label";
+import PhoneInputLabel from "@/components/input-labels/phone-input-label";
 import RegionSelectionInputLabel from "@/components/input-labels/region-selection-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -24,6 +26,7 @@ const inputsSchema = z.object({
 type InputsType = z.infer<typeof inputsSchema>;
 
 export default function CheckoutInfoPage() {
+  const router = useRouter();
   const {
     formState: { errors, submitCount },
     register,
@@ -41,9 +44,11 @@ export default function CheckoutInfoPage() {
       trigger("country");
       trigger("region");
     }
-  }, [submitCount, trigger, country, region]);
+  }, [country, region, submitCount, trigger]);
 
-  const onSubmit = (_data: InputsType) => {};
+  const onSubmit = (_data: InputsType) => {
+    router.replace("/checkout/payment");
+  };
 
   return (
     <>
@@ -93,6 +98,13 @@ export default function CheckoutInfoPage() {
               placeholder="Enter address"
               register={register("address")}
               error={errors.address?.message}
+            />
+
+            <PhoneInputLabel
+              title="Phone number"
+              placeholder="Phone number"
+              setValue={(value) => setValue("phoneNumber", value)}
+              error={errors.phoneNumber?.message}
             />
           </div>
 
