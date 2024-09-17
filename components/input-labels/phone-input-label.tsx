@@ -20,7 +20,6 @@ export default function PhoneInputLabel({ title }: PhoneInputLabelProperties) {
 
       <Controller
         name="phoneNumber"
-        rules={{ required: true }}
         render={({ field }) => (
           <PhoneInput
             country="rw"
