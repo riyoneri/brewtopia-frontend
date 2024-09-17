@@ -15,7 +15,7 @@ export default function PhoneInputLabel({ title }: PhoneInputLabelProperties) {
   } = useFormContext<{ phoneNumber: string }>();
 
   return (
-    <label className="grid gap-1">
+    <label className="grid gap-1" htmlFor={title}>
       <p>{title}</p>
 
       <Controller
