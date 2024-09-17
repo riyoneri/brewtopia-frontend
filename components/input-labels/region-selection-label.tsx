@@ -31,6 +31,7 @@ export default function RegionSelectionInputLabel({
               "border-secondary/50": !errors.region,
               "border-accent-red": errors.region,
             })}
+            id={title}
           />
         )}
       />
