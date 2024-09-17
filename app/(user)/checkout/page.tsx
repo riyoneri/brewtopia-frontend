@@ -8,8 +8,7 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
 import { z } from "zod";
 
@@ -27,24 +26,7 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function CheckoutInfoPage() {
   const router = useRouter();
-  const {
-    formState: { errors, submitCount },
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    trigger,
-  } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
-
-  const country = watch("country");
-  const region = watch("region");
-
-  useEffect(() => {
-    if (submitCount) {
-      trigger("country");
-      trigger("region");
-    }
-  }, [country, region, submitCount, trigger]);
+  const methods = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
   const onSubmit = (_data: InputsType) => {
     router.replace("/checkout/payment");
@@ -54,73 +36,64 @@ export default function CheckoutInfoPage() {
     <>
       <title>Checkout Data</title>
       <div className="space-y-5">
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 sm:gap-8">
-          <div className="grid gap-3 sm:gap-5">
-            <h5 className="text-xl font-medium sm:text-3xl">Customer Data</h5>
-            <TextInputLabel
-              title="Name"
-              placeholder="Enter name"
-              register={register("name")}
-              error={errors.name?.message}
-            />
-            <TextInputLabel
-              title="Email"
-              placeholder="Enter email"
-              register={register("email")}
-              error={errors.email?.message}
-            />
-          </div>
-          <div className="grid gap-3 sm:gap-5">
-            <h5 className="text-xl font-medium sm:text-3xl">
-              Shipping address
-            </h5>
-            <div className="flex flex-col flex-wrap gap-5 *:flex-1 sm:flex-row sm:items-start">
-              <CountrySelectionInputLabel
-                title="Country"
-                setValue={(value) => setValue("country", value)}
-                error={errors.country?.message}
-              />
-              <RegionSelectionInputLabel
-                title="Region"
-                setValue={(value) => setValue("region", value)}
-                error={errors.region?.message}
-                country={country}
+        <FormProvider {...methods}>
+          <form
+            onSubmit={methods.handleSubmit(onSubmit)}
+            className="grid gap-5 sm:gap-8"
+          >
+            <div className="grid gap-3 sm:gap-5">
+              <h5 className="text-xl font-medium sm:text-3xl">Customer Data</h5>
+              <TextInputLabel
+                title="Name"
+                placeholder="Enter name"
+                register={methods.register("name")}
+                error={methods.formState.errors.name?.message}
               />
               <TextInputLabel
-                placeholder="Enter postal code"
-                register={register("postalCode")}
-                title="Postal code"
-                error={errors.postalCode?.message}
+                title="Email"
+                placeholder="Enter email"
+                register={methods.register("email")}
+                error={methods.formState.errors.email?.message}
               />
             </div>
-            <TextInputLabel
-              title="Address"
-              placeholder="Enter address"
-              register={register("address")}
-              error={errors.address?.message}
-            />
+            <div className="grid gap-3 sm:gap-5">
+              <h5 className="text-xl font-medium sm:text-3xl">
+                Shipping address
+              </h5>
+              <div className="flex flex-col flex-wrap gap-5 *:flex-1 sm:flex-row sm:items-start">
+                <CountrySelectionInputLabel title="Country" />
+                <RegionSelectionInputLabel title="Region" />
+                <TextInputLabel
+                  placeholder="Enter postal code"
+                  register={methods.register("postalCode")}
+                  title="Postal code"
+                  error={methods.formState.errors.postalCode?.message}
+                />
+              </div>
+              <TextInputLabel
+                title="Address"
+                placeholder="Enter address"
+                register={methods.register("address")}
+                error={methods.formState.errors.address?.message}
+              />
 
-            <PhoneInputLabel
-              title="Phone number"
-              placeholder="Phone number"
-              setValue={(value) => setValue("phoneNumber", value)}
-              error={errors.phoneNumber?.message}
-            />
-          </div>
+              <PhoneInputLabel title="Phone number" />
+            </div>
 
-          <div className="mt-5 flex flex-col-reverse gap-5 xs:flex-row">
-            <Link href="/menu" className="grid">
-              <Button
-                variant="outline"
-                className="flex items-center justify-center gap-2"
-              >
-                <FaArrowLeft />
-                Back to Shop
-              </Button>
-            </Link>
-            <Button type="submit">Proceed to Shipping</Button>
-          </div>
-        </form>
+            <div className="mt-5 flex flex-col-reverse gap-5 xs:flex-row">
+              <Link href="/menu" className="grid">
+                <Button
+                  variant="outline"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <FaArrowLeft />
+                  Back to Shop
+                </Button>
+              </Link>
+              <Button type="submit">Proceed to Shipping</Button>
+            </div>
+          </form>
+        </FormProvider>
       </div>
     </>
   );
