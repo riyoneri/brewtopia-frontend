@@ -1,39 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import classNames from "classnames";
+import { Controller, useFormContext } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 import { AllInputsProperties } from "./text-input-label";
 
-interface PhoneInputLabelProperties
-  extends Omit<AllInputsProperties, "register"> {
-  setValue: (_value: string) => void;
-}
+type PhoneInputLabelProperties = Pick<AllInputsProperties, "title">;
 
-export default function PhoneInputLabel({
-  title,
-  error,
-  placeholder,
-  setValue,
-}: PhoneInputLabelProperties) {
-  const [phone, setPhone] = useState("");
+export default function PhoneInputLabel({ title }: PhoneInputLabelProperties) {
+  const {
+    formState: { errors },
+  } = useFormContext<{ phoneNumber: string }>();
+
   return (
     <label className="grid gap-1">
       <p>{title}</p>
 
-      <PhoneInput
-        placeholder={placeholder}
-        autoFormat
-        onChange={(value) => {
-          setPhone(value);
-          setValue(value);
-        }}
-        value={phone}
+      <Controller
+        name="phoneNumber"
+        render={({ field }) => (
+          <PhoneInput
+            country="rw"
+            containerClass={classNames("border-2 flex py-1", {
+              "border-secondary/50": !errors.phoneNumber,
+              "border-accent-red": errors.phoneNumber,
+            })}
+            {...field}
+            autoFormat
+            buttonClass="!bg-transparent !border-r-2 !border-secondary/50 !border-y-0 !flex !rounded-none !border-l-0 !p-0"
+            inputClass="flex-1 !border-none"
+          />
+        )}
       />
 
-      {error && (
-        <p className="-mt-1 ml-0.5 text-xs text-accent-red  xs:text-sm">
-          {error}
+      {errors.phoneNumber && (
+        <p className="-mt-1 ml-0.5 text-xs text-accent-red xs:text-sm">
+          {errors.phoneNumber.message}
         </p>
       )}
     </label>
