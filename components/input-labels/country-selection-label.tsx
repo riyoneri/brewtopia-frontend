@@ -23,6 +23,7 @@ export default function CountrySelectionInputLabel({
             <CountryDropdown
               {...field}
               defaultOptionLabel="Select a country"
+              id={title}
               classes={classNames(
                 "border-2 hidden sm:block px-2 py-1 scrollbar outline-none",
                 {
@@ -33,6 +34,7 @@ export default function CountrySelectionInputLabel({
             />
             <CountryDropdown
               {...field}
+              id={title}
               defaultOptionLabel="Select a country"
               classes={classNames(
                 "border-2 sm:hidden px-2 py-1 scrollbar outline-none",
