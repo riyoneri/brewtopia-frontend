@@ -19,7 +19,7 @@ const inputsSchema = z.object({
   region: z.string().min(1, "Enter region please").default(""),
   postalCode: z.string().min(1, "Enter postal code please"),
   address: z.string().min(1, "Enter address please"),
-  phoneNumber: z.string().min(1, "Enter phone number please"),
+  phoneNumber: z.string().min(1, "Enter phone number please").default(""),
 });
 
 type InputsType = z.infer<typeof inputsSchema>;
