@@ -23,14 +23,15 @@ export default function PhoneInputLabel({ title }: PhoneInputLabelProperties) {
         render={({ field }) => (
           <PhoneInput
             country="rw"
-            containerClass={classNames("border-2 flex py-1", {
+            inputProps={{ id: title }}
+            containerClass={classNames("border-2 flex sm:py-1", {
               "border-secondary/50": !errors.phoneNumber,
               "border-accent-red": errors.phoneNumber,
             })}
             {...field}
             autoFormat
             buttonClass="!bg-transparent !border-r-2 !border-secondary/50 !border-y-0 !flex !rounded-none !border-l-0 !p-0"
-            inputClass="flex-1 !border-none"
+            inputClass="flex-1 !border-none !h-auto !w-auto"
           />
         )}
       />
