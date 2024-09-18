@@ -73,3 +73,11 @@ interface CartItemDto {
   totalPrice: number;
   product: ProductDto;
 }
+
+interface OrderDto {
+  id: string;
+  createdAt: string;
+  paymentMethod: string;
+  products: CartItemDto[];
+  total: number;
+}
