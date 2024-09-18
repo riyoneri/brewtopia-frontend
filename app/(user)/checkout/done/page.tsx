@@ -3,6 +3,7 @@ import ConfirmedIllustration from "@/components/illustrations/confirmed-illustra
 import OrderProductsList from "@/components/order/order-products-list";
 import ProductsList from "@/components/products/products-list";
 import Orders from "@/data/orders";
+import Link from "next/link";
 
 export default function CheckoutDonePage() {
   return (
@@ -40,9 +41,9 @@ export default function CheckoutDonePage() {
             <p>${Orders[0].total}</p>
           </div>
 
-          <Button className="mx-auto w-full font-medium sm:w-fit">
-            Continue Shopping
-          </Button>
+          <Link href="/menu" className="mx-auto w-full font-medium sm:w-fit">
+            <Button>Continue Shopping</Button>
+          </Link>
         </section>
 
         <section className="mt-10 bg-tertiary py-8 sm:py-10">
