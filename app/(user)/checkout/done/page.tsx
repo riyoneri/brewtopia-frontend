@@ -1,6 +1,6 @@
 import Button from "@/components/button";
 import ConfirmedIllustration from "@/components/illustrations/confirmed-illustration";
-import OrderItemsList from "@/components/order/order-products-list";
+import OrderProductsList from "@/components/order/order-products-list";
 import ProductsList from "@/components/products/products-list";
 import Orders from "@/data/orders";
 
@@ -10,11 +10,11 @@ export default function CheckoutDonePage() {
       <title>Checkout done</title>
       <div className="maximum-width pt-5">
         <section className="grid gap-3">
-          <ConfirmedIllustration className="mx-auto w-1/3 sm:w-1/5" />
-          <h3 className="mt-5 text-center text-xl font-medium sm:text-3xl">
+          <ConfirmedIllustration className="mx-auto w-1/3 xs:w-1/4 sm:w-1/6 lg:w-1/12" />
+          <h3 className="mt-5 text-lg font-medium sm:text-center sm:text-xl md:text-3xl">
             Thanks for your order!
           </h3>
-          <p className="text-center">
+          <p className="sm:text-center">
             The order confirmation has been sent to{" "}
             <span className="font-medium underline">brewtopia@gmail.com</span>
           </p>
@@ -33,7 +33,7 @@ export default function CheckoutDonePage() {
             </div>
           </div>
           <hr className="border-2" />
-          <OrderItemsList products={Orders[0].products} />
+          <OrderProductsList products={Orders[0].products} />
           <hr className="border-2" />
           <div className="flex justify-between text-2xl font-medium">
             <p>Total</p>

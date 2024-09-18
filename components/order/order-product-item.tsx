@@ -7,7 +7,7 @@ export default function OrderProductItem({
   quantity,
 }: CartItemDto) {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex flex-col gap-5 xs:flex-row xs:items-center">
       <Image
         src={product.imageUrl}
         className="size-16 object-cover sm:size-20"
