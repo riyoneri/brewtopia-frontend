@@ -36,7 +36,7 @@ export default function CheckoutDonePage() {
           <OrderItemsList products={Orders[0].products} />
           <hr className="border-2" />
           <div className="flex justify-between text-2xl font-medium">
-            <p>Grand Total</p>
+            <p>Total</p>
             <p>${Orders[0].total}</p>
           </div>
 
