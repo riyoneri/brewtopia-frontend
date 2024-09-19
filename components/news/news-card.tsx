@@ -18,15 +18,15 @@ export default function NewsCard({ id, title, date, imageUrl }: NewsDto) {
         src={imageUrl}
         width={500}
         height={500}
-        className="max-h-40 object-cover xs:w-fit"
+        className="max-h-36 object-cover xs:h-20 xs:w-fit sm:h-auto"
         alt={title}
       />
       <div className="flex-1">
         <p className="text-lg font-medium sm:text-2xl">{title}</p>
-        <div className="flex flex-col gap-1 text-xs text-neutral-500 xs:flex-row xs:items-center xs:text-sm">
+        <div className="flex flex-col flex-wrap gap-1 text-xs text-neutral-500 xs:flex-row xs:text-sm sm:items-center">
           <>
             <ReactTimeago date={newsDate.toISOString()} />
-            <GoDotFill className="hidden text-xs xs:block" />
+            <GoDotFill className="hidden text-xs sm:block" />
           </>
           <span>{newsDate.format("MMMM D, YYYY")}</span>
         </div>
