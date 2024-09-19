@@ -144,7 +144,7 @@ export default function UserNavBar() {
           </div>
         </div>
       </nav>
-      <nav className="sticky top-0 z-50 bg-white py-2 shadow-md sm:hidden ">
+      <nav className="sticky top-0 z-50 bg-white py-2 text-base shadow-md sm:hidden ">
         <div className="dui-drawer dui-drawer-end">
           <input
             id="my-drawer"
@@ -188,15 +188,15 @@ export default function UserNavBar() {
                       "bg-tertiary": pathname === navLink.url,
                     })}
                   >
-                    <NavIcon className="text-lg" />
+                    <NavIcon className="text-2xl" />
                     {navLink.text}
                   </Link>
                 ))}
               </div>
-              <Disclosure as="div" className="flex flex-col" defaultOpen={true}>
+              <Disclosure as="div" className="flex flex-col">
                 <DisclosureButton className="group flex w-full items-center justify-between px-2 py-1 transition data-[open]:bg-tertiary hover:bg-tertiary">
                   <div className="flex items-center gap-3">
-                    <FaCircleUser className="text-lg" />
+                    <FaCircleUser className="text-2xl" />
                     <span>Profile</span>
                   </div>
                   <FaChevronDown className="text-lg transition group-data-[open]:rotate-180" />
@@ -217,7 +217,7 @@ export default function UserNavBar() {
                         },
                       )}
                     >
-                      <navLinks.icon className="text-lg" />
+                      <navLinks.icon className="text-xl" />
                       {navLinks.text}
                     </Link>
                   ))}
