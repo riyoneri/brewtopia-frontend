@@ -17,10 +17,13 @@
     "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.21.1",
+    "@ant-design/nextjs-registry": "^1.0.1",
     "@gsap/react": "^2.1.1",
     "@headlessui/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.54.1",
+    "antd": "^5.20.6",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "framer-motion": "^11.3.31",
