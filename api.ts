@@ -74,10 +74,17 @@ interface CartItemDto {
   product: ProductDto;
 }
 
+enum ORDER_STATUS {
+  PROCESSED = "Processed",
+  SHIPPED = "Shipped",
+  DELIVERED = "Delivered",
+}
+
 interface OrderDto {
   id: string;
   createdAt: string;
   paymentMethod: string;
+  status: string;
   products: CartItemDto[];
   total: number;
 }
