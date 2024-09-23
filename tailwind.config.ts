@@ -1,9 +1,15 @@
+import { nextui } from "@nextui-org/theme";
 import daisyui from "daisyui";
 import tailwindScrollbar from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./components/**/*.{ts,tsx,mdx}", "./app/**/*.{ts,tsx,mdx}"],
+  content: [
+    "./components/**/*.{ts,tsx,mdx}",
+    "./app/**/*.{ts,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/components/table.js",
+    "./node_modules/@nextui-org/theme/dist/components/pagination.js",
+  ],
   theme: {
     extend: {
       colors: {
@@ -24,7 +30,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [daisyui, tailwindScrollbar],
+  plugins: [daisyui, tailwindScrollbar, nextui()],
   daisyui: {
     themes: false,
     darkTheme: false,
