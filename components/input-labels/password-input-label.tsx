@@ -1,11 +1,10 @@
 "use client";
 
+import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
 import { AnimatePresence, easeOut, motion } from "framer-motion";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-
-import { AllInputsProperties } from "./text-input-label";
 
 interface PasswordInputLabelProperties extends AllInputsProperties {
   validations?: { isValid: boolean; validationMessage: string }[];

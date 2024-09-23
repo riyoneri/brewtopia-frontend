@@ -1,10 +1,9 @@
 "use client";
 
+import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
 import { Controller, useFormContext } from "react-hook-form";
 import OTPInput from "react-otp-input";
-
-import { AllInputsProperties } from "./text-input-label";
 
 type OtpInputLabelProperties = Pick<
   AllInputsProperties,
