@@ -2,13 +2,19 @@
 
 import SearchFilterInput from "@/components/filter/search-filter-input";
 import Orders from "@/data/orders";
-import { StyleProvider } from "@ant-design/cssinjs";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { ConfigProvider, Table, TableColumnType } from "antd";
+import { Pagination } from "@nextui-org/pagination";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@nextui-org/table";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const dataSource = Orders.slice(0, 4).map((order) => ({
+const rows = Orders.map((order) => ({
   key: order.id,
   orderId: order.id,
   date: dayjs(order.createdAt).format("DD MMM YYYY"),
@@ -17,7 +23,7 @@ const dataSource = Orders.slice(0, 4).map((order) => ({
   amount: order.total,
 }));
 
-const columns: TableColumnType[] = [
+const columns = [
   {
     title: "Order Id",
     key: "orderId",
@@ -32,7 +38,7 @@ const columns: TableColumnType[] = [
     title: "Items",
     dataIndex: "items",
     key: "items",
-    sorter: (a, b) => a.items - b.items,
+    allowSorting: true,
   },
   {
     title: "Status",
@@ -43,67 +49,87 @@ const columns: TableColumnType[] = [
     title: "Amount ($)",
     dataIndex: "amount",
     key: "amount",
-    sorter: (a, b) => a.amount - b.amount,
+    allowSorting: true,
   },
 ];
 
 export default function OrdersPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const pages = Math.ceil(rows.length / rowsPerPage);
+
+  const items = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return rows.slice(start, end);
+  }, [page, rowsPerPage]);
 
   useEffect(() => setIsMounted(true), []);
 
   if (!isMounted) return;
 
   return (
-    <AntdRegistry>
-      <StyleProvider layer>
-        <ConfigProvider
-          theme={{
-            components: {
-              Table: {
-                headerBorderRadius: 0,
-                headerSplitColor: "white",
-              },
-            },
+    <>
+      <title>Your Orders</title>
+      <div className="maximum-width space-y-5 pt-5">
+        <SearchFilterInput />
+        <Table
+          bottomContent={
+            <div className="flex justify-between">
+              <div className="flex items-center gap-5 text-neutral-500">
+                <span className="">View</span>
+                <span className="">{rowsPerPage}</span>
+                <span>Orders per page</span>
+              </div>
+              <Pagination
+                isCompact
+                showControls
+                radius="none"
+                page={page}
+                total={pages}
+                onChange={(page) => setPage(page)}
+              />
+            </div>
+          }
+          classNames={{ tbody: "border-b" }}
+          aria-label="Example static collection table"
+          removeWrapper
+        >
+          <TableHeader>
+            {columns.map((column) => (
+              <TableColumn
+                className="border-y-2 border-black bg-transparent text-base text-black hover:text-black"
+                key={column.key}
+              >
+                {column.title}
+              </TableColumn>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {items.map((order) => (
+              <TableRow key={order.key}>
+                <TableCell className="py-3">{order.orderId}</TableCell>
+                <TableCell className="py-3">{order.date}</TableCell>
+                <TableCell className="py-3">{order.items}</TableCell>
+                <TableCell className="py-3">{order.status}</TableCell>
+                <TableCell className="py-3">${order.amount}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <button
+          onClick={() => {
+            setRowsPerPage((previousRowsPerPage) => previousRowsPerPage + 3);
+            setPage(1);
           }}
         >
-          <title>Your Orders</title>
-          <div className="maximum-width space-y-5 pt-5">
-            <h3 className="text-lg font-medium sm:text-2xl md:text-3xl">
-              Order History
-            </h3>
-            <div className="flex flex-col gap-5 sm:flex-row">
-              <SearchFilterInput />
-            </div>
-
-            <Table
-              dataSource={dataSource}
-              components={{
-                header: {
-                  cell: (properties: {
-                    children: React.ReactNode;
-                    className?: string;
-                    [key: string]: any;
-                  }) => (
-                    <td
-                      {...properties}
-                      className="border-x-0 border-y-2 border-black py-2 text-center"
-                    >
-                      {properties.children}
-                    </td>
-                  ),
-                },
-              }}
-              bordered
-              columns={columns}
-              pagination={{ pageSize: 50 }}
-              scroll={{
-                y: 240,
-              }}
-            />
-          </div>
-        </ConfigProvider>
-      </StyleProvider>
-    </AntdRegistry>
+          Increase view count
+        </button>
+      </div>
+    </>
   );
 }
