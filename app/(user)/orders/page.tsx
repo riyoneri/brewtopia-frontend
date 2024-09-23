@@ -1,7 +1,9 @@
 "use client";
 
 import SearchFilterInput from "@/components/filter/search-filter-input";
+import SelectInputLabel from "@/components/input-labels/select-input-label";
 import Orders from "@/data/orders";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Pagination } from "@nextui-org/pagination";
 import {
   Table,
@@ -13,6 +15,8 @@ import {
 } from "@nextui-org/table";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
 
 const rows = Orders.map((order) => ({
   key: order.id,
@@ -53,9 +57,24 @@ const columns = [
   },
 ];
 
+const inputsSchema = z.object({
+  keyword: z.string().min(1),
+  rows: z.number().default(5),
+});
+
+type InputsType = z.infer<typeof inputsSchema>;
+
+const rowsSelections = [
+  { key: 5, text: "5" },
+  { key: 10, text: "10" },
+  { key: 15, text: "15" },
+];
+
 export default function OrdersPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [page, setPage] = useState(1);
+  const methods = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
+  const rowsWatcher = methods.watch("rows");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -68,7 +87,12 @@ export default function OrdersPage() {
     return rows.slice(start, end);
   }, [page, rowsPerPage]);
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    !isMounted && setIsMounted(true);
+
+    setRowsPerPage(rowsWatcher ?? 5);
+    setPage(1);
+  }, [isMounted, rowsWatcher]);
 
   if (!isMounted) return;
 
@@ -76,13 +100,18 @@ export default function OrdersPage() {
     <>
       <title>Your Orders</title>
       <div className="maximum-width space-y-5 pt-5">
-        <SearchFilterInput />
+        <FormProvider {...methods}>
+          <SearchFilterInput />
+        </FormProvider>
+
         <Table
           bottomContent={
-            <div className="flex justify-between">
-              <div className="flex items-center gap-5 text-neutral-500">
-                <span className="">View</span>
-                <span className="">{rowsPerPage}</span>
+            <div className="flex flex-col items-end justify-between gap-5 md:flex-row">
+              <div className="flex items-center gap-3 text-neutral-500">
+                <span>View</span>
+                <FormProvider {...methods}>
+                  <SelectInputLabel name="rows" selections={rowsSelections} />
+                </FormProvider>
                 <span>Orders per page</span>
               </div>
               <Pagination
@@ -121,14 +150,6 @@ export default function OrdersPage() {
             ))}
           </TableBody>
         </Table>
-        <button
-          onClick={() => {
-            setRowsPerPage((previousRowsPerPage) => previousRowsPerPage + 3);
-            setPage(1);
-          }}
-        >
-          Increase view count
-        </button>
       </div>
     </>
   );
