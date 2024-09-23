@@ -1,12 +1,5 @@
+import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
-import { UseFormRegisterReturn } from "react-hook-form";
-
-export interface AllInputsProperties {
-  title: string;
-  placeholder: string;
-  register: UseFormRegisterReturn;
-  error?: string;
-}
 
 interface TextInputLabelProperties extends AllInputsProperties {
   type?: "email" | "text";

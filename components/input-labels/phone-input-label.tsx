@@ -1,11 +1,10 @@
 "use client";
 
+import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
 import { Controller, useFormContext } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
-import { AllInputsProperties } from "./text-input-label";
 
 type PhoneInputLabelProperties = Pick<AllInputsProperties, "title">;
 

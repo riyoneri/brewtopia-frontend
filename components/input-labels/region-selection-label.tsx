@@ -1,8 +1,7 @@
+import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
 import { RegionDropdown } from "react-country-region-selector";
 import { Controller, useFormContext } from "react-hook-form";
-
-import { AllInputsProperties } from "./text-input-label";
 
 type RegionSelectionInputLabelProperties = Pick<AllInputsProperties, "title">;
 
