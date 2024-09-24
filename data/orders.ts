@@ -23,6 +23,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -39,6 +40,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -55,6 +57,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -71,6 +74,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -87,6 +91,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -103,6 +108,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -119,6 +125,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -135,6 +142,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -151,6 +159,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -167,6 +176,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -183,6 +193,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -199,6 +210,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -215,6 +227,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -231,6 +244,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -247,6 +261,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -263,6 +278,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -279,6 +295,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
   {
     id: faker.string.uuid(),
@@ -295,6 +312,7 @@ const Orders: OrderDto[] = [
       max: CartItems.length - 1,
     }),
     total: faker.number.int({ min: 50, max: 150 }),
+    displayId: faker.string.alphanumeric(10),
   },
 ];
 

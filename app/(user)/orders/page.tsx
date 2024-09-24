@@ -14,13 +14,15 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import dayjs from "dayjs";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const rows = Orders.map((order) => ({
   key: order.id,
-  orderId: order.id,
+  id: order.id,
+  orderId: order.displayId,
   date: dayjs(order.createdAt).format("DD MMM YYYY"),
   items: order.products.length,
   status: order.status,
@@ -50,7 +52,7 @@ const columns = [
     key: "status",
   },
   {
-    title: "Amount ($)",
+    title: "Amount",
     dataIndex: "amount",
     key: "amount",
     allowSorting: true,
@@ -141,7 +143,11 @@ export default function OrdersPage() {
           <TableBody>
             {items.map((order) => (
               <TableRow key={order.key}>
-                <TableCell className="py-3">{order.orderId}</TableCell>
+                <TableCell className="py-3">
+                  <Link href={`/orders/${order.id}`} className="underline">
+                    {order.orderId}
+                  </Link>
+                </TableCell>
                 <TableCell className="py-3">{order.date}</TableCell>
                 <TableCell className="py-3">{order.items}</TableCell>
                 <TableCell className="py-3">{order.status}</TableCell>

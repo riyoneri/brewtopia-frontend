@@ -84,6 +84,7 @@ interface OrderDto {
   id: string;
   createdAt: string;
   paymentMethod: string;
+  displayId: string;
   status: string;
   products: CartItemDto[];
   total: number;
