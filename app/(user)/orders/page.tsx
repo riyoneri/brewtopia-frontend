@@ -101,33 +101,15 @@ export default function OrdersPage() {
   return (
     <>
       <title>Your Orders</title>
-      <div className="maximum-width space-y-5 pt-5">
+      <div className="maximum-width dynamic-hero-height flex flex-col gap-y-3 py-5">
         <FormProvider {...methods}>
           <SearchFilterInput />
         </FormProvider>
 
         <Table
-          bottomContent={
-            <div className="flex flex-col items-end justify-between gap-5 md:flex-row">
-              <div className="flex items-center gap-3 text-neutral-500">
-                <span>View</span>
-                <FormProvider {...methods}>
-                  <SelectInputLabel name="rows" selections={rowsSelections} />
-                </FormProvider>
-                <span>Orders per page</span>
-              </div>
-              <Pagination
-                isCompact
-                showControls
-                radius="none"
-                page={page}
-                total={pages}
-                onChange={(page) => setPage(page)}
-              />
-            </div>
-          }
+          className="mt-2 max-w-full flex-1 overflow-x-auto"
           classNames={{ tbody: "border-b" }}
-          aria-label="Example static collection table"
+          aria-label="Orders table"
           removeWrapper
         >
           <TableHeader>
@@ -148,7 +130,9 @@ export default function OrdersPage() {
                     {order.orderId}
                   </Link>
                 </TableCell>
-                <TableCell className="py-3">{order.date}</TableCell>
+                <TableCell className="whitespace-nowrap py-3">
+                  {order.date}
+                </TableCell>
                 <TableCell className="py-3">{order.items}</TableCell>
                 <TableCell className="py-3">{order.status}</TableCell>
                 <TableCell className="py-3">${order.amount}</TableCell>
@@ -156,6 +140,27 @@ export default function OrdersPage() {
             ))}
           </TableBody>
         </Table>
+        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto overflow-y-visible py-3 xs:overflow-x-hidden sm:flex-row">
+          <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
+            <span className="hidden xs:block">View</span>
+            <FormProvider {...methods}>
+              <SelectInputLabel
+                className="w-full xs:w-20"
+                name="rows"
+                selections={rowsSelections}
+              />
+            </FormProvider>
+            <span>Orders per page</span>
+          </div>
+          <Pagination
+            isCompact
+            showControls
+            radius="none"
+            page={page}
+            total={pages}
+            onChange={(page) => setPage(page)}
+          />
+        </div>
       </div>
     </>
   );

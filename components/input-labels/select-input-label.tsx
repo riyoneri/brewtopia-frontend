@@ -1,14 +1,17 @@
 import { Select, SelectItem, SelectSection } from "@nextui-org/react";
+import classNames from "classnames";
 import { Controller } from "react-hook-form";
 
 interface SelectInputLabelProperties {
   name: string;
   selections: { key: string | number; text: string }[];
+  className?: string;
 }
 
 export default function SelectInputLabel({
   name,
   selections,
+  className,
 }: SelectInputLabelProperties) {
   return (
     <Controller
@@ -16,7 +19,7 @@ export default function SelectInputLabel({
       render={({ field }) => (
         <Select
           {...field}
-          className="w-20 outline-none"
+          className={classNames(className, "outline-none")}
           size="sm"
           radius="none"
           variant="bordered"
