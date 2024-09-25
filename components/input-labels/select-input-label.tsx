@@ -24,6 +24,7 @@ export default function SelectInputLabel({
           size="sm"
           radius="none"
           variant="bordered"
+          defaultSelectedKeys={[`${selections[0].key}`]}
           classNames={{
             popoverContent: "rounded-none",
             trigger:
