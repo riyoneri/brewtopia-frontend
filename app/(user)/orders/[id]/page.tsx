@@ -10,7 +10,7 @@ export default function OrderDetails() {
     <>
       <title>Order Details</title>
       <div className="from-white from-90% to-tertiary to-90% lg:bg-gradient-to-r ">
-        <div className="maximum-width flex flex-col gap-10 *:pt-5 lg:flex-row">
+        <div className="maximum-width flex flex-col gap-5 *:pt-5 lg:flex-row lg:gap-10">
           <div className="flex-1 space-y-5 bg-white">
             <h1 className="text-4xl font-medium">Order Details</h1>
             <div className="mt-10 space-y-2">
@@ -32,49 +32,49 @@ export default function OrderDetails() {
             <hr className="border-2" />
             <OrderProductsList products={order.products} />
           </div>
-          <div className="lg:dynamic-hero-height mb-5 w-full space-y-5 bg-tertiary px-5 lg:mb-0 lg:w-96">
-            <h3 className="text-xl font-medium xs:text-2xl">Order Status</h3>
-            <div>
-              <ul className="dui-timeline dui-timeline-vertical dui-timeline-compact md:dui-timeline-horizontal lg:dui-timeline-vertical">
-                <li>
-                  <div className="dui-timeline-middle">
-                    <FaCircleCheck className="text-2xl" />
-                  </div>
-                  <div className="dui-timeline-end  space-y-2 rounded-none">
-                    <h3 className="font-medium">Processed</h3>
-                    <p className="text-sm">
-                      The order is being processed by the seller
-                    </p>
-                  </div>
-                  <hr className="" />
-                </li>
-                <li>
-                  <hr className="" />
-                  <div className="dui-timeline-middle">
-                    <FaCircleCheck className="text-2xl" />
-                  </div>
-                  <div className="dui-timeline-end ">
-                    <h3 className="font-medium">Shipped</h3>
-                    <p className="text-sm">
-                      The order has been sent by the seller
-                    </p>
-                  </div>
-                  <hr className="" />
-                </li>
-                <li>
-                  <hr className="" />
-                  <div className="dui-timeline-middle">
-                    <FaCircleCheck className="text-2xl" />
-                  </div>
-                  <div className="dui-timeline-end ">
-                    <h3 className="font-medium">Delivered</h3>
-                    <p className="text-sm">
-                      The order has been received by the buyer
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+          <div className="lg:dynamic-hero-height dui-timeline-compact mb-5 w-full max-w-full space-y-2 overflow-x-auto bg-tertiary pb-5 lg:mb-0 lg:w-96">
+            <h3 className="sticky left-0 px-5 text-xl font-medium xs:text-2xl">
+              Order Status
+            </h3>
+            <ul className="dui-timeline dui-timeline-vertical max-md:dui-timeline-compact md:dui-timeline-horizontal lg:dui-timeline-vertical lg:dui-timeline-compact max-md:px-5 md:max-lg:mx-5 lg:px-5">
+              <li>
+                <div className="dui-timeline-middle">
+                  <FaCircleCheck className="text-xl text-primary" />
+                </div>
+                <div className="dui-timeline-end dui-timeline-box space-y-1 rounded-none">
+                  <h3 className="font-medium">Processed</h3>
+                  <p className="text-sm">
+                    The order is being processed by the seller
+                  </p>
+                </div>
+                <hr className="!rounded-none bg-primary" />
+              </li>
+              <li>
+                <hr className="!rounded-none bg-primary" />
+                <div className="dui-timeline-middle">
+                  <FaCircleCheck className="text-xl text-neutral-400" />
+                </div>
+                <div className="dui-timeline-end dui-timeline-box space-y-1 rounded-none">
+                  <h3 className="font-medium">Shipped</h3>
+                  <p className="text-sm">
+                    The order has been sent by the seller
+                  </p>
+                </div>
+                <hr className="!rounded-none bg-neutral-400" />
+              </li>
+              <li>
+                <hr className="!rounded-none bg-neutral-400" />
+                <div className="dui-timeline-middle">
+                  <FaCircleCheck className="text-xl text-neutral-400" />
+                </div>
+                <div className="dui-timeline-end dui-timeline-box space-y-1 rounded-none">
+                  <h3 className="font-medium">Delivered</h3>
+                  <p className="text-sm">
+                    The order has been received by the buyer
+                  </p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
