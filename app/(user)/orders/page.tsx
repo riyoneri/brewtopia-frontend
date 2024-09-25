@@ -4,15 +4,15 @@ import SearchFilterInput from "@/components/filter/search-filter-input";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import Orders from "@/data/orders";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Pagination } from "@nextui-org/pagination";
 import {
+  Pagination,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
+} from "@nextui-org/react";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";

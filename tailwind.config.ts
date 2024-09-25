@@ -1,4 +1,4 @@
-import { nextui } from "@nextui-org/theme";
+import { nextui } from "@nextui-org/react";
 import daisyui from "daisyui";
 import tailwindScrollbar from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
@@ -7,8 +7,7 @@ const config: Config = {
   content: [
     "./components/**/*.{ts,tsx,mdx}",
     "./app/**/*.{ts,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/table.js",
-    "./node_modules/@nextui-org/theme/dist/components/pagination.js",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
