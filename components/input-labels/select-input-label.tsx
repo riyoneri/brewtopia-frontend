@@ -19,6 +19,7 @@ export default function SelectInputLabel({
       render={({ field }) => (
         <Select
           {...field}
+          aria-label="Select an number of orders"
           className={classNames(className, "outline-none")}
           size="sm"
           radius="none"
