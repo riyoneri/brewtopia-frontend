@@ -44,7 +44,7 @@ export default function AdminLogin() {
         </div>
 
         <button
-          onClick={() => signIn("google", { callbackUrl: "/obsidian" })}
+          onClick={() => signIn("google-admin", { callbackUrl: "/obsidian" })}
           type="button"
           className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
         >
