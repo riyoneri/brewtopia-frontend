@@ -72,7 +72,7 @@ export default function AdminRootLayout({
   if (status === "loading")
     return (
       <div className="grid min-h-dvh place-content-center">
-        <span className="dui-loading dui-loading-spinner bg-primary"></span>
+        <span className="dui-loading dui-loading-spinner dui-loading-lg bg-primary"></span>
       </div>
     );
 
