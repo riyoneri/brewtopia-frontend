@@ -14,7 +14,7 @@ export default function AdminHeader({
   return (
     <header className="flex items-center justify-between">
       <h3 className="hidden text-4xl font-medium sm:block">Dashboard</h3>
-      <div className="flex items-center sm:hidden">
+      <div className="flex items-center gap-1 sm:hidden">
         <MdMenu
           onClick={openSidebar}
           className="dui-drawer-button text-2xl text-primary"
