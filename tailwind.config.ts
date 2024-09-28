@@ -29,7 +29,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [daisyui, tailwindScrollbar, nextui()],
+  plugins: [
+    daisyui,
+    tailwindScrollbar,
+    nextui({ prefix: "nui-", addCommonColors: false }),
+  ],
   daisyui: {
     themes: false,
     darkTheme: false,
