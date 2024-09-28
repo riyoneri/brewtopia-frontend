@@ -1,8 +1,9 @@
 "use client";
 
-import SearchFilterInput from "@/components/filter/search-filter-input";
-import SelectInputLabel from "@/components/input-labels/select-input-label";
+import SearchFilterInput from "@/components/input-labels/search-input-label";
+import SelectInput from "@/components/input-labels/select-input-label";
 import Orders from "@/data/orders";
+import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Pagination,
@@ -66,12 +67,6 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-const rowsSelections = [
-  { key: 5, text: "5" },
-  { key: 10, text: "10" },
-  { key: 15, text: "15" },
-];
-
 export default function OrdersPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [page, setPage] = useState(1);
@@ -103,7 +98,10 @@ export default function OrdersPage() {
       <title>Your Orders</title>
       <div className="maximum-width dynamic-hero-height flex flex-col gap-y-3 py-5">
         <FormProvider {...methods}>
-          <SearchFilterInput />
+          <SearchFilterInput
+            name="search"
+            register={methods.register("keyword")}
+          />
         </FormProvider>
 
         <Table
@@ -144,10 +142,10 @@ export default function OrdersPage() {
           <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden xs:block">View</span>
             <FormProvider {...methods}>
-              <SelectInputLabel
+              <SelectInput
                 className="w-full xs:w-20"
                 name="rows"
-                selections={rowsSelections}
+                selectOptions={rowsPerPageSelections}
               />
             </FormProvider>
             <span>Orders per page</span>
