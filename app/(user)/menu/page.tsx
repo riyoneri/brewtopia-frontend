@@ -1,22 +1,60 @@
 "use client";
 
 import CategoriesWithProducts from "@/components/categories-with-products";
-import PriceFilterInput from "@/components/filter/price-filter-input";
-import SearchFilterInput from "@/components/filter/search-filter-input";
-import SortFilterInput from "@/components/filter/sort-filter-input";
-import { parseAsInteger, useQueryStates } from "nuqs";
+import SearchInputLabel from "@/components/input-labels/search-input-label";
+import SelectInputLabel from "@/components/input-labels/select-input-label";
+import {
+  productsPriceRanges,
+  productsSorts,
+} from "@/utils/constants/sort-filter-options";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryState } from "nuqs";
 import { Suspense, useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+
+const inputsSchema = z.object({
+  searchKey: z.string(),
+  priceRangeId: z.string(),
+  sortId: z.string(),
+});
+
+type InputsType = z.infer<typeof inputsSchema>;
 
 function MenuPage() {
-  const [, setQueries] = useQueryStates({
-    price: parseAsInteger.withDefault(0),
-    sort: parseAsInteger.withDefault(0),
+  const [, setPrice] = useQueryState("price", {
+    defaultValue: "0",
+    clearOnDefault: true,
+  });
+  const [, setSort] = useQueryState("sort", {
+    defaultValue: "0",
+    clearOnDefault: true,
+  });
+
+  const methods = useForm<InputsType>({
+    resolver: zodResolver(inputsSchema),
+    defaultValues: {
+      priceRangeId: "0",
+      sortId: "0",
+    },
   });
 
   useEffect(() => {
-    setQueries(Object.create(null));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setPrice("0");
+    setSort("0");
+  }, [setPrice, setSort]);
+
+  const priceRangeIdWatcher = methods.watch("priceRangeId");
+  const sortIdWatcher = methods.watch("sortId");
+
+  useEffect(() => {
+    setPrice(priceRangeIdWatcher);
+    setSort(sortIdWatcher);
+  }, [priceRangeIdWatcher, setPrice, setSort, sortIdWatcher]);
+
+  const clearSearchInput = () => {
+    methods.resetField("searchKey");
+  };
 
   return (
     <>
@@ -29,10 +67,35 @@ function MenuPage() {
           also supply coffee to a company you at home along with the equipment
         </p>
 
-        <div className="flex flex-col gap-5 sm:flex-row">
-          <SearchFilterInput />
-          <PriceFilterInput />
-          <SortFilterInput />
+        <div className="flex flex-col flex-wrap gap-5 sm:flex-row">
+          <FormProvider {...methods}>
+            <SearchInputLabel
+              className="flex-1"
+              name="searchKey"
+              register={methods.register("searchKey")}
+              hasHeader
+              clearHandler={clearSearchInput}
+            />
+            <SelectInputLabel
+              name="priceRangeId"
+              selectOptions={productsPriceRanges}
+              hasHeader
+              title="Price"
+              resetValue={() => {
+                methods.resetField("priceRangeId");
+              }}
+            />
+            <SelectInputLabel
+              name="sortId"
+              selectOptions={productsSorts}
+              className="md:w-52"
+              hasHeader
+              title="Sort By"
+              resetValue={() => {
+                methods.resetField("sortId");
+              }}
+            />
+          </FormProvider>
         </div>
 
         <CategoriesWithProducts />
