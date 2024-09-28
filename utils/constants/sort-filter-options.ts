@@ -27,7 +27,8 @@ export const productsSorts = [
 export const orderStatus = [
   { key: "all", text: "All" },
   { key: "processed", text: ORDER_STATUS.PROCESSED },
-  { key: "new", text: "New Orders" },
+  { key: "shipped", text: ORDER_STATUS.SHIPPED },
+  { key: "delivered", text: ORDER_STATUS.DELIVERED },
 ];
 
 export const rowsPerPageSelections = [
