@@ -8,7 +8,8 @@ import { FaChevronDown } from "react-icons/fa6";
 
 interface SelectInputLabelProperties
   extends Omit<FilterSortInputProperties, "clearHandler"> {
-  resetValue: () => void;
+  resetValue?: () => void;
+  firstOptionDisabled?: boolean;
 }
 
 export default function SelectInputLabel({
@@ -18,6 +19,7 @@ export default function SelectInputLabel({
   selectOptions,
   className,
   resetValue,
+  firstOptionDisabled = true,
 }: SelectInputLabelProperties) {
   const defaultOptionKey = selectOptions[0].key;
   const [value, setValue] = useState(defaultOptionKey);
@@ -33,7 +35,7 @@ export default function SelectInputLabel({
           <button
             onClick={() => {
               setValue(defaultOptionKey);
-              resetValue();
+              resetValue && resetValue();
             }}
           >
             Clear
@@ -51,7 +53,7 @@ export default function SelectInputLabel({
             className="min-w-max"
             radius="none"
             variant="bordered"
-            disabledKeys={[defaultOptionKey]}
+            disabledKeys={[firstOptionDisabled ? "" : defaultOptionKey]}
             selectedKeys={[value]}
             value={value}
             disallowEmptySelection
