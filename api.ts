@@ -89,3 +89,17 @@ interface OrderDto {
   products: CartItemDto[];
   total: number;
 }
+
+interface SelectOption {
+  key: string;
+  text: string;
+}
+
+interface FilterSortInputProperties {
+  title?: string;
+  hasHeader?: boolean;
+  clearHandler?: () => void;
+  selectOptions: SelectOption[];
+  name: string;
+  className?: string;
+}
