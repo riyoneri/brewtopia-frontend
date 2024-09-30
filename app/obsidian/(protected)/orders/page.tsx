@@ -25,7 +25,6 @@ const columns = [
     title: "Items",
     dataIndex: "items",
     key: "items",
-    allowSorting: true,
   },
   {
     title: "Status",
@@ -36,7 +35,6 @@ const columns = [
     title: "Amount",
     dataIndex: "amount",
     key: "amount",
-    allowSorting: true,
   },
 ];
 

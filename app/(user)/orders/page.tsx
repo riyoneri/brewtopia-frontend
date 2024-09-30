@@ -16,6 +16,7 @@ import {
 } from "@nextui-org/react";
 import dayjs from "dayjs";
 import Link from "next/link";
+import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -45,7 +46,6 @@ const columns = [
     title: "Items",
     dataIndex: "items",
     key: "items",
-    allowSorting: true,
   },
   {
     title: "Status",
@@ -56,7 +56,6 @@ const columns = [
     title: "Amount",
     dataIndex: "amount",
     key: "amount",
-    allowSorting: true,
   },
 ];
 
