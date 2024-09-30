@@ -20,6 +20,7 @@
     "@gsap/react": "^2.1.1",
     "@headlessui/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
+    "@internationalized/date": "^3.5.5",
     "@nextui-org/react": "^2.4.8",
     "@tanstack/react-query": "^5.54.1",
     "classnames": "^2.5.1",
