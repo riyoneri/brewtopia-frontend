@@ -143,7 +143,7 @@ export default function OrdersPage() {
             <span className="hidden xs:block">View</span>
             <FormProvider {...methods}>
               <SelectInput
-                className="w-full xs:w-20"
+                className="w-full xs:min-w-20 sm:w-20"
                 name="rows"
                 selectOptions={rowsPerPageSelections}
               />

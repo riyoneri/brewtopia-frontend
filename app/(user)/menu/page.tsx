@@ -74,14 +74,14 @@ function MenuPage() {
               name="searchKey"
               register={methods.register("searchKey")}
               hasHeader
-              clearHandler={clearSearchInput}
+              resetInput={clearSearchInput}
             />
             <SelectInputLabel
               name="priceRangeId"
               selectOptions={productsPriceRanges}
               hasHeader
               title="Price"
-              resetValue={() => {
+              resetInput={() => {
                 methods.resetField("priceRangeId");
               }}
             />
@@ -91,7 +91,7 @@ function MenuPage() {
               className="md:w-52"
               hasHeader
               title="Sort By"
-              resetValue={() => {
+              resetInput={() => {
                 methods.resetField("sortId");
               }}
             />
