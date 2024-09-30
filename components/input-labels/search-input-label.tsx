@@ -9,7 +9,7 @@ interface SearchInputLabelProperties
 export default function SearchInputLabel({
   className,
   name,
-  clearHandler,
+  resetInput,
   hasHeader = false,
   title = "Search",
   register,
@@ -19,7 +19,7 @@ export default function SearchInputLabel({
       {hasHeader && (
         <div className="flex items-center justify-between">
           <span className="cursor-default">{title}</span>
-          <button onClick={clearHandler}>Clear</button>
+          <button onClick={resetInput}>Clear</button>
         </div>
       )}
       <label
