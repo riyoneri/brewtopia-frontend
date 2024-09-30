@@ -2,9 +2,11 @@
 
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInput from "@/components/input-labels/select-input-label";
+import DatePickerInput from "@/components/inputs/date-picker-input";
 import { orderStatus } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Table, TableBody, TableColumn, TableHeader } from "@nextui-org/react";
+import dayjs from "dayjs";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -42,21 +44,33 @@ const inputsSchema = z.object({
   search: z.string().min(1),
   rows: z.number().default(5),
   status: z.string(),
+  dateRange: z.object({
+    start: z.string().date(),
+    end: z.string().date(),
+  }),
 });
 
 type InputsType = z.infer<typeof inputsSchema>;
 
+const defaultDateRange = {
+  start: dayjs().format("YYYY-MM-DD"),
+  end: dayjs().format("YYYY-MM-DD"),
+};
+
 export default function OrdersPage() {
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
-    defaultValues: { status: orderStatus[0].key },
+    defaultValues: {
+      status: orderStatus[0].key,
+      dateRange: defaultDateRange,
+    },
   });
 
   return (
     <>
       <title>Orders</title>
       <div className="space-y-5 pt-5">
-        <div className="flex flex-col items-stretch gap-5 md:flex-row md:items-end">
+        <div className="flex flex-col items-stretch gap-5 xl:flex-row xl:items-start">
           <FormProvider {...methods}>
             <SearchFilterInput
               name="search"
@@ -65,11 +79,18 @@ export default function OrdersPage() {
             />
 
             <SelectInput
-              resetValue={() => {
+              resetInput={() => {
                 methods.setValue("status", "all");
               }}
               name="status"
               selectOptions={orderStatus}
+            />
+
+            <DatePickerInput
+              name="dateRange"
+              resetInput={() => {
+                methods.setValue("dateRange", defaultDateRange);
+              }}
             />
           </FormProvider>
         </div>
