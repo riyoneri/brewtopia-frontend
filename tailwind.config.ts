@@ -32,7 +32,18 @@ const config: Config = {
   plugins: [
     daisyui,
     tailwindScrollbar,
-    nextui({ prefix: "nui-", addCommonColors: false }),
+    nextui({
+      prefix: "nui-",
+      addCommonColors: false,
+      layout: { radius: { large: "0px", medium: "0px", small: "0px" } },
+      themes: {
+        light: {
+          colors: {
+            danger: "#F14C35",
+          },
+        },
+      },
+    }),
   ],
   daisyui: {
     themes: false,
