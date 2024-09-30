@@ -92,7 +92,7 @@ interface SelectOption {
 interface FilterSortInputProperties {
   title?: string;
   hasHeader?: boolean;
-  clearHandler?: () => void;
+  resetInput?: () => void;
   selectOptions: SelectOption[];
   name: string;
   className?: string;

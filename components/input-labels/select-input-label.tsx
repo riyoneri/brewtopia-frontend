@@ -6,9 +6,7 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { FaChevronDown } from "react-icons/fa6";
 
-interface SelectInputLabelProperties
-  extends Omit<FilterSortInputProperties, "clearHandler"> {
-  resetValue?: () => void;
+interface SelectInputLabelProperties extends FilterSortInputProperties {
   firstOptionDisabled?: boolean;
 }
 
@@ -18,8 +16,8 @@ export default function SelectInputLabel({
   hasHeader = false,
   selectOptions,
   className,
-  resetValue,
   firstOptionDisabled = true,
+  resetInput,
 }: SelectInputLabelProperties) {
   const defaultOptionKey = selectOptions[0].key;
   const [value, setValue] = useState(defaultOptionKey);
@@ -35,7 +33,7 @@ export default function SelectInputLabel({
           <button
             onClick={() => {
               setValue(defaultOptionKey);
-              resetValue && resetValue();
+              resetInput && resetInput();
             }}
           >
             Clear
