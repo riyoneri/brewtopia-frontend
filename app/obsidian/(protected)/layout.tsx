@@ -90,9 +90,9 @@ export default function AdminRootLayout({
         type="checkbox"
         className="dui-drawer-toggle"
       />
-      <div className="dui-drawer-content p-5">
+      <div className="dui-drawer-content flex flex-col gap-5 p-5">
         <AdminHeader openSidebar={() => setSidebarOpen(true)} />
-        {children}
+        <div className="flex-1 *:h-full">{children}</div>
       </div>
       <div className="dui-drawer-side sm:text-lg">
         <label onClick={closeSidebar} className="dui-drawer-overlay"></label>
