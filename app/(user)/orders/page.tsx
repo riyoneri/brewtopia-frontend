@@ -1,7 +1,7 @@
 "use client";
 
 import SearchFilterInput from "@/components/input-labels/search-input-label";
-import SelectInput from "@/components/input-labels/select-input-label";
+import SelectInputLabel from "@/components/input-labels/select-input-label";
 import Orders from "@/data/orders";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,6 @@ import {
 } from "@nextui-org/react";
 import dayjs from "dayjs";
 import Link from "next/link";
-import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -141,7 +140,7 @@ export default function OrdersPage() {
           <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden xs:block">View</span>
             <FormProvider {...methods}>
-              <SelectInput
+              <SelectInputLabel
                 className="w-full xs:min-w-20 sm:w-20"
                 name="rows"
                 selectOptions={rowsPerPageSelections}
