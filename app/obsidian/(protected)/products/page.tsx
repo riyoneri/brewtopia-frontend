@@ -170,7 +170,7 @@ export default function ProductsListPage() {
           </TableBody>
         </Table>
 
-        <div className="rowItems-center flex max-w-full flex-col justify-between gap-5 overflow-x-auto overflow-y-visible  xs:overflow-x-hidden lg:flex-row">
+        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto overflow-y-visible  xs:overflow-x-hidden lg:flex-row">
           <div className="rowItems-center flex flex-col gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden sm:block">View</span>
             <FormProvider {...methods}>
