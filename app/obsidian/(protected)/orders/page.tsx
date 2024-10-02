@@ -174,15 +174,15 @@ export default function OrdersPage() {
           </TableHeader>
           <TableBody emptyContent={"You don't have any orders yet."}>
             {items.map((order) => (
-              <TableRow key={order.key}>
-                <TableCell className="py-3">{order.orderId}</TableCell>
-                <TableCell className="whitespace-nowrap py-3">
+              <TableRow key={order.key} className="*:py-3">
+                <TableCell>{order.orderId}</TableCell>
+                <TableCell className="whitespace-nowrap">
                   {order.date}
                 </TableCell>
-                <TableCell className="py-3">{order.items}</TableCell>
-                <TableCell className="py-3">{order.status}</TableCell>
-                <TableCell className="py-3">${order.amount}</TableCell>
-                <TableCell className="py-3">
+                <TableCell>{order.items}</TableCell>
+                <TableCell>{order.status}</TableCell>
+                <TableCell>${order.amount}</TableCell>
+                <TableCell>
                   <Button
                     onClick={() =>
                       setSelectedOrder(
