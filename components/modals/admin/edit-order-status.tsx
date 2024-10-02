@@ -36,14 +36,14 @@ export default function EditOrderStatus({
       />
 
       <dialog className="dui-modal dui-modal-middle" role="dialog">
-        <div className="dui-modal-box flex flex-col items-center gap-2 rounded-none px-3 text-sm xs:px-5 sm:text-base">
+        <div className="dui-modal-box flex flex-col items-center gap-2 rounded-none p-2 pb-5 text-sm sm:text-base">
           <button
             className="size-5 self-end leading-none transition hover:bg-tertiary sm:size-7"
             onClick={closeHandler}
           >
             ✕
           </button>
-          <h3 className="text-lg font-medium sm:text-3xl">
+          <h3 className="my-5 text-lg font-medium">
             {order.displayId} (${order.total})
           </h3>
           <FormProvider {...methods}>
@@ -57,7 +57,12 @@ export default function EditOrderStatus({
             </form>
           </FormProvider>
         </div>
-        <label className="dui-modal-backdrop bg-black/80">Close</label>
+        <label
+          className="dui-modal-backdrop bg-black/80"
+          onClick={closeHandler}
+        >
+          Close
+        </label>
       </dialog>
     </>
   );
