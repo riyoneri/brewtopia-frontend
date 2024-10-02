@@ -59,8 +59,8 @@ const columns = [
 ];
 
 const inputsSchema = z.object({
-  keyword: z.string().min(1),
-  rows: z.number().default(5),
+  keyword: z.string(),
+  rows: z.number(),
 });
 
 type InputsType = z.infer<typeof inputsSchema>;
@@ -68,7 +68,10 @@ type InputsType = z.infer<typeof inputsSchema>;
 export default function OrdersPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [page, setPage] = useState(1);
-  const methods = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
+  const methods = useForm<InputsType>({
+    resolver: zodResolver(inputsSchema),
+    defaultValues: { rows: 5 },
+  });
   const rowsWatcher = methods.watch("rows");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -85,7 +88,7 @@ export default function OrdersPage() {
   useEffect(() => {
     !isMounted && setIsMounted(true);
 
-    setRowsPerPage(rowsWatcher ?? 5);
+    setRowsPerPage(Number(rowsWatcher));
     setPage(1);
   }, [isMounted, rowsWatcher]);
 
