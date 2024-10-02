@@ -70,8 +70,8 @@ const columns = [
 ];
 
 const inputsSchema = z.object({
-  search: z.string().min(1),
-  rows: z.number().default(5),
+  search: z.string(),
+  rows: z.number(),
   status: z.string(),
   dateRange: z.object({
     start: z.string().date(),
@@ -92,6 +92,7 @@ export default function OrdersPage() {
     defaultValues: {
       status: orderStatus[0].key,
       dateRange: defaultDateRange,
+      rows: 5,
     },
   });
 
@@ -114,9 +115,11 @@ export default function OrdersPage() {
   useEffect(() => {
     !isMounted && setIsMounted(true);
 
-    setRowsPerPage(rowsWatcher ?? 5);
+    setRowsPerPage(Number(rowsWatcher));
     setPage(1);
   }, [isMounted, rowsWatcher]);
+
+  if (!isMounted) return;
 
   return (
     <>
