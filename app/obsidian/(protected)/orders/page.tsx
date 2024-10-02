@@ -182,8 +182,8 @@ export default function OrdersPage() {
                 <TableCell className="py-3">
                   <Button
                     onClick={() =>
-                      setSelectedOrder((order) =>
-                        Orders.find((orderItem) => orderItem.id === order?.id),
+                      setSelectedOrder(
+                        Orders.find((orderItem) => orderItem.id === order.id),
                       )
                     }
                     variant="outline"
