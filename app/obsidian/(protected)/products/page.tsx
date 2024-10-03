@@ -97,7 +97,7 @@ export default function ProductsListPage() {
     <>
       <title>All Products</title>
       <div className="flex flex-col gap-5">
-        <div className="rowItems-stretch xl:rowItems-start flex flex-col gap-5 xl:flex-row">
+        <div className="flex flex-col items-stretch gap-5 xl:flex-row xl:items-start">
           <FormProvider {...methods}>
             <SearchFilterInput
               name="search"
