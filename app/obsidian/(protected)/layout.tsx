@@ -35,7 +35,7 @@ const NavLinks = [
       },
       {
         text: "Categories",
-        url: "/obsidian/categories",
+        url: "/obsidian/products/categories",
       },
     ],
   },
@@ -132,7 +132,12 @@ export default function AdminRootLayout({
                 <Link
                   href={subMenu.url}
                   key={subMenu.text}
-                  className="group flex items-center gap-3 p-2 transition hover:bg-primary/40"
+                  className={classNames(
+                    "group flex items-center gap-3 p-2 transition hover:bg-primary/40",
+                    {
+                      "bg-primary/40": subMenu.url === pathname,
+                    },
+                  )}
                 >
                   <span className="size-2 rounded-full bg-primary"></span>
                   {subMenu.text}
@@ -140,14 +145,20 @@ export default function AdminRootLayout({
               ));
 
               return (
-                <Disclosure key={navLink.text} as="div">
+                <Disclosure
+                  key={navLink.text}
+                  as="div"
+                  className="space-y-1 *:space-y-1"
+                >
                   {({ open }) => (
                     <>
                       <DisclosureButton
                         className={classNames(
                           "group hover:bg-primary py-2 px-3 hover:text-white transition flex w-full items-center justify-between",
                           {
-                            "text-white bg-primary": navLink.url === pathname,
+                            "text-white bg-primary": pathname.includes(
+                              navLink.text.toLowerCase(),
+                            ),
                           },
                         )}
                       >
