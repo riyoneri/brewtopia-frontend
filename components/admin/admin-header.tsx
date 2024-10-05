@@ -37,7 +37,7 @@ export default function AdminHeader({
           <MenuItems
             transition
             anchor="bottom end"
-            className="mx-5 mt-2 max-w-full origin-top bg-tertiary p-1 text-sm/6 text-neutral-900 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] data-[closed]:scale-95 data-[closed]:opacity-0 focus:outline-none sm:mx-0"
+            className="relative z-10 mx-5 mt-2 max-w-full origin-top bg-tertiary p-1 text-sm/6 text-neutral-900 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] data-[closed]:scale-95 data-[closed]:opacity-0 focus:outline-none sm:mx-0"
           >
             {Notifications.map((notification) => (
               <MenuItem
