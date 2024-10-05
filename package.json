@@ -9,13 +9,6 @@
     "lint": "next lint --fix --no-cache --max-warnings=0",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md}": "prettier --write"
-  },
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@headlessui/react": "^2.1.5",
