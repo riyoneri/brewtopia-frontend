@@ -94,7 +94,7 @@ export default function AdminRootLayout({
         <AdminHeader openSidebar={() => setSidebarOpen(true)} />
         <div className="flex-1 *:h-full">{children}</div>
       </div>
-      <div className="dui-drawer-side sm:text-lg">
+      <div className="dui-drawer-side z-20 sm:text-lg">
         <label onClick={closeSidebar} className="dui-drawer-overlay"></label>
         <div className="relative flex min-h-full w-5/6 flex-col bg-white p-3 xs:w-80 sm:bg-tertiary">
           <div className="flex items-center justify-between border-b border-b-secondary pb-3">
