@@ -18,6 +18,7 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FaPenToSquare, FaTrash } from "react-icons/fa6";
@@ -64,6 +65,7 @@ const inputsSchema = z.object({
 type InputsType = z.infer<typeof inputsSchema>;
 
 export default function ProductsListPage() {
+  const pathname = usePathname();
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
     defaultValues: {
@@ -113,11 +115,8 @@ export default function ProductsListPage() {
           aria-label="Products table"
           removeWrapper
           topContent={
-            <div>
-              <Link
-                href="/obsidian/product/create"
-                className="flex justify-end"
-              >
+            <div className="flex justify-end">
+              <Link href={`${pathname}/create`}>
                 <Button className="w-full xs:w-auto">Add Products</Button>
               </Link>
             </div>
@@ -135,7 +134,7 @@ export default function ProductsListPage() {
           </TableHeader>
           <TableBody emptyContent={"You don't have any orders yet."}>
             {rowItems.map((product) => (
-              <TableRow key={product.id} className="*: *:whitespace-nowrap">
+              <TableRow key={product.id} className="*:whitespace-nowrap *:py-3">
                 <TableCell>
                   <Image
                     src={product.imageUrl}
@@ -158,9 +157,11 @@ export default function ProductsListPage() {
                   />
                 </TableCell>
                 <TableCell className="flex items-center gap-5">
-                  <Button variant="outline">
-                    <FaPenToSquare />
-                  </Button>
+                  <Link href={`${pathname}/${product.id}/edit`}>
+                    <Button variant="outline">
+                      <FaPenToSquare />
+                    </Button>
+                  </Link>
                   <Button variant="outline" className="group/delete-btn">
                     <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                   </Button>
