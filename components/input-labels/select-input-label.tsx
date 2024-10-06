@@ -17,7 +17,9 @@ export default function SelectInputLabel({
   selectOptions,
   className,
   firstOptionDisabled = true,
+  hasHeaderButton = true,
   resetInput,
+  error,
 }: SelectInputLabelProperties) {
   const defaultOptionKey = selectOptions[0].key;
   const [value, setValue] = useState(defaultOptionKey);
@@ -30,14 +32,16 @@ export default function SelectInputLabel({
       {hasHeader && (
         <div className="flex items-center justify-between">
           <span>{title}</span>
-          <button
-            onClick={() => {
-              setValue(defaultOptionKey);
-              resetInput && resetInput();
-            }}
-          >
-            Clear
-          </button>
+          {hasHeaderButton && (
+            <button
+              onClick={() => {
+                setValue(defaultOptionKey);
+                resetInput && resetInput();
+              }}
+            >
+              Clear
+            </button>
+          )}
         </div>
       )}
 
@@ -57,8 +61,13 @@ export default function SelectInputLabel({
             disallowEmptySelection
             classNames={{
               popoverContent: "rounded-none border-2 mt-3 border-neutral-300",
-              trigger:
-                "data-[open]:border-neutral-400 border-2 px-2 py-1 h-full data-[focus]:border-neutral-400 border-neutral-400 min-h-max",
+              trigger: classNames(
+                "data-[open]:border-neutral-400 border-2 px-2 py-1 h-full min-h-max",
+                {
+                  "border-neutral-400 data-[focus]:border-neutral-400": !error,
+                  "border-accent-red data-[focus]:border-accent-red": error,
+                },
+              ),
               selectorIcon: "relative size-10 end-0",
               value: "text-sm sm:text-base leading-[1.33]",
             }}
@@ -78,6 +87,11 @@ export default function SelectInputLabel({
           </Select>
         )}
       />
+      {error && (
+        <p className="-mt-1 ml-0.5 text-xs text-accent-red  xs:text-sm">
+          {error}
+        </p>
+      )}
     </label>
   );
 }
