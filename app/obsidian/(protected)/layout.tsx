@@ -16,6 +16,7 @@ import { Fragment, useEffect, useState } from "react";
 import { AiOutlineMenuFold, AiOutlineProduct } from "react-icons/ai";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaChevronDown } from "react-icons/fa";
+import { FaGear, FaUsers } from "react-icons/fa6";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { PiShippingContainerFill } from "react-icons/pi";
 
@@ -48,6 +49,16 @@ const NavLinks = [
     text: "Promotions",
     icon: HiOutlineReceiptPercent,
     url: "/obsidian/promotions",
+  },
+  {
+    text: "Customers",
+    icon: FaUsers,
+    url: "/obsidian/customers",
+  },
+  {
+    text: "Settings",
+    icon: FaGear,
+    url: "/obsidian/settings",
   },
 ];
 
