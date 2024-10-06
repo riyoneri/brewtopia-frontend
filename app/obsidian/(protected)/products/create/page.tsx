@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/button";
+import ImageInputLabel from "@/components/input-labels/image-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import TextAreaInputLabel from "@/components/input-labels/textarea-input-label";
@@ -16,6 +17,20 @@ const inputsSchema = z.object({
     .min(1, "Minimum price is 1")
     .default(0),
   description: z.string().min(1, "Enter description please"),
+  image: z
+    .custom<FileList>()
+    .refine((files) => files?.length > 0, "Image is required")
+    .refine(
+      (fileList) =>
+        ["image/jpeg", "image/png", "image/jpg"].includes(
+          fileList[0]?.type.toLocaleLowerCase(),
+        ),
+      "Allowed formats are jpeg, png and jpg",
+    )
+    .refine(
+      (fileList) => fileList[0]?.size <= 3_000_000,
+      "Image size must be less than 3MBs",
+    ),
 });
 
 type InputsType = z.infer<typeof inputsSchema>;
@@ -65,6 +80,13 @@ export default function CreateProductPage() {
             placeholder="Enter description"
             register={methods.register("description")}
             error={methods.formState.errors.description?.message}
+          />
+
+          <ImageInputLabel
+            title="Image"
+            register={methods.register("image")}
+            placeholder="Enter image"
+            error={methods.formState.errors.image?.message}
           />
           <Button type="submit">Update Product</Button>
         </form>
