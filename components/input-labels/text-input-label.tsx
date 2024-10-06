@@ -2,7 +2,7 @@ import { AllInputsProperties } from "@/utils/input-properties";
 import classNames from "classnames";
 
 interface TextInputLabelProperties extends AllInputsProperties {
-  type?: "email" | "text";
+  type?: "email" | "text" | "number";
 }
 
 export default function TextInputLabel({
