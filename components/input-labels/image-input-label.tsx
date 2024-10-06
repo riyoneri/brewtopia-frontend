@@ -14,12 +14,17 @@ export default function ImageInputLabel({
 }: ImageInputLabelProperties) {
   const imageValue = useWatch({ name: register.name });
 
+  const imageSource =
+    imageValue instanceof FileList
+      ? URL.createObjectURL(imageValue?.[0])
+      : imageValue;
+
   return (
     <div className="flex flex-col items-center gap-3 sm:flex-row">
       {imageValue ? (
         <Image
           draggable="false"
-          src={URL.createObjectURL(imageValue?.[0])}
+          src={imageSource}
           width={100}
           height={100}
           alt={`${title}`}
