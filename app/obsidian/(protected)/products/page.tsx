@@ -3,6 +3,7 @@
 import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
+import DeleteProductModal from "@/components/modals/delete-product-modal";
 import Products from "@/data/products";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,6 +67,9 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function ProductsListPage() {
   const pathname = usePathname();
+  const [productToDelete, setProductToDelete] = useState<
+    undefined | ProductDto
+  >();
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
     defaultValues: {
@@ -98,6 +102,12 @@ export default function ProductsListPage() {
   return (
     <>
       <title>All Products</title>
+      {productToDelete && (
+        <DeleteProductModal
+          product={productToDelete}
+          cancelDelete={() => setProductToDelete(undefined)}
+        />
+      )}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col items-stretch gap-5 xl:flex-row xl:items-start">
           <FormProvider {...methods}>
@@ -162,7 +172,11 @@ export default function ProductsListPage() {
                       <FaPenToSquare />
                     </Button>
                   </Link>
-                  <Button variant="outline" className="group/delete-btn">
+                  <Button
+                    variant="outline"
+                    className="group/delete-btn"
+                    onClick={() => setProductToDelete(product)}
+                  >
                     <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                   </Button>
                 </TableCell>
