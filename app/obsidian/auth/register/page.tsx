@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
-import ConfirmEmailModal from "@/components/modals/admin/confirm-email-modal";
+import ConfirmEmailModal from "@/components/modals/confirm-email-modal";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn, signOut } from "next-auth/react";

@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCountdown } from "usehooks-ts";
 
-import Button from "../../button";
+import Button from "../button";
 
 interface ConfirmEmailModalProperties {
   redirectUrl: string;

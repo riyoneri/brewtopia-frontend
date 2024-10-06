@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import DatePickerInput from "@/components/inputs/date-picker-input";
-import EditOrderStatus from "@/components/modals/admin/edit-order-status";
+import EditOrderStatus from "@/components/modals/edit-order-status";
 import Orders from "@/data/orders";
 import {
   orderStatus,
