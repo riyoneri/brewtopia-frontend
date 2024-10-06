@@ -28,12 +28,7 @@ export default function EditOrderStatus({
 
   return (
     <>
-      <input
-        type="checkbox"
-        checked={true}
-        readOnly
-        className="dui-modal-toggle"
-      />
+      <input type="checkbox" checked readOnly className="dui-modal-toggle" />
 
       <dialog className="dui-modal dui-modal-middle" role="dialog">
         <div className="dui-modal-box flex flex-col items-center gap-2 rounded-none p-2 pb-5 text-sm sm:text-base">
