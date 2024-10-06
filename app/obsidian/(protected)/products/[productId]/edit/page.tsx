@@ -99,7 +99,7 @@ export default function EditProductPage() {
             placeholder="Enter image"
             error={methods.formState.errors.image?.message}
           />
-          <Button type="submit">Update Product</Button>
+          <Button type="submit">Update</Button>
         </form>
       </FormProvider>
     </>
