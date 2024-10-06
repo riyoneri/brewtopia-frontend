@@ -40,7 +40,7 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function EditProductPage() {
+export default function UpdateProductPage() {
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
     defaultValues: {
@@ -53,7 +53,7 @@ export default function EditProductPage() {
 
   return (
     <>
-      <title>Edit Product</title>
+      <title>Update Product</title>
       <FormProvider {...methods}>
         <form
           className="mx-auto flex w-full flex-col gap-5 xs:w-3/4 sm:w-full md:w-3/4 lg:w-1/2"

@@ -127,7 +127,7 @@ export default function CategoriesListPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"You don't have any orders yet."}>
+          <TableBody emptyContent={"You don't have any categories yet."}>
             {categories.map((category) => (
               <TableRow
                 key={category.id}
@@ -138,11 +138,11 @@ export default function CategoriesListPage() {
                   <Switch
                     size="sm"
                     defaultSelected
-                    aria-label="Product status"
+                    aria-label="Category status"
                   />
                 </TableCell>
                 <TableCell className="flex items-center gap-5">
-                  <Link href={`${pathname}/${category.id}/edit`}>
+                  <Link href={`${pathname}/${category.id}/update`}>
                     <Button variant="outline">
                       <FaPenToSquare />
                     </Button>

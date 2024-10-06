@@ -142,7 +142,7 @@ export default function ProductsListPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"You don't have any orders yet."}>
+          <TableBody emptyContent={"You don't have any products yet."}>
             {rowItems.map((product) => (
               <TableRow key={product.id} className="*:whitespace-nowrap *:py-3">
                 <TableCell>
@@ -167,7 +167,7 @@ export default function ProductsListPage() {
                   />
                 </TableCell>
                 <TableCell className="flex items-center gap-5">
-                  <Link href={`${pathname}/${product.id}/edit`}>
+                  <Link href={`${pathname}/${product.id}/update`}>
                     <Button variant="outline">
                       <FaPenToSquare />
                     </Button>
