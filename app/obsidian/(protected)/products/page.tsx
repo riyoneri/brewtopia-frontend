@@ -124,7 +124,7 @@ export default function ProductsListPage() {
 
         <Table
           className="flex-1 overflow-x-auto"
-          classNames={{ tbody: "border-b" }}
+          classNames={{ tbody: "border-b", tr: "border-b" }}
           aria-label="Products table"
           removeWrapper
         >
@@ -140,7 +140,7 @@ export default function ProductsListPage() {
           </TableHeader>
           <TableBody emptyContent={"You don't have any products yet."}>
             {rowItems.map((product) => (
-              <TableRow key={product.id} className="*:whitespace-nowrap *:py-3">
+              <TableRow key={product.id} className="*:whitespace-nowrap">
                 <TableCell>
                   <Image
                     src={product.imageUrl}
@@ -150,9 +150,7 @@ export default function ProductsListPage() {
                     className="size-10 object-cover"
                   />
                 </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {product.name}
-                </TableCell>
+                <TableCell>{product.name}</TableCell>
                 <TableCell>First category</TableCell>
                 <TableCell>${product.price}</TableCell>
                 <TableCell>
@@ -162,19 +160,21 @@ export default function ProductsListPage() {
                     aria-label="Product status"
                   />
                 </TableCell>
-                <TableCell className="flex items-center gap-5">
-                  <Link href={`${pathname}/${product.id}/update`}>
-                    <Button variant="outline">
-                      <FaPenToSquare />
+                <TableCell>
+                  <div className="flex items-center gap-5">
+                    <Link href={`${pathname}/${product.id}/update`}>
+                      <Button variant="outline">
+                        <FaPenToSquare />
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outline"
+                      className="group/delete-btn"
+                      onClick={() => setProductToDelete(product)}
+                    >
+                      <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                     </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    className="group/delete-btn"
-                    onClick={() => setProductToDelete(product)}
-                  >
-                    <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
-                  </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

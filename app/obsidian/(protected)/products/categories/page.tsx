@@ -108,7 +108,7 @@ export default function CategoriesListPage() {
 
         <Table
           className="flex-1 overflow-x-auto"
-          classNames={{ tbody: "border-b" }}
+          classNames={{ tbody: "border-b", tr: "border-b" }}
           aria-label="Categories table"
           removeWrapper
           fullWidth
@@ -125,10 +125,7 @@ export default function CategoriesListPage() {
           </TableHeader>
           <TableBody emptyContent={"You don't have any categories yet."}>
             {categories.map((category) => (
-              <TableRow
-                key={category.id}
-                className="*:whitespace-nowrap *:py-3"
-              >
+              <TableRow key={category.id} className="*:whitespace-nowrap">
                 <TableCell className="w-full">{category.name}</TableCell>
                 <TableCell>
                   <Switch
@@ -137,19 +134,21 @@ export default function CategoriesListPage() {
                     aria-label="Category status"
                   />
                 </TableCell>
-                <TableCell className="flex items-center gap-5">
-                  <Link href={`${pathname}/${category.id}/update`}>
-                    <Button variant="outline">
-                      <FaPenToSquare />
+                <TableCell>
+                  <div className="flex items-center gap-5">
+                    <Link href={`${pathname}/${category.id}/update`}>
+                      <Button variant="outline">
+                        <FaPenToSquare />
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outline"
+                      className="group/delete-btn"
+                      onClick={() => setCategoryToDelete(category)}
+                    >
+                      <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                     </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    className="group/delete-btn"
-                    onClick={() => setCategoryToDelete(category)}
-                  >
-                    <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
-                  </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

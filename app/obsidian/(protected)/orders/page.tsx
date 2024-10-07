@@ -158,7 +158,7 @@ export default function OrdersPage() {
 
         <Table
           className="flex-1 overflow-x-auto"
-          classNames={{ tbody: "border-b" }}
+          classNames={{ tbody: "border-b", tr: "border-b" }}
           aria-label="Orders table"
           removeWrapper
         >
@@ -174,11 +174,9 @@ export default function OrdersPage() {
           </TableHeader>
           <TableBody emptyContent={"You don't have any orders yet."}>
             {items.map((order) => (
-              <TableRow key={order.key} className="*:py-3">
+              <TableRow key={order.key} className="*:whitespace-nowrap">
                 <TableCell>{order.orderId}</TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {order.date}
-                </TableCell>
+                <TableCell>{order.date}</TableCell>
                 <TableCell>{order.items}</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell>${order.amount}</TableCell>
