@@ -99,3 +99,16 @@ interface FilterSortInputProperties {
   className?: string;
   error?: string;
 }
+
+interface DiscountDto {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+}
+
+interface ItemToDelete {
+  id: string;
+  name: string;
+}
