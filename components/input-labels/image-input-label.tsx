@@ -15,7 +15,7 @@ export default function ImageInputLabel({
   const imageValue = useWatch({ name: register.name });
 
   const imageSource =
-    imageValue instanceof FileList
+    imageValue instanceof FileList && imageValue[0]
       ? URL.createObjectURL(imageValue?.[0])
       : imageValue;
 
