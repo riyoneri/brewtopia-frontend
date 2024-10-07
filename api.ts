@@ -112,3 +112,9 @@ interface ItemToDelete {
   id: string;
   name: string;
 }
+
+interface UserDto {
+  id: string;
+  name: string;
+  email: string;
+}
