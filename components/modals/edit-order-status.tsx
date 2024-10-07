@@ -55,9 +55,7 @@ export default function EditOrderStatus({
         <label
           className="dui-modal-backdrop bg-black/80"
           onClick={closeHandler}
-        >
-          Close
-        </label>
+        ></label>
       </dialog>
     </>
   );

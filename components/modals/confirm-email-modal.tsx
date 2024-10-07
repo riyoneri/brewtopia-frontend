@@ -96,7 +96,7 @@ export default function ConfirmEmailModal(
             </p>
           )}
         </div>
-        <label className="dui-modal-backdrop bg-black/80">Close</label>
+        <label className="dui-modal-backdrop bg-black/80"></label>
       </dialog>
     </>
   );
