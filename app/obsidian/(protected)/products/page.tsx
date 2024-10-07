@@ -83,7 +83,7 @@ export default function ProductsListPage() {
 
   const pages = Math.ceil(Products.length / rowsPerPage);
 
-  const rowItems = useMemo(() => {
+  const products = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
@@ -138,7 +138,7 @@ export default function ProductsListPage() {
             ))}
           </TableHeader>
           <TableBody emptyContent={"You don't have any products yet."}>
-            {rowItems.map((product) => (
+            {products.map((product) => (
               <TableRow key={product.id} className="*:whitespace-nowrap">
                 <TableCell>
                   <Image
@@ -149,7 +149,14 @@ export default function ProductsListPage() {
                     className="size-10 object-cover"
                   />
                 </TableCell>
-                <TableCell>{product.name}</TableCell>
+                <TableCell>
+                  <Link
+                    href={`${pathname}/${product.id}`}
+                    className="underline"
+                  >
+                    {product.name}
+                  </Link>
+                </TableCell>
                 <TableCell>First category</TableCell>
                 <TableCell>${product.price}</TableCell>
                 <TableCell>
