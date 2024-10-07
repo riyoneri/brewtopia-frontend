@@ -52,7 +52,7 @@ export default function CreatePromotionPage() {
       <div className="flex w-full flex-col gap-5 lg:flex-row">
         <FormProvider {...methods}>
           <form
-            className="mx-auto flex flex-col gap-5"
+            className="mx-auto flex w-full flex-col gap-5"
             onSubmit={methods.handleSubmit((data) => data)}
           >
             <TextInputLabel
