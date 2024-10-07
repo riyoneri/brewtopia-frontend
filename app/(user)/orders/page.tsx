@@ -121,7 +121,7 @@ export default function OrdersPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody emptyContent={"You don't have any orders yet."}>
             {items.map((order) => (
               <TableRow key={order.key} className="*:whitespace-nowrap">
                 <TableCell>
