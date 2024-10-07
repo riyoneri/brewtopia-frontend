@@ -109,7 +109,7 @@ export default function ProductsListPage() {
         />
       )}
       <div className="flex flex-col gap-5">
-        <div className="flex flex-col items-stretch gap-5 xl:flex-row xl:items-start">
+        <div className="flex flex-col items-stretch gap-5 md:flex-row md:items-start">
           <FormProvider {...methods}>
             <SearchFilterInput
               name="search"
@@ -117,6 +117,9 @@ export default function ProductsListPage() {
               className="flex-1"
             />
           </FormProvider>
+          <Link href={`${pathname}/create`}>
+            <Button className="w-full">Add Products</Button>
+          </Link>
         </div>
 
         <Table
@@ -124,13 +127,6 @@ export default function ProductsListPage() {
           classNames={{ tbody: "border-b" }}
           aria-label="Products table"
           removeWrapper
-          topContent={
-            <div className="flex justify-end">
-              <Link href={`${pathname}/create`}>
-                <Button className="w-full xs:w-auto">Add Products</Button>
-              </Link>
-            </div>
-          }
         >
           <TableHeader>
             {columns.map((column) => (
