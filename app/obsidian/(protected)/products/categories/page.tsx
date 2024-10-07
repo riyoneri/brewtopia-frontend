@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import DeleteCategoryModal from "@/components/modals/delete-category-modal";
+import DeleteModal from "@/components/modals/delete-modal";
 import Categories from "@/data/categories";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,9 +51,7 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function CategoriesListPage() {
   const pathname = usePathname();
-  const [categoryToDelete, setCategoryToDelete] = useState<
-    undefined | CategoryDto
-  >();
+  const [itemToDelete, setItemToDelete] = useState<undefined | ItemToDelete>();
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
     defaultValues: {
@@ -86,10 +84,11 @@ export default function CategoriesListPage() {
   return (
     <>
       <title>All Categories</title>
-      {categoryToDelete && (
-        <DeleteCategoryModal
-          category={categoryToDelete}
-          cancelDelete={() => setCategoryToDelete(undefined)}
+      {itemToDelete && (
+        <DeleteModal
+          item={itemToDelete}
+          type="category"
+          cancelDelete={() => setItemToDelete(undefined)}
         />
       )}
       <div className="flex flex-col gap-5">
@@ -144,7 +143,12 @@ export default function CategoriesListPage() {
                     <Button
                       variant="outline"
                       className="group/delete-btn"
-                      onClick={() => setCategoryToDelete(category)}
+                      onClick={() =>
+                        setItemToDelete({
+                          id: category.id,
+                          name: category.name,
+                        })
+                      }
                     >
                       <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                     </Button>

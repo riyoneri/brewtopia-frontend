@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import DeleteProductModal from "@/components/modals/delete-product-modal";
+import DeleteModal from "@/components/modals/delete-modal";
 import Products from "@/data/products";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,9 +67,7 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function ProductsListPage() {
   const pathname = usePathname();
-  const [productToDelete, setProductToDelete] = useState<
-    undefined | ProductDto
-  >();
+  const [itemToDelete, setItemToDelete] = useState<undefined | ItemToDelete>();
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
     defaultValues: {
@@ -102,10 +100,11 @@ export default function ProductsListPage() {
   return (
     <>
       <title>All Products</title>
-      {productToDelete && (
-        <DeleteProductModal
-          product={productToDelete}
-          cancelDelete={() => setProductToDelete(undefined)}
+      {itemToDelete && (
+        <DeleteModal
+          item={itemToDelete}
+          type="product"
+          cancelDelete={() => setItemToDelete(undefined)}
         />
       )}
       <div className="flex flex-col gap-5">
@@ -170,7 +169,9 @@ export default function ProductsListPage() {
                     <Button
                       variant="outline"
                       className="group/delete-btn"
-                      onClick={() => setProductToDelete(product)}
+                      onClick={() =>
+                        setItemToDelete({ id: product.id, name: product.name })
+                      }
                     >
                       <FaTrash className="text-accent-red group-hover/delete-btn:text-white" />
                     </Button>
