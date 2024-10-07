@@ -129,7 +129,9 @@ export default function AdminRootLayout({
                     className={classNames(
                       "flex items-center gap-3 hover:bg-primary py-2 px-3 hover:text-white transition",
                       {
-                        "text-white bg-primary": navLink.url === pathname,
+                        "text-white bg-primary":
+                          navLink.url === pathname ||
+                          pathname.includes(navLink.text.toLowerCase()),
                       },
                     )}
                   >
