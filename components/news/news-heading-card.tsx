@@ -1,13 +1,10 @@
 "use client";
 
 import dayjs from "dayjs";
-import customParserFormat from "dayjs/plugin/customParseFormat";
 import Image from "next/image";
 import Link from "next/link";
 import { GoDotFill } from "react-icons/go";
 import TimeAgo from "react-timeago";
-
-dayjs.extend(customParserFormat);
 
 export default function NewsHeadingCard({
   imageUrl,
