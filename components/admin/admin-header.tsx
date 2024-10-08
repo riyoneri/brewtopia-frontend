@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { FaRegBell } from "react-icons/fa6";
-import { IoCloseOutline, IoLogOutOutline, IoSettings } from "react-icons/io5";
+import { IoCloseOutline, IoLogOutOutline } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 
 export default function AdminHeader({
@@ -65,13 +65,6 @@ export default function AdminHeader({
             anchor="bottom end"
             className="mt-2 grid w-40 origin-top-right bg-tertiary p-1 transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] data-[closed]:scale-95 data-[closed]:opacity-0 xs:w-52"
           >
-            <MenuItem
-              as="button"
-              className="flex items-center gap-2 px-2 py-1.5 text-neutral-900 transition data-[focus]:bg-primary data-[focus]:text-white"
-            >
-              <IoSettings className="text-lg" />
-              Settings
-            </MenuItem>
             <MenuItem
               as="button"
               onClick={() => signOut({ callbackUrl: "/obsidian/auth/login" })}
