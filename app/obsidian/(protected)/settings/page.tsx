@@ -64,13 +64,13 @@ export default function SettingsPage() {
   return (
     <>
       <title>Settings</title>
-      <div className="maximum-width space-y-5 pt-5">
+      <div className="space-y-5">
         <h3 className="text-center text-xl font-medium xs:text-2xl">
           Change Account settings
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mx-auto flex w-full flex-col gap-3 border-2 p-5 sm:w-2/3"
+          className="mx-auto flex w-full flex-col gap-3 border-2 p-5 lg:w-2/3"
         >
           <TextInputLabel
             title="Name"
