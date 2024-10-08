@@ -23,7 +23,7 @@ import {
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { FaPenToSquare } from "react-icons/fa6";
 import { z } from "zod";
 
 const rows = Orders.map((order) => ({
@@ -189,7 +189,7 @@ export default function OrdersPage() {
                     }
                     variant="outline"
                   >
-                    <FaArrowUpRightFromSquare />
+                    <FaPenToSquare />
                   </Button>
                 </TableCell>
               </TableRow>
