@@ -32,7 +32,7 @@ export default function SearchInputLabel({
           id={name}
           {...register}
           placeholder="Keyword"
-          className="flex-1 outline-none"
+          className="min-w-1 flex-1 outline-none"
         />
       </label>
     </div>
