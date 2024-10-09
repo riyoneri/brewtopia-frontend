@@ -10,6 +10,7 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import classNames from "classnames";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -67,7 +68,7 @@ const DropDownNavLinks = [
 export default function UserNavBar() {
   const pathname = usePathname();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isAuth] = useState(true);
+  const { data: session, status } = useSession();
 
   const closeDrawer = () => setIsDrawerOpen(false);
 
@@ -96,15 +97,17 @@ export default function UserNavBar() {
               </Link>
             ))}
 
-            <Link href="/cart">
-              <Button>Cart (0)</Button>
-            </Link>
-            {!isAuth && (
-              <Link href="/auth/login">
-                <Button variant="outline">Sign In</Button>
+            {session?.user.role === "user" && (
+              <Link href="/cart">
+                <Button>Cart (0)</Button>
               </Link>
             )}
-            {isAuth && (
+
+            {status === "loading" ? (
+              <Button variant="outline" className="flex">
+                <span className="dui-loading dui-loading-dots"></span>
+              </Button>
+            ) : session?.user.role === "user" ? (
               <Menu>
                 <MenuButton className="box-border flex self-stretch border-2 border-primary/50 p-1 data-[open]:bg-primary data-[focus]:outline-1 data-[focus]:outline-white">
                   {({ open }) => (
@@ -134,12 +137,19 @@ export default function UserNavBar() {
                   ))}
 
                   <MenuItem>
-                    <button className="block w-full bg-accent-red/40 text-start data-[focus]:bg-white/30">
+                    <button
+                      onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                      className="block w-full bg-accent-red/40 text-start data-[focus]:bg-white/30"
+                    >
                       Sign Out
                     </button>
                   </MenuItem>
                 </MenuItems>
               </Menu>
+            ) : (
+              <Link href="/auth/login">
+                <Button variant="outline">Sign In</Button>
+              </Link>
             )}
           </div>
         </div>
