@@ -24,7 +24,10 @@ const handler = NextAuth({
       try {
         const response = await fetch(requestUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXTAUTH_CALLBACK_TOKEN}`,
+          },
           body: JSON.stringify(user),
         });
 
