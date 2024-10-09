@@ -1,5 +1,6 @@
 "use client";
 
+import AuthLoading from "@/components/auth-loading";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -20,12 +21,7 @@ export default function AdminAuthLayout({
     }
   }, [status, router]);
 
-  if (status === "loading")
-    return (
-      <div className="grid min-h-dvh place-content-center">
-        <span className="dui-loading dui-loading-spinner dui-loading-lg bg-primary"></span>
-      </div>
-    );
+  if (status === "loading") return <AuthLoading />;
 
   if (status === "authenticated") return;
 

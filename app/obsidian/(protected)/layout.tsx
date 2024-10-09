@@ -1,6 +1,7 @@
 "use client";
 
 import AdminHeader from "@/components/admin/admin-header";
+import AuthLoading from "@/components/auth-loading";
 import {
   Disclosure,
   DisclosureButton,
@@ -80,12 +81,7 @@ export default function AdminRootLayout({
     }
   }, [status, router]);
 
-  if (status === "loading")
-    return (
-      <div className="grid min-h-dvh place-content-center">
-        <span className="dui-loading dui-loading-spinner dui-loading-lg bg-primary"></span>
-      </div>
-    );
+  if (status === "loading") return <AuthLoading />;
 
   if (status === "unauthenticated") {
     signOut({ redirect: false });
