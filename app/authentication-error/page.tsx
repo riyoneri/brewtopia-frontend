@@ -4,6 +4,7 @@ import BrokenIllustration from "@/assets/illustrations/broken.illustration";
 import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";
+import { Suspense } from "react";
 
 interface ErrorMessages {
   Configuration: string;
@@ -23,7 +24,7 @@ const errorMessages: ErrorMessages = {
     "An unknown error occurred. Please try again or contact support if the issue persists.",
 };
 
-export default function NotFoundPage() {
+function AuthenticationErrorPage() {
   const router = useRouter();
   const [error] = useQueryState<keyof ErrorMessages | undefined>("error", {
     parse: (value: string) =>
@@ -46,5 +47,13 @@ export default function NotFoundPage() {
         </div>
       </main>
     </>
+  );
+}
+
+export default function WrappedAuthenticationPage() {
+  return (
+    <Suspense>
+      <AuthenticationErrorPage />
+    </Suspense>
   );
 }
