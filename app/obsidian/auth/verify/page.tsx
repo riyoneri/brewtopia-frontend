@@ -59,7 +59,7 @@ export default function VerifyEmail() {
         )}
         {error && (
           <p className="text-sm text-accent-red">
-            {error.errorMessage || error.validationErrors.token}
+            {error.message || error.validationErrors.token}
           </p>
         )}
       </div>

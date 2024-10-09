@@ -102,9 +102,9 @@ export default function AccountPage() {
             error={errors.confirmPassword?.message}
           />
 
-          {/* {error?.errorMessage && (
+          {/* {error?.message && (
             <p className="text-center text-sm text-accent-red xs:text-base">
-              {error.errorMessage}
+              {error.message}
             </p>
           )} */}
 

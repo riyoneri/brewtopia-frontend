@@ -25,7 +25,7 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
 
     if (!response.ok) {
       if (typeof data.message === "string")
-        throw { errorMessage: data.message, statusCode: response.status };
+        throw { message: data.message, statusCode: response.status };
 
       throw {
         validationErrors: data.message,
@@ -41,7 +41,7 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
 
     throw {
       ...typedError,
-      errorMessage: typedError.errorMessage || typedError.message,
+      errorMessage: typedError.message,
       statusCode: typedError.statusCode || 500,
     };
   }

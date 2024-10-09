@@ -39,13 +39,12 @@ interface NotificationDto {
 }
 
 interface FetcherResponse {
-  errorMessage: string;
+  message: string;
   statusCode: number;
   validationErrors: Partial<Record<string, string>>;
-  message: string;
 }
 
-interface GlobalResponseError<T> extends Omit<FetcherResponse, "message"> {
+interface GlobalResponseError<T> extends FetcherResponse {
   validationErrors: Partial<Record<keyof T, string>>;
 }
 
