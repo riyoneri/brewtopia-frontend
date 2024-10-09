@@ -11,19 +11,20 @@ export default function AdminAuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === "authenticated" && session.user.role === "admin") {
       enqueueSnackbar("You are already authenticated", { variant: "success" });
+
       router.replace("/obsidian");
     }
-  }, [status, router]);
+  }, [status, router, session?.user.role]);
 
   if (status === "loading") return <AuthLoading />;
 
-  if (status === "authenticated") return;
+  if (status === "authenticated" && session.user.role === "admin") return;
 
   return <div className="min-h-dvh p-5">{children}</div>;
 }

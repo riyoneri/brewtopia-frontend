@@ -68,22 +68,28 @@ export default function AdminRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
+    if (
+      status === "unauthenticated" ||
+      (session && session.user.role !== "admin")
+    ) {
       enqueueSnackbar("Login first", { variant: "error" });
 
       router.replace("/obsidian/auth/login");
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   if (status === "loading") return <AuthLoading />;
 
-  if (status === "unauthenticated") {
+  if (
+    status === "unauthenticated" ||
+    (session && session.user.role !== "admin")
+  ) {
     signOut({ redirect: false });
     return;
   }
