@@ -11,6 +11,7 @@ import {
 } from "@headlessui/react";
 import classNames from "classnames";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -109,15 +110,25 @@ export default function UserNavBar() {
               </Button>
             ) : session?.user.role === "user" ? (
               <Menu>
-                <MenuButton className="box-border flex self-stretch border-2 border-primary/50 p-1 data-[open]:bg-primary data-[focus]:outline-1 data-[focus]:outline-white">
-                  {({ open }) => (
-                    <FaCircleUser
-                      className={classNames("text-2xl transition", {
-                        "text-primary": !open,
-                        "text-white": open,
-                      })}
-                    />
-                  )}
+                <MenuButton className="box-border flex items-center self-stretch border-2 border-primary/50 p-1 data-[open]:bg-primary data-[focus]:outline-1 data-[focus]:outline-white">
+                  {({ open }) =>
+                    session.user.image ? (
+                      <Image
+                        src={session.user.image}
+                        height={50}
+                        width={50}
+                        alt={`${session.user.name} Image`}
+                        className="size-6"
+                      />
+                    ) : (
+                      <FaCircleUser
+                        className={classNames("text-2xl transition", {
+                          "text-primary": !open,
+                          "text-white": open,
+                        })}
+                      />
+                    )
+                  }
                 </MenuButton>
 
                 <MenuItems
@@ -208,10 +219,20 @@ export default function UserNavBar() {
               </div>
               <Disclosure as="div" className="flex flex-col">
                 <DisclosureButton className="group flex w-full items-center justify-between px-2 py-1.5 transition data-[open]:bg-primary/70 hover:bg-primary hover:text-white">
-                  <div className="flex items-center gap-3">
-                    <FaCircleUser className="text-2xl" />
-                    <span>Profile</span>
-                  </div>
+                  {session?.user.image ? (
+                    <Image
+                      src={session.user.image}
+                      height={50}
+                      width={50}
+                      alt={`${session.user.name} Image`}
+                      className="size-6"
+                    />
+                  ) : (
+                    <div className="flex items-center gap-3">
+                      <FaCircleUser className="text-2xl" />
+                      <span>Profile</span>
+                    </div>
+                  )}
                   <FaChevronDown className="text-lg transition-transform group-data-[open]:rotate-180" />
                 </DisclosureButton>
                 <DisclosurePanel
