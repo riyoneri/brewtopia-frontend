@@ -92,7 +92,7 @@ export default function ConfirmEmailModal(
           </p>
           {error && (
             <p className="text-sm text-accent-red">
-              {error.errorMessage || error.validationErrors.email}
+              {error.message || error.validationErrors.email}
             </p>
           )}
         </div>
