@@ -9,26 +9,41 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
+    GoogleProvider({
+      id: "google-client",
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
+      let requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/admin/auth/google`;
+      if (account?.provider === "google-client")
+        requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/admin/auth/google`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-          },
-        );
+        const response = await fetch(requestUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
 
         if (!response.ok) return false;
 
         return true;
       } catch {
-        return "/obsidian/auth/login";
+        if (account?.provider.includes("google")) {
+          return account?.provider === "google-client"
+            ? "/auth/login"
+            : "/obsidian/auth/login";
+        }
+
+        return false;
       }
     },
+  },
+  pages: {
+    error: "/authentication-error",
   },
 });
 
