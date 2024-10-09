@@ -24,11 +24,9 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
     const data = await response.json();
 
     if (!response.ok) {
-      if (typeof data.message === "string")
-        throw { message: data.message, statusCode: response.status };
-
       throw {
-        validationErrors: data.message,
+        message: data.errors ? undefined : data.message,
+        validationErrors: data.errors,
         statusCode: response.status,
       };
     }
