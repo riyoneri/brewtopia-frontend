@@ -33,7 +33,7 @@ export default function AdminLogin() {
 
   return (
     <>
-      <title>Admin login</title>
+      <title>Login</title>
       <form
         className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
         onSubmit={handleSubmit(onSubmit)}
