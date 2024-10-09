@@ -1,5 +1,6 @@
 "use client";
 
+import AuthLoading from "@/components/auth-loading";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -20,15 +21,7 @@ export default function AdminAuthLayout({
     }
   }, [status, router, session?.user?.role]);
 
-  if (status === "loading")
-    return (
-      <>
-        <title>Loading...</title>
-        <div className="hero-height grid place-content-center">
-          <span className="dui-loading dui-loading-spinner dui-loading-lg bg-primary"></span>
-        </div>
-      </>
-    );
+  if (status === "loading") return <AuthLoading fullHeight={false} />;
 
   if (status === "authenticated" && session?.user?.role === "user") return;
 
