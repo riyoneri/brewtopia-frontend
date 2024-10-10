@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
-import ConfirmEmailModal from "@/components/modals/confirm-email-modal";
+import AdminConfirmEmailModal from "@/components/modals/admin-confirm-email-modal";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
@@ -55,7 +55,7 @@ export default function AdminRegister() {
       for (key in error.validationErrors)
         setError(key, { message: error.validationErrors[key] });
     }
-    setRedirectUrl(`http://127.0.0.1:3000/obsidian/auth/verify`);
+    window && setRedirectUrl(`${window.location.origin}/obsidian/auth/verify`);
   }, [error?.validationErrors, setError]);
 
   const onSubmit = (data: InputsType) => {
@@ -89,7 +89,7 @@ export default function AdminRegister() {
     <>
       <title>Admin Register</title>
       {data && (
-        <ConfirmEmailModal
+        <AdminConfirmEmailModal
           email={getValues("email")}
           redirectUrl={redirectUrl}
         />
