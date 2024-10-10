@@ -56,6 +56,14 @@ interface AdminDto {
   notifications: Array<NotificationDto>;
 }
 
+interface UserDto {
+  id: string;
+  name: string;
+  email: string;
+  imageUrl?: string;
+  active: boolean;
+}
+
 interface SimplifiedResponse {
   message: string;
 }
