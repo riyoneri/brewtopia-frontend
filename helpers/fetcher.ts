@@ -39,7 +39,7 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
 
     throw {
       ...typedError,
-      errorMessage: typedError.message,
+      message: typedError.message,
       statusCode: typedError.statusCode || 500,
     };
   }
