@@ -53,7 +53,7 @@ export default function ConfirmEmailModal(
           <button
             className="size-5 self-end leading-none transition hover:bg-tertiary  sm:size-7"
             onClick={() => {
-              router.push("/obsidian/auth/login");
+              router.push("/auth/login");
             }}
           >
             ✕
