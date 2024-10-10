@@ -1,4 +1,4 @@
-import useAdminRequestVerificationEmail from "@/hooks/admin/use-admin-request-verification-email";
+import useRequestVerificationEmail from "@/hooks/user/use-request-verification-email";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCountdown } from "usehooks-ts";
@@ -19,7 +19,7 @@ export default function ConfirmEmailModal(
     countStart: countDownTime,
   });
   const { data, error, mutate, isPending } =
-    useAdminRequestVerificationEmail<typeof properties>();
+    useRequestVerificationEmail<typeof properties>();
 
   useEffect(() => {
     if (count === 0) resetCountdown();
@@ -92,7 +92,9 @@ export default function ConfirmEmailModal(
           </p>
           {error && (
             <p className="text-sm text-accent-red">
-              {error.message || error.validationErrors.email}
+              {error.message ||
+                error.validationErrors.email ||
+                error.validationErrors.redirectUrl}
             </p>
           )}
         </div>
