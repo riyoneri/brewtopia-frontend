@@ -19,11 +19,7 @@ export default function NotFoundPage() {
             It seems the page you&apos;re looking for doesn&apos;t exist. You
             might have followed a broken link or mistyped the URL.
           </p>
-          <p>
-            Don&apos;t worry, you can head back to previous page or explore our
-            products to find what you need.
-          </p>
-          <p className="font-semibold">Happy shopping!</p>
+          <p>Don&apos;t worry, you can head back to previous page</p>
           <Button onClick={() => router.back()}>Go back</Button>
         </div>
       </main>
