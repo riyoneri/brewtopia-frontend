@@ -6,7 +6,7 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import ConfirmEmailModal from "@/components/modals/confirm-email-modal";
 import useRegisterAdmin from "@/hooks/admin/use-admin-register";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -111,8 +111,6 @@ export default function AdminRegister() {
           <FcGoogle />
           Sign up with Google
         </button>
-
-        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
 
         <span className="dui-divider my-0">or</span>
 
