@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/button";
-import useAdminVerifyEmail from "@/hooks/admin/use-admin-verify-email";
+import useVerifyEmail from "@/hooks/user/use-verify-email";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ export default function VerifyEmail() {
   const router = useRouter();
   const [requestSent, setRequestSent] = useState(false);
   const { mutate, data, error, isPending } =
-    useAdminVerifyEmail<Record<"token", string>>();
+    useVerifyEmail<Record<"token", string>>();
 
   const token = searchParameters.get("token");
 
