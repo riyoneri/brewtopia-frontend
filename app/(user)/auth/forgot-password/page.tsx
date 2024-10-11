@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import ForgotPasswordModal from "@/components/modals/forgot-password-modal";
-import useResetPassword from "@/hooks/user/use-reset-password";
+import useForgotPassword from "@/hooks/user/use-forgot-password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ export default function AdminForgotPassword() {
     handleSubmit,
     setError,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
-  const { data, error, isPending, mutate } = useResetPassword<InputsType>();
+  const { data, error, isPending, mutate } = useForgotPassword<InputsType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
