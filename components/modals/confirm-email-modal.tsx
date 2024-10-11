@@ -60,7 +60,7 @@ export default function ConfirmEmailModal(
           </button>
 
           <h2 className="mb-2 font-medium xs:text-lg sm:text-xl">
-            Registration Successful!
+            Verification E-mail sent!
           </h2>
 
           <p className="text-pretty text-center">
