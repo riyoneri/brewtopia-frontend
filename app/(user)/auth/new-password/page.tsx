@@ -114,9 +114,9 @@ export default function AdminNewPassword() {
             }
           />
 
-          {error?.message && (
+          {(error?.message || error?.validationErrors?.token) && (
             <p className="text-center text-sm text-accent-red xs:text-base">
-              {error.message}
+              {error.validationErrors?.token || error?.message}
             </p>
           )}
 

@@ -2,9 +2,11 @@
 
 import Button from "@/components/button";
 import PasswordInputLabel from "@/components/input-labels/password-input-label";
+import useAdminResetPassword from "@/hooks/admin/use-admin-reset-password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -28,6 +30,12 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminNewPassword() {
   const router = useRouter();
+  const searchParameters = useSearchParams();
+  const token = searchParameters.get("token");
+  const { data, error, isPending, mutate } = useAdminResetPassword<
+    InputsType & { token: string }
+  >();
+
   const {
     formState: { errors },
     register,
@@ -35,10 +43,14 @@ export default function AdminNewPassword() {
     watch,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
+  useEffect(() => {
+    if (data) router.replace("./done");
+  }, [data, router]);
+
   const passwordValue = watch("password");
 
-  const onSubmit = (_data: InputsType) => {
-    router.replace("./done");
+  const onSubmit = (data: InputsType) => {
+    mutate(JSON.stringify({ ...data, token }));
   };
 
   const passwordValidations = [
@@ -64,6 +76,8 @@ export default function AdminNewPassword() {
     },
   ];
 
+  if (!token) return notFound();
+
   return (
     <>
       <title>Admin new password</title>
@@ -79,22 +93,44 @@ export default function AdminNewPassword() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-5">
           <PasswordInputLabel
             title="Password"
             placeholder="Enter password"
             register={register("password")}
             validations={passwordValidations}
-            error={errors.password?.message && " "}
+            error={
+              error?.validationErrors?.password ||
+              (errors.password?.message && " ")
+            }
           />
           <PasswordInputLabel
             title="Confirm Password"
             placeholder="Enter password"
             register={register("confirmPassword")}
-            error={errors.confirmPassword?.message}
+            error={
+              error?.validationErrors?.confirmPassword ||
+              errors.confirmPassword?.message
+            }
           />
 
-          <Button type="submit">Reset Password</Button>
+          {(error?.message || error?.validationErrors?.token) && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {error?.validationErrors?.token || error?.message}
+            </p>
+          )}
+
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="flex justify-center text-base"
+          >
+            {isPending ? (
+              <span className="dui-loading dui-loading-spinner"></span>
+            ) : (
+              "Update Password"
+            )}
+          </Button>
         </div>
 
         <p className="text-center">
