@@ -2,9 +2,11 @@
 
 import Button from "@/components/button";
 import TextInputLabel from "@/components/input-labels/text-input-label";
+import ForgotPasswordModal from "@/components/modals/forgot-password-modal";
+import useAdminForgotPassword from "@/hooks/admin/use-admin-forgot-password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -18,21 +20,36 @@ const inputsSchema = z.object({
 type InputsType = z.infer<typeof inputsSchema>;
 
 export default function AdminForgotPassword() {
-  const router = useRouter();
+  const { data, error, isPending, mutate } =
+    useAdminForgotPassword<InputsType>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState("");
+
   const {
     formState: { errors },
     register,
     handleSubmit,
+    setError,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
 
+  useEffect(() => {
+    window &&
+      setRedirectUrl(`${window.location.origin}/obsidian/auth/new-password`);
+
+    data && setIsModalOpen(true);
+
+    error?.validationErrors?.email &&
+      setError("email", { message: error.validationErrors.email });
+  }, [data, error, setError]);
+
   const onSubmit = (data: InputsType) => {
-    data;
-    router.push("./otp");
+    mutate(JSON.stringify({ ...data, redirectUrl }));
   };
 
   return (
     <>
       <title>Admin forgot password</title>
+      {isModalOpen && <ForgotPasswordModal />}
       <form
         className="mx-auto flex w-full flex-col gap-5 sm:w-2/3 sm:gap-8 xl:w-1/3"
         onSubmit={handleSubmit(onSubmit)}
@@ -50,7 +67,23 @@ export default function AdminForgotPassword() {
             error={errors.email?.message}
           />
 
-          <Button type="submit">Reset Password</Button>
+          {error?.message && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {error.message}
+            </p>
+          )}
+
+          <Button
+            disabled={isPending || isModalOpen}
+            type="submit"
+            className="flex justify-center text-base"
+          >
+            {isPending ? (
+              <span className="dui-loading dui-loading-spinner"></span>
+            ) : (
+              "Reset Password"
+            )}
+          </Button>
         </div>
 
         <p className="text-center">
