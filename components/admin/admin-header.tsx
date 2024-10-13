@@ -72,7 +72,7 @@ export default function AdminHeader({
                 className="size-8"
               />
             ) : (
-              <FaCircleUser className="text-2xl transition" />
+              <FaCircleUser className="size-8 transition" />
             )}
           </MenuButton>
           <MenuItems
