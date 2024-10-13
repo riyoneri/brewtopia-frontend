@@ -6,6 +6,9 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
@@ -20,15 +23,37 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function AdminLogin() {
+export default function Login() {
+  const router = useRouter();
   const {
     formState: { errors },
     register,
     handleSubmit,
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: InputsType) => {
-    data;
+  const onSubmit = async (data: InputsType) => {
+    setError("");
+    setIsLoading(true);
+    signIn("client-credentials", {
+      ...data,
+      redirect: false,
+    })
+      .then((response) => {
+        response?.error && setError(response.error);
+        if (response?.ok) {
+          router.replace("/");
+          enqueueSnackbar("Welcome back 😊", {
+            variant: "success",
+            key: "already-authenticated",
+          });
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -73,7 +98,24 @@ export default function AdminLogin() {
           >
             Forgot password?
           </Link>
-          <Button type="submit">Submit</Button>
+
+          {error && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {error}
+            </p>
+          )}
+
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className="flex justify-center text-base"
+          >
+            {isLoading ? (
+              <span className="dui-loading dui-loading-spinner"></span>
+            ) : (
+              "Login"
+            )}
+          </Button>
         </div>
 
         <p className="text-center">
