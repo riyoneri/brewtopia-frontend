@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 
-export default function AdminDonePasswordReset() {
+export default function DonePasswordReset() {
   const router = useRouter();
 
   return (

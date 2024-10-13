@@ -19,7 +19,7 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema & { redirectUrl: string }>;
 
-export default function AdminForgotPassword() {
+export default function ForgotPassword() {
   const [redirectUrl, setRedirectUrl] = useState("");
 
   const {

@@ -28,7 +28,7 @@ const inputsSchema = z
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function AdminNewPassword() {
+export default function NewPassword() {
   const router = useRouter();
   const searchParameters = useSearchParams();
   const token = searchParameters.get("token");

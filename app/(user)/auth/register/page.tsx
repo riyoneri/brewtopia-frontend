@@ -33,7 +33,7 @@ const inputsSchema = z
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function AdminRegister() {
+export default function Register() {
   const [redirectUrl, setRedirectUrl] = useState("");
   const {
     formState: { errors },
