@@ -74,7 +74,7 @@ export default function AdminLogin() {
           className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
         >
           <FcGoogle />
-          Sign up with Google
+          Sign in with Google
         </button>
 
         <span className="dui-divider my-0">or</span>
