@@ -16,7 +16,10 @@ export default function AdminAuthLayout({
 
   useEffect(() => {
     if (status === "authenticated" && session.user.role === "admin") {
-      enqueueSnackbar("You are already authenticated", { variant: "success" });
+      enqueueSnackbar("You are already authenticated", {
+        variant: "success",
+        key: "already-authenticated",
+      });
 
       router.replace("/obsidian");
     }
