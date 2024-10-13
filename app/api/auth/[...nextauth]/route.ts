@@ -29,7 +29,6 @@ const handler = NextAuth({
     }),
     CredentialsProvider({
       id: "admin-credentials",
-      name: "admin-credentials",
       credentials: {
         email: { type: "string" },
         password: { type: "password" },
@@ -44,7 +43,6 @@ const handler = NextAuth({
             }),
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${process.env.NEXTAUTH_CALLBACK_TOKEN}`,
             },
           });
 
@@ -58,6 +56,44 @@ const handler = NextAuth({
             image: data.user.image,
             name: data.user.name,
             role: "admin",
+            token: data.token,
+          };
+        } catch (error) {
+          const typedError = error as { message: string; status: number };
+
+          throw new Error(typedError.message);
+        }
+      },
+    }),
+    CredentialsProvider({
+      id: "client-credentials",
+      credentials: {
+        email: { type: "string" },
+        password: { type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          const response = await fetch(`${apiUrl}/auth/login`, {
+            method: "POST",
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) throw new Error(data.message);
+
+          return {
+            id: data.user.id,
+            email: data.user.email,
+            image: data.user.image,
+            name: data.user.name,
+            role: "user",
             token: data.token,
           };
         } catch (error) {
