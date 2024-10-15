@@ -2,6 +2,7 @@
 
 import AdminHeader from "@/components/admin/admin-header";
 import AuthLoading from "@/components/auth-loading";
+import { connectSocketServer } from "@/helpers/socket";
 import {
   Disclosure,
   DisclosureButton,
@@ -83,6 +84,10 @@ export default function AdminRootLayout({
       router.replace("/obsidian/auth/login");
     }
   }, [status, router, session]);
+
+  useEffect(() => {
+    if (session) connectSocketServer(session?.user.token, session?.user.role);
+  }, [session]);
 
   if (status === "loading") return <AuthLoading />;
 
