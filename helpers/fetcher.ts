@@ -37,8 +37,6 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
   } catch (error) {
     const typedError = error as FetcherResponse;
 
-    // if (typedError.status === 401 && logout) logout();
-
     throw {
       ...typedError,
       message: typedError.message,
