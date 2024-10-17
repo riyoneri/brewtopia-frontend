@@ -1,3 +1,5 @@
+import { getSession } from "next-auth/react";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface FetcherData {
@@ -9,11 +11,11 @@ interface FetcherData {
 export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
   try {
     let headers: Record<string, string> = {};
-    const token = localStorage.getItem("_o")?.replaceAll(/"/g, "");
+    const session = await getSession();
 
     typeof body === "string" && (headers["Content-Type"] = "application/json");
 
-    token && (headers["Authorization"] = `Bearer ${token}`);
+    session && (headers["Authorization"] = `Bearer ${session.user.token}`);
 
     const response = await fetch(`${API_URL}${url}`, {
       method,
