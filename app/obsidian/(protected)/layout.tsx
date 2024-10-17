@@ -79,7 +79,7 @@ export default function AdminRootLayout({
       status === "unauthenticated" ||
       (session && session.user.role !== "admin")
     ) {
-      enqueueSnackbar("Login first", { variant: "error" });
+      enqueueSnackbar("Login first", { variant: "error", key: "login" });
 
       router.replace("/obsidian/auth/login");
     }

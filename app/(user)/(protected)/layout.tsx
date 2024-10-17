@@ -19,7 +19,7 @@ export default function AdminRootLayout({
       status === "unauthenticated" ||
       (session && session.user.role !== "user")
     ) {
-      enqueueSnackbar("Login first", { variant: "error" });
+      enqueueSnackbar("Login first", { variant: "error", key: "login" });
 
       router.replace("/auth/login");
     }
