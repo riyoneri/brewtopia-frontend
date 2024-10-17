@@ -2,7 +2,7 @@
 
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import Users from "@/data/users";
+import { useListClients } from "@/hooks/admin/use-list-clients";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,7 +15,8 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { useEffect, useMemo, useState } from "react";
+import classNames from "classnames";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -51,20 +52,12 @@ export default function CustomersPage() {
       rows: 5,
     },
   });
-
   const [page, setPage] = useState(1);
-  const rowsWatcher = methods.watch("rows");
-
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const pages = Math.ceil(Users.length / rowsPerPage);
+  const { data, error, isLoading } = useListClients(page, rowsPerPage);
 
-  const customers = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return Users.slice(start, end);
-  }, [page, rowsPerPage]);
+  const rowsWatcher = methods.watch("rows");
 
   useEffect(() => {
     setRowsPerPage(rowsWatcher ?? 5);
@@ -84,7 +77,7 @@ export default function CustomersPage() {
         </FormProvider>
 
         <Table
-          className="flex-1 overflow-x-auto"
+          className={classNames("overflow-x-auto", { "flex-1": !isLoading })}
           classNames={{ tbody: "border-b", tr: "border-b" }}
           aria-label="Customers table"
           removeWrapper
@@ -99,8 +92,20 @@ export default function CustomersPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"You don't have customers products yet."}>
-            {customers.map((customer) => (
+          <TableBody
+            isLoading={isLoading}
+            loadingContent={
+              <span className="dui-loading dui-loading-spinner dui-loading-lg h-min "></span>
+            }
+            emptyContent={
+              error ? (
+                <p className="text-center text-accent-red">{error?.message}</p>
+              ) : (
+                "You don't have customers yet."
+              )
+            }
+          >
+            {data?.users?.map((customer) => (
               <TableRow key={customer.id} className="*:whitespace-nowrap">
                 <TableCell>{customer.name}</TableCell>
                 <TableCell>{customer.email}</TableCell>
@@ -112,7 +117,7 @@ export default function CustomersPage() {
                   />
                 </TableCell>
               </TableRow>
-            ))}
+            )) ?? []}
           </TableBody>
         </Table>
 
@@ -133,7 +138,7 @@ export default function CustomersPage() {
             showControls
             radius="none"
             page={page}
-            total={pages}
+            total={data?.total ?? 1}
             onChange={(page) => setPage(page)}
           />
         </div>
