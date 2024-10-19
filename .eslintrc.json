@@ -4,6 +4,7 @@
     "plugin:unicorn/recommended",
     "plugin:tailwindcss/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:react/jsx-runtime",
     "prettier"
   ],
   "rules": {
