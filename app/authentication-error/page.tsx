@@ -1,7 +1,7 @@
 "use client";
 
-import BrokenIllustration from "@/assets/illustrations/broken.illustration";
 import Button from "@/components/button";
+import BrokenIllustration from "@/components/illustrations/broken.illustration";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { Suspense } from "react";

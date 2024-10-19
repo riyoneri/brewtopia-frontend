@@ -1,6 +1,6 @@
 "use client";
 
-import DeliveryIllustration from "@/assets/illustrations/delivery.illustration";
+import DeliveryIllustration from "@/components/illustrations/delivery.illustration";
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import NewOrdersList from "@/components/new-orders/new-orders-list";
 import SummaryChart from "@/components/summary-chart";

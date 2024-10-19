@@ -1,7 +1,7 @@
 "use client";
 
-import NotFoundIllustration from "@/assets/illustrations/not-found.illustration";
 import Button from "@/components/button";
+import NotFoundIllustration from "@/components/illustrations/not-found.illustration";
 import { useRouter } from "next/navigation";
 
 export default function NotFoundPage() {

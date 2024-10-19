@@ -1,4 +1,4 @@
-import DeactivatedIllustration from "@/assets/illustrations/deactivated.illustration";
+import DeactivatedIllustration from "@/components/illustrations/deactivated.illustration";
 import { useSession } from "next-auth/react";
 
 export default function DeactivatedAccount() {

@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorIllustration from "@/assets/illustrations/error.illustration";
+import ErrorIllustration from "@/components/illustrations/error.illustration";
 
 export default function ErrorPage() {
   return (
