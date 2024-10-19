@@ -93,6 +93,7 @@ const handler = NextAuth({
             email: data.user.email,
             image: data.user.image,
             name: data.user.name,
+            active: data.user.active,
             role: "user",
             token: data.token,
           };
@@ -126,6 +127,7 @@ const handler = NextAuth({
           const data = await response.json();
 
           user.token = data.token;
+          user.active = data.user.active;
 
           return true;
         } catch {
@@ -145,6 +147,7 @@ const handler = NextAuth({
       user?.role && (token.role = user.role);
       user?.picture && (token.image = user.picture);
       user?.token && (token.token = user.token);
+      user?.active && (token.active = user.active);
 
       return token;
     },
@@ -152,6 +155,7 @@ const handler = NextAuth({
       session.user.role = token.role;
       session.user.image = token.image;
       session.user.token = token.token;
+      session.user.active = token.active;
 
       return session;
     },
