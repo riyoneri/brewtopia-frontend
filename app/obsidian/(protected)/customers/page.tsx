@@ -3,6 +3,7 @@
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import { useListClients } from "@/hooks/admin/use-list-clients";
+import useAdminUpdateClientStatus from "@/hooks/admin/use-update-client-status";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -16,6 +17,7 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import classNames from "classnames";
+import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -54,8 +56,18 @@ export default function CustomersPage() {
   });
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [customerToUpdate, setCustomerToUpdate] = useState({
+    id: "",
+    active: false,
+  });
+  const { data, error, isPending, mutate } = useAdminUpdateClientStatus();
 
-  const { data, error, isLoading } = useListClients(page, rowsPerPage);
+  const {
+    data: clients,
+    error: clientsError,
+    isLoading,
+    refetch: refetchClients,
+  } = useListClients(page, rowsPerPage);
 
   const rowsWatcher = methods.watch("rows");
 
@@ -63,6 +75,26 @@ export default function CustomersPage() {
     setRowsPerPage(rowsWatcher ?? 5);
     setPage(1);
   }, [rowsWatcher]);
+
+  useEffect(() => {
+    if (data) {
+      refetchClients();
+      setCustomerToUpdate({ id: "", active: false });
+    }
+
+    if (error?.message) {
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
+  }, [data, error?.message, refetchClients]);
+
+  useEffect(() => {
+    if (customerToUpdate.id) {
+      mutate({
+        id: customerToUpdate.id,
+        body: JSON.stringify({ active: customerToUpdate.active }),
+      });
+    }
+  }, [customerToUpdate.active, customerToUpdate.id, mutate]);
 
   return (
     <>
@@ -98,23 +130,41 @@ export default function CustomersPage() {
               <span className="dui-loading dui-loading-spinner dui-loading-lg h-min "></span>
             }
             emptyContent={
-              error ? (
-                <p className="text-center text-accent-red">{error?.message}</p>
+              clientsError ? (
+                <p className="text-center text-accent-red">
+                  {clientsError?.message}
+                </p>
               ) : (
                 "You don't have customers yet."
               )
             }
           >
-            {data?.users?.map((customer) => (
+            {clients?.users?.map((customer) => (
               <TableRow key={customer.id} className="*:whitespace-nowrap">
                 <TableCell>{customer.name}</TableCell>
                 <TableCell>{customer.email}</TableCell>
                 <TableCell>
-                  <Switch
-                    size="sm"
-                    defaultSelected
-                    aria-label="Product status"
-                  />
+                  <div className="flex items-center">
+                    <Switch
+                      size="sm"
+                      isSelected={customer.active}
+                      isDisabled={
+                        isPending && customerToUpdate.id === customer.id
+                      }
+                      onChange={(event) => {
+                        setCustomerToUpdate({
+                          id: customer.id,
+                          active: event.target.checked,
+                        });
+                      }}
+                      aria-label="Product status"
+                    />
+                    <div className="flex min-w-6">
+                      {isPending && customerToUpdate.id === customer.id && (
+                        <span className="dui-loading dui-loading-spinner bg-primary"></span>
+                      )}
+                    </div>
+                  </div>
                 </TableCell>
               </TableRow>
             )) ?? []}
@@ -138,7 +188,7 @@ export default function CustomersPage() {
             showControls
             radius="none"
             page={page}
-            total={data?.total ?? 1}
+            total={clients?.total ?? 1}
             onChange={(page) => setPage(page)}
           />
         </div>
