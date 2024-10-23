@@ -6,17 +6,16 @@ import { getSocket } from "@/helpers/socket";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status, data: session } = useSession();
+  const { status, data: session, update } = useSession();
   const router = useRouter();
   const socket = getSocket();
-  const [userActive, setUserActive] = useState(true);
 
   useEffect(() => {
     if (
@@ -33,9 +32,9 @@ export default function RootLayout({
     if (!socket) return;
 
     socket.on("client:status", (data) => {
-      setUserActive(data.active);
+      update({ active: data.active });
     });
-  }, [socket]);
+  }, [session, socket, update]);
 
   if (status === "loading") return <AuthLoading fullHeight={false} />;
 
@@ -47,7 +46,7 @@ export default function RootLayout({
     return;
   }
 
-  if (!session?.user.active || !userActive) return <DeactivatedAccount />;
+  if (!session?.user.active) return <DeactivatedAccount />;
 
   return <div>{children}</div>;
 }
