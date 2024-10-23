@@ -143,11 +143,15 @@ const handler = NextAuth({
 
       return true;
     },
-    jwt({ user, token }) {
+    jwt({ user, token, session, trigger }) {
       user?.role && (token.role = user.role);
       user?.picture && (token.image = user.picture);
       user?.token && (token.token = user.token);
       user?.active && (token.active = user.active);
+
+      if (trigger === "update") {
+        token.active = session.active;
+      }
 
       return token;
     },
