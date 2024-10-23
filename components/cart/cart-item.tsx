@@ -15,12 +15,12 @@ export default function CartItem({
           height={100}
           width={100}
           alt={`${name} Image`}
-          className="h-12 w-24 object-cover"
+          className="h-12 min-w-24 object-cover"
         />
         <div>
           <Link
             href={`menu/${productId}`}
-            className="text-lg font-medium hover:underline"
+            className="whitespace-nowrap text-lg font-medium hover:underline"
           >
             {name}
           </Link>
