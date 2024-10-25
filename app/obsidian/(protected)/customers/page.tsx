@@ -79,7 +79,6 @@ export default function CustomersPage() {
   useEffect(() => {
     if (data) {
       refetchClients();
-      setCustomerToUpdate({ id: "", active: false });
     }
 
     if (error?.message) {
@@ -94,7 +93,7 @@ export default function CustomersPage() {
         body: JSON.stringify({ active: customerToUpdate.active }),
       });
     }
-  }, [customerToUpdate.active, customerToUpdate.id, mutate]);
+  }, [customerToUpdate, mutate]);
 
   return (
     <>
@@ -147,7 +146,13 @@ export default function CustomersPage() {
                   <div className="flex items-center">
                     <Switch
                       size="sm"
-                      isSelected={customer.active}
+                      isSelected={
+                        error
+                          ? customer.active
+                          : customerToUpdate.id === customer.id
+                            ? customerToUpdate.active
+                            : customer.active
+                      }
                       isDisabled={
                         isPending && customerToUpdate.id === customer.id
                       }
