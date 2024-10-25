@@ -13,4 +13,6 @@ export function connectSocketServer(
   socket = io(process.env.NEXT_PUBLIC_API_URL?.slice(0, -3), {
     auth: { token, role },
   });
+
+  return socket;
 }
