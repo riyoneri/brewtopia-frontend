@@ -39,6 +39,7 @@ export default function CartItem({
             id=""
             value={quantity}
             max="999"
+            readOnly
           />
           <button className="self-stretch px-1 transition-colors hover:bg-tertiary">
             <FaMinus />
