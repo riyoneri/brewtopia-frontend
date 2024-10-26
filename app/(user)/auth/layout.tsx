@@ -4,9 +4,9 @@ import AuthLoading from "@/components/auth-loading";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function AuthLayout({
+function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -32,4 +32,16 @@ export default function AuthLayout({
   if (status === "authenticated" && session?.user?.role === "user") return;
 
   return <div className="min-h-dvh p-5">{children}</div>;
+}
+
+export default function WrappedAuthLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <Suspense>
+      <AuthLayout>{children}</AuthLayout>
+    </Suspense>
+  );
 }
