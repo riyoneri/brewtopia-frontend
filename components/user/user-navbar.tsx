@@ -257,7 +257,10 @@ export default function UserNavBar() {
                   ))}
                 </DisclosurePanel>
               </Disclosure>
-              <button className="mt-1 flex w-full items-center gap-3 bg-primary/20 px-2 py-1 text-start transition hover:bg-primary hover:text-white">
+              <button
+                onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                className="mt-1 flex w-full items-center gap-3 bg-primary/20 px-2 py-1 text-start transition hover:bg-primary hover:text-white"
+              >
                 <IoIosLogOut className="text-2xl" />
                 Sign Out
               </button>
