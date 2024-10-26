@@ -6,7 +6,6 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +23,6 @@ const inputsSchema = z.object({
 type InputsType = z.infer<typeof inputsSchema>;
 
 export default function Login() {
-  const router = useRouter();
   const {
     formState: { errors },
     register,
@@ -43,7 +41,6 @@ export default function Login() {
       .then((response) => {
         response?.error && setError(response.error);
         if (response?.ok) {
-          router.replace("/");
           enqueueSnackbar("Welcome back 😊", {
             variant: "success",
             key: "already-authenticated",

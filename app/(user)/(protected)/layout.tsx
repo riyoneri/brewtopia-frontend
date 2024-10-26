@@ -4,7 +4,7 @@ import AuthLoading from "@/components/auth-loading";
 import DeactivatedAccount from "@/components/deactivated-account";
 import { connectSocketServer } from "@/helpers/socket";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useEffect } from "react";
 
@@ -15,6 +15,7 @@ export default function RootLayout({
 }>) {
   const { status, data: session, update } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (
@@ -23,9 +24,9 @@ export default function RootLayout({
     ) {
       enqueueSnackbar("Login first", { variant: "error", key: "login" });
 
-      router.replace("/auth/login");
+      router.replace(`/auth/login?redirect=${pathname}`);
     }
-  }, [status, router, session]);
+  }, [pathname, router, session, status]);
 
   useEffect(() => {
     if (!session) return;

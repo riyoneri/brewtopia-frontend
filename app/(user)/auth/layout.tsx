@@ -2,7 +2,7 @@
 
 import AuthLoading from "@/components/auth-loading";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useEffect } from "react";
 
@@ -13,6 +13,9 @@ export default function AuthLayout({
 }>) {
   const { status, data: session } = useSession();
   const router = useRouter();
+  const searchParameters = useSearchParams();
+
+  const redirectUrl = searchParameters.get("redirect");
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.role === "user") {
@@ -20,9 +23,9 @@ export default function AuthLayout({
         variant: "success",
         key: "already-authenticated",
       });
-      router.replace("/");
+      router.replace(redirectUrl ?? "/");
     }
-  }, [status, router, session?.user?.role]);
+  }, [status, router, session?.user?.role, redirectUrl]);
 
   if (status === "loading") return <AuthLoading fullHeight={false} />;
 
