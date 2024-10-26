@@ -6,8 +6,9 @@ import TextInputLabel from "@/components/input-labels/text-input-label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
@@ -22,7 +23,7 @@ const inputsSchema = z.object({
 
 type InputsType = z.infer<typeof inputsSchema>;
 
-export default function Login() {
+function Login() {
   const {
     formState: { errors },
     register,
@@ -30,6 +31,9 @@ export default function Login() {
   } = useForm<InputsType>({ resolver: zodResolver(inputsSchema) });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const searchParameters = useSearchParams();
+
+  const redirectUrl = searchParameters.get("redirect");
 
   const onSubmit = async (data: InputsType) => {
     setError("");
@@ -66,7 +70,9 @@ export default function Login() {
         </div>
 
         <button
-          onClick={() => signIn("google-client", { callbackUrl: "/" })}
+          onClick={() =>
+            signIn("google-client", { callbackUrl: redirectUrl ?? "/" })
+          }
           type="button"
           className="flex items-center justify-center gap-2 border-2 border-secondary/50 px-2 py-1 transition  hover:bg-tertiary/20"
         >
@@ -123,5 +129,13 @@ export default function Login() {
         </p>
       </form>
     </>
+  );
+}
+
+export default function WrappedLoginPage() {
+  return (
+    <Suspense>
+      <Login />
+    </Suspense>
   );
 }

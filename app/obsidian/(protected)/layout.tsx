@@ -74,6 +74,8 @@ export default function AdminRootLayout({
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const redirectUrl = pathname === "/obsidian" ? "" : `?redirect=${pathname}`;
+
   useEffect(() => {
     if (
       status === "unauthenticated" ||
@@ -81,9 +83,9 @@ export default function AdminRootLayout({
     ) {
       enqueueSnackbar("Login first", { variant: "error", key: "login" });
 
-      router.replace("/obsidian/auth/login");
+      router.replace(`/obsidian/auth/login${redirectUrl}`);
     }
-  }, [status, router, session]);
+  }, [status, router, session, redirectUrl]);
 
   useEffect(() => {
     if (session) connectSocketServer(session?.user.token, session?.user.role);
