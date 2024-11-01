@@ -1,4 +1,6 @@
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -26,6 +28,19 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
     const data = await response.json();
 
     if (!response.ok) {
+      if (response.status === 401) {
+        enqueueSnackbar("Invalid auth token, you need to login first", {
+          variant: "error",
+          key: "login",
+        });
+
+        signOut({ redirect: false });
+
+        redirect(
+          session?.user.role === "admin" ? "/obsidian" : "/obsidian/auth/login",
+        );
+      }
+
       throw {
         message: data.errors ? undefined : data.message,
         validationErrors: data.errors,
