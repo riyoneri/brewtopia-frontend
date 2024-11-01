@@ -16,7 +16,7 @@ export default function useAdminUpdateClientStatus() {
       fetcher({
         url: `/admin/clients/${id}/status`,
         body,
-        method: "POST",
+        method: "PATCH",
       }),
   });
 

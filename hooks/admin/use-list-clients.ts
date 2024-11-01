@@ -1,5 +1,4 @@
 import { fetcher } from "@/helpers/fetcher";
-import handleFetchRedirect from "@/helpers/handle-fetch-redirect";
 import { useQuery } from "@tanstack/react-query";
 
 export function useListClients(page: number = 1, limit: number = 5) {
@@ -12,10 +11,6 @@ export function useListClients(page: number = 1, limit: number = 5) {
       fetcher({ url: `/admin/clients?page=${page}&limit=${limit}` }),
     queryKey: ["clients", page, limit],
   });
-
-  if (error?.statusCode === 401) {
-    handleFetchRedirect("admin");
-  }
 
   return { data, isLoading, error, refetch };
 }
