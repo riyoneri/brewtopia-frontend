@@ -37,7 +37,9 @@ export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
         signOut({ redirect: false });
 
         redirect(
-          session?.user.role === "admin" ? "/obsidian" : "/obsidian/auth/login",
+          session?.user.role === "admin"
+            ? "/obsidian/auth/login"
+            : "/auth/login",
         );
       }
 
