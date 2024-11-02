@@ -64,8 +64,16 @@ export default function CreateCategoryPage() {
           </p>
         )}
 
-        <Button disabled={createCategoryIsLoading} type="submit">
-          Create
+        <Button
+          disabled={createCategoryIsLoading}
+          className="flex items-center justify-center"
+          type="submit"
+        >
+          {createCategoryIsLoading ? (
+            <span className="dui-loading dui-loading-spinner"></span>
+          ) : (
+            "Create"
+          )}
         </Button>
       </form>
     </>
