@@ -4,12 +4,11 @@ import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import DeleteModal from "@/components/modals/delete-modal";
-import Categories from "@/data/categories";
+import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Pagination,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +18,7 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FaPenToSquare, FaTrash } from "react-icons/fa6";
 import { z } from "zod";
@@ -29,11 +28,6 @@ const columns = [
     title: "Name",
     key: "name",
     dataIndex: "name",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
   },
   {
     title: "Actions",
@@ -59,27 +53,20 @@ export default function CategoriesListPage() {
     },
   });
 
-  const [isMounted, setIsMounted] = useState(false);
   const [page, setPage] = useState(1);
   const rowsWatcher = methods.watch("rows");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const pages = Math.ceil(Categories.length / rowsPerPage);
-
-  const categories = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return Categories.slice(start, end);
-  }, [page, rowsPerPage]);
+  const {
+    getAllCategoriesData,
+    getAllCategoriesError,
+    getAllCategoriesLoading,
+  } = useGetAllCategories(page, rowsPerPage);
 
   useEffect(() => {
-    !isMounted && setIsMounted(true);
-
     setRowsPerPage(rowsWatcher ?? 5);
     setPage(1);
-  }, [isMounted, rowsWatcher]);
+  }, [rowsWatcher]);
 
   return (
     <>
@@ -122,17 +109,24 @@ export default function CategoriesListPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"You don't have any categories yet."}>
-            {categories.map((category) => (
+          <TableBody
+            isLoading={getAllCategoriesLoading}
+            loadingContent={
+              <span className="dui-loading dui-loading-spinner dui-loading-lg h-min"></span>
+            }
+            emptyContent={
+              getAllCategoriesError ? (
+                <p className="text-center text-accent-red">
+                  {getAllCategoriesError?.message}
+                </p>
+              ) : (
+                "You don't have any categories yet."
+              )
+            }
+          >
+            {getAllCategoriesData?.categories?.map((category) => (
               <TableRow key={category.id} className="*:whitespace-nowrap">
                 <TableCell className="w-full">{category.name}</TableCell>
-                <TableCell>
-                  <Switch
-                    size="sm"
-                    defaultSelected
-                    aria-label="Category status"
-                  />
-                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-5">
                     <Link href={`${pathname}/${category.id}/update`}>
@@ -155,11 +149,11 @@ export default function CategoriesListPage() {
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            )) ?? []}
           </TableBody>
         </Table>
 
-        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto overflow-y-visible  xs:overflow-x-hidden lg:flex-row">
+        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto xs:overflow-x-hidden lg:flex-row">
           <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden sm:block">View</span>
             <FormProvider {...methods}>
@@ -169,15 +163,20 @@ export default function CategoriesListPage() {
                 selectOptions={rowsPerPageSelections}
               />
             </FormProvider>
-            <span className="whitespace-nowrap">Products per page</span>
+            <span className="whitespace-nowrap">Categories per page</span>
           </div>
           <Pagination
             isCompact
             showControls
             radius="none"
+            className="p-0"
             page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
+            total={
+              getAllCategoriesData
+                ? Math.ceil(getAllCategoriesData?.total / rowsPerPage)
+                : 1
+            }
+            onChange={setPage}
           />
         </div>
       </div>
