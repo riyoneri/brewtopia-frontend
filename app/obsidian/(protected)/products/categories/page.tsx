@@ -168,12 +168,11 @@ export default function CategoriesListPage() {
           <Pagination
             isCompact
             showControls
-            radius="none"
-            className="p-0"
+            className="py-0"
             page={page}
             total={
               getAllCategoriesData
-                ? Math.ceil(getAllCategoriesData?.total / rowsPerPage)
+                ? Math.ceil(getAllCategoriesData.total / rowsPerPage)
                 : 1
             }
             onChange={setPage}
