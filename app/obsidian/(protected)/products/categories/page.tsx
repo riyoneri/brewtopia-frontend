@@ -54,6 +54,7 @@ export default function CategoriesListPage() {
   });
 
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const rowsWatcher = methods.watch("rows");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -67,6 +68,12 @@ export default function CategoriesListPage() {
     setRowsPerPage(rowsWatcher ?? 5);
     setPage(1);
   }, [rowsWatcher]);
+
+  useEffect(() => {
+    if (getAllCategoriesData) {
+      setTotalPages(Math.ceil(getAllCategoriesData.total / rowsPerPage));
+    }
+  }, [getAllCategoriesData, rowsPerPage]);
 
   return (
     <>
@@ -153,7 +160,7 @@ export default function CategoriesListPage() {
           </TableBody>
         </Table>
 
-        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto xs:overflow-x-hidden lg:flex-row">
+        <div className="flex flex-col items-center justify-between gap-5 lg:flex-row">
           <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden sm:block">View</span>
             <FormProvider {...methods}>
@@ -168,13 +175,9 @@ export default function CategoriesListPage() {
           <Pagination
             isCompact
             showControls
-            className="py-0"
+            className="max-w-full"
             page={page}
-            total={
-              getAllCategoriesData
-                ? Math.ceil(getAllCategoriesData.total / rowsPerPage)
-                : 1
-            }
+            total={totalPages}
             onChange={setPage}
           />
         </div>
