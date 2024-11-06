@@ -3,9 +3,12 @@
 import Button from "@/components/button";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import { useGetSingleCategory } from "@/hooks/admin/use-admin-get-single-category";
+import useUpdateCategory from "@/hooks/admin/use-admin-update-category";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { notFound, useParams } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { RedirectType, notFound, redirect, useParams } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const inputsSchema = z.object({
@@ -31,9 +34,27 @@ export default function UpdateCategoryPage() {
     getSingleCategoryLoading,
   } = useGetSingleCategory(categoryId);
 
-  getSingleCategoryData && setValue("name", getSingleCategoryData.name);
+  const {
+    updateCategoryData,
+    updateCategoryError,
+    updateCategoryIsLoading,
+    updateCategoryMutate,
+  } = useUpdateCategory<InputsType>(categoryId);
+
+  useEffect(() => {
+    getSingleCategoryData && setValue("name", getSingleCategoryData.name);
+
+    if (updateCategoryData) {
+      enqueueSnackbar("Category was updated", { variant: "success" });
+      redirect("..", RedirectType.replace);
+    }
+  }, [getSingleCategoryData, setValue, updateCategoryData]);
 
   if (!categoryId) notFound();
+
+  const onSubmit: SubmitHandler<InputsType> = (data) => {
+    updateCategoryMutate(JSON.stringify(data));
+  };
 
   return (
     <>
@@ -54,16 +75,34 @@ export default function UpdateCategoryPage() {
       {getSingleCategoryData && (
         <form
           className="mx-auto flex w-full flex-col gap-5 xs:w-3/4 sm:w-full md:w-3/4 lg:w-1/2"
-          onSubmit={handleSubmit((data) => data)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <TextInputLabel
             title="Name"
             placeholder="Enter name"
             register={register("name")}
-            error={errors.name?.message}
+            error={
+              errors.name?.message || updateCategoryError?.validationErrors.name
+            }
           />
 
-          <Button type="submit">Update</Button>
+          {updateCategoryError?.message && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {updateCategoryError.message}
+            </p>
+          )}
+
+          <Button
+            disabled={updateCategoryIsLoading}
+            className="flex items-center justify-center"
+            type="submit"
+          >
+            {updateCategoryIsLoading ? (
+              <span className="dui-loading dui-loading-spinner"></span>
+            ) : (
+              "Update"
+            )}
+          </Button>
         </form>
       )}
     </>
