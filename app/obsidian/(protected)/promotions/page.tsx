@@ -3,7 +3,6 @@
 import Button from "@/components/button";
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import DeleteModal from "@/components/modals/delete-modal";
 import Discounts from "@/data/discounts";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,7 +60,7 @@ type InputsType = z.infer<typeof inputsSchema>;
 
 export default function PromotionsPage() {
   const pathname = usePathname();
-  const [itemToDelete, setItemToDelete] = useState<undefined | ItemToDelete>();
+  const [_itemToDelete, setItemToDelete] = useState<undefined | ItemToDelete>();
 
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
@@ -92,13 +91,13 @@ export default function PromotionsPage() {
   return (
     <>
       <title>Promotions</title>
-      {itemToDelete && (
+      {/* {itemToDelete && (
         <DeleteModal
           item={itemToDelete}
           type="category"
-          cancelDelete={() => setItemToDelete(undefined)}
+          closeModal={() => setItemToDelete(undefined)}
         />
-      )}
+      )} */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col items-stretch gap-5 md:flex-row md:items-start">
           <FormProvider {...methods}>

@@ -18,7 +18,7 @@ export default function ProductDetailsPage() {
       {itemToDelete && (
         <DeleteModal
           item={itemToDelete}
-          cancelDelete={() => setItemToDelete(undefined)}
+          closeModal={() => setItemToDelete(undefined)}
           type="product"
         />
       )}

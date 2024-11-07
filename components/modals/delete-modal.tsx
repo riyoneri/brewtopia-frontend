@@ -1,16 +1,29 @@
+import { UseMutateFunction } from "@tanstack/react-query";
+
 import Button from "../button";
 
 interface DeleteModalProperties {
   item: ItemToDelete;
   type: string;
-  cancelDelete: () => void;
+  fetchData: () => {
+    isPending: boolean;
+    mutate: UseMutateFunction<ResponseData, ResponseError, string, unknown>;
+    error: ResponseError | null;
+    data: ResponseData | undefined;
+  };
+  closeModal: () => void;
 }
 
 export default function DeleteModal({
   item,
   type,
-  cancelDelete,
+  fetchData,
+  closeModal,
 }: DeleteModalProperties) {
+  const { data, error, isPending, mutate } = fetchData();
+
+  data && closeModal();
+
   return (
     <>
       <input type="checkbox" checked readOnly className="dui-modal-toggle" />
@@ -23,12 +36,24 @@ export default function DeleteModal({
           <p>Are you sure you want to delete this {type}?</p>
           <p className="my-4 font-medium">{item.name}</p>
           <hr className="w-full border-2" />
+          {error && (
+            <p className="text-center text-sm text-accent-red xs:text-base">
+              {error.message}
+            </p>
+          )}
           <div className="mt-2 flex flex-col gap-3 self-stretch *:flex-1 xs:flex-row xs:justify-end xs:gap-5 xs:self-end">
-            <Button className="flex items-center justify-center border-transparent !bg-accent-red">
-              Delete
-              <span className="dui-loading dui-loading-spinner dui-loading-sm"></span>
+            <Button
+              onClick={() => mutate(item.id)}
+              disabled={isPending}
+              className="flex items-center justify-center border-transparent !bg-accent-red disabled:!border-accent-red/5 disabled:!bg-accent-red/40"
+            >
+              {isPending ? (
+                <span className="dui-loading dui-loading-spinner dui-loading-sm"></span>
+              ) : (
+                "Delete"
+              )}
             </Button>
-            <Button variant="outline" onClick={cancelDelete}>
+            <Button variant="outline" onClick={closeModal}>
               Cancel
             </Button>
           </div>

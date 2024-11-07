@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import DeleteModal from "@/components/modals/delete-modal";
+import useDeleteCategory from "@/hooks/admin/use-admin-delete-category";
 import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -71,9 +72,12 @@ export default function CategoriesListPage() {
 
   useEffect(() => {
     if (getAllCategoriesData) {
+      if (getAllCategoriesData.categories.length === 0 && page > 1)
+        setPage((previousPage) => --previousPage);
+
       setTotalPages(Math.ceil(getAllCategoriesData.total / rowsPerPage));
     }
-  }, [getAllCategoriesData, rowsPerPage]);
+  }, [getAllCategoriesData, page, rowsPerPage]);
 
   return (
     <>
@@ -82,7 +86,8 @@ export default function CategoriesListPage() {
         <DeleteModal
           item={itemToDelete}
           type="category"
-          cancelDelete={() => setItemToDelete(undefined)}
+          fetchData={useDeleteCategory}
+          closeModal={() => setItemToDelete(undefined)}
         />
       )}
       <div className="flex flex-col gap-5">
