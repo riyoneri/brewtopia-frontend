@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useVerifyEmail<T>() {
@@ -11,7 +12,7 @@ export default function useVerifyEmail<T>() {
       fetcher({
         url: "/auth/verify-email",
         body,
-        method: "POST",
+        method: FETCH_METHOD.POST,
       }),
   });
 
