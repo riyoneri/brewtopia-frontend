@@ -41,7 +41,6 @@ interface NotificationDto {
 interface FetcherResponse {
   message: string;
   statusCode: number;
-  validationErrors: Partial<Record<string, string>>;
 }
 
 interface GlobalResponseError<T> extends FetcherResponse {
