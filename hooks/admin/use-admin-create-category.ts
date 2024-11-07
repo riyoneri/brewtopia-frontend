@@ -5,8 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export default function useAdminCreateCategory<T>() {
   const client = useQueryClient();
   const { isPending, mutate, error, data } = useMutation<
-    SimplifiedResponse,
-    GlobalResponseError<T>,
+    ResponseData,
+    ExtendedResponseError<T>,
     string
   >({
     mutationFn: (body) =>

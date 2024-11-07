@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 export function useGetSingleCategory(categoryId: string) {
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
-    FetcherResponse,
+    ResponseError,
     CategoryDto
   >({
     queryFn: () =>

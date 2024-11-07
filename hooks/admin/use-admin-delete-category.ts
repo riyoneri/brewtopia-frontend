@@ -5,8 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export default function useDeleteCategory() {
   const client = useQueryClient();
   const { isPending, mutate, error, data } = useMutation<
-    SimplifiedResponse,
-    FetcherResponse,
+    ResponseData,
+    ResponseError,
     string
   >({
     mutationFn: (categoryId: string) =>

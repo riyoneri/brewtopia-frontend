@@ -4,8 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 
 export default function useForgotPassword<T>() {
   const { isPending, mutate, error, data } = useMutation<
-    SimplifiedResponse,
-    GlobalResponseError<T>,
+    ResponseData,
+    ExtendedResponseError<T>,
     string
   >({
     mutationFn: (body: string) =>

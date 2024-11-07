@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 export default function useRegisterAdmin<T>() {
   const { isPending, mutate, error, data } = useMutation<
     AdminDto,
-    GlobalResponseError<T>,
+    ExtendedResponseError<T>,
     string
   >({
     mutationFn: (body: string) =>

@@ -38,13 +38,17 @@ interface NotificationDto {
   link: string;
 }
 
-interface FetcherResponse {
+interface ResponseError {
   message: string;
   statusCode: number;
 }
 
-interface GlobalResponseError<T> extends FetcherResponse {
+interface ExtendedResponseError<T> extends ResponseError {
   validationErrors: Partial<Record<keyof T, string>>;
+}
+
+interface ResponseData {
+  message: string;
 }
 
 interface AdminDto {
@@ -61,10 +65,6 @@ interface UserDto {
   email: string;
   imageUrl?: string;
   active: boolean;
-}
-
-interface SimplifiedResponse {
-  message: string;
 }
 
 interface CategoryDto {

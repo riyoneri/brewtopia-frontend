@@ -57,7 +57,7 @@ export const fetcher = async ({
 
     return data;
   } catch (error) {
-    const typedError = error as FetcherResponse;
+    const typedError = error as ResponseError;
 
     throw {
       ...typedError,

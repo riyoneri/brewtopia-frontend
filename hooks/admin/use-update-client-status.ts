@@ -9,8 +9,8 @@ interface UpdateClientVariables {
 
 export default function useAdminUpdateClientStatus() {
   const { isPending, mutate, error, data } = useMutation<
-    SimplifiedResponse,
-    FetcherResponse,
+    ResponseData,
+    ResponseError,
     UpdateClientVariables
   >({
     mutationFn: ({ id, body }) =>
