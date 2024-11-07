@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { useMutation } from "@tanstack/react-query";
 
 interface UpdateClientVariables {
@@ -16,7 +17,7 @@ export default function useAdminUpdateClientStatus() {
       fetcher({
         url: `/admin/clients/${id}/status`,
         body,
-        method: "PATCH",
+        method: FETCH_METHOD.PATCH,
       }),
   });
 

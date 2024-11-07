@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useUpdateCategory<T>(categoryId: string) {
@@ -12,7 +13,7 @@ export default function useUpdateCategory<T>(categoryId: string) {
       fetcher({
         url: `/admin/categories/${categoryId}`,
         body,
-        method: "PATCH",
+        method: FETCH_METHOD.PATCH,
       }),
     onSuccess() {
       client.invalidateQueries({ queryKey: ["categories"] });

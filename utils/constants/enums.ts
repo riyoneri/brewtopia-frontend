@@ -6,3 +6,10 @@ export enum ORDER_STATUS {
   DELIVERED = "Delivered",
   CANCELLED = "Cancelled",
 }
+
+export enum FETCH_METHOD {
+  GET = "GET",
+  POST = "POST",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}

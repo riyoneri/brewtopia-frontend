@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useAdminForgotPassword<T>() {
@@ -11,7 +12,7 @@ export default function useAdminForgotPassword<T>() {
       fetcher({
         url: "/admin/auth/forgot-password",
         body,
-        method: "POST",
+        method: FETCH_METHOD.POST,
       }),
   });
 

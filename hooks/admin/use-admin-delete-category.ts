@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useDeleteCategory(categoryId: string) {
@@ -11,7 +12,7 @@ export default function useDeleteCategory(categoryId: string) {
     mutationFn: () =>
       fetcher({
         url: `/admin/categories/${categoryId}`,
-        method: "DELETE",
+        method: FETCH_METHOD.DELETE,
       }),
     onSuccess() {
       client.invalidateQueries({ queryKey: ["categories"] });

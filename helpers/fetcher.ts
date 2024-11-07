@@ -1,3 +1,4 @@
+import { FETCH_METHOD } from "@/utils/constants/enums";
 import { getSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -6,11 +7,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface FetcherData {
   url: string;
-  method?: "GET" | "POST" | "PATCH" | "DELETE";
+  method?: FETCH_METHOD;
   body?: FormData | string;
 }
 
-export const fetcher = async ({ url, body, method = "GET" }: FetcherData) => {
+export const fetcher = async ({
+  url,
+  body,
+  method = FETCH_METHOD.GET,
+}: FetcherData) => {
   try {
     let headers: Record<string, string> = {};
     const session = await getSession();
