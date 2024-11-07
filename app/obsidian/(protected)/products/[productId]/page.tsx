@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "@/components/button";
-import DeleteModal from "@/components/modals/delete-modal";
 import Products from "@/data/products";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,17 +10,17 @@ import { GoDotFill } from "react-icons/go";
 
 export default function ProductDetailsPage() {
   const pathname = usePathname();
-  const [itemToDelete, setItemToDelete] = useState<ItemToDelete | undefined>();
+  const [_itemToDelete, setItemToDelete] = useState<ItemToDelete | undefined>();
   return (
     <>
       <title>Product Details</title>
-      {itemToDelete && (
+      {/* {itemToDelete && (
         <DeleteModal
           item={itemToDelete}
           closeModal={() => setItemToDelete(undefined)}
           type="product"
         />
-      )}
+      )} */}
       <div className="flex w-full flex-col gap-5 lg:flex-row">
         <div>
           <Image
