@@ -33,8 +33,8 @@ export default function CreateCategoryPage() {
 
   useEffect(() => {
     if (createCategoryData) {
-      enqueueSnackbar("New category created", { variant: "success" });
-      redirect("./", RedirectType.replace);
+      enqueueSnackbar("New category was created", { variant: "success" });
+      redirect("./", RedirectType.push);
     }
   }, [createCategoryData]);
 

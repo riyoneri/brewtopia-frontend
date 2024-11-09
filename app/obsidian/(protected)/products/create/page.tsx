@@ -8,6 +8,9 @@ import TextAreaInputLabel from "@/components/input-labels/textarea-input-label";
 import useAdminCreateProduct from "@/hooks/admin/use-admin-create-product";
 import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RedirectType, redirect } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+import { useEffect } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -41,13 +44,24 @@ export default function CreateProductPage() {
   const methods = useForm<InputsType>({
     resolver: zodResolver(inputsSchema),
   });
-  const { createProductError, createProductIsLoading, createProductMutate } =
-    useAdminCreateProduct<InputsType>();
+  const {
+    createProductData,
+    createProductError,
+    createProductIsLoading,
+    createProductMutate,
+  } = useAdminCreateProduct<InputsType>();
   const {
     getAllCategoriesData,
     getAllCategoriesError,
     getAllCategoriesLoading,
   } = useGetAllCategories(undefined, undefined, false);
+
+  useEffect(() => {
+    if (createProductData) {
+      enqueueSnackbar("New product was created", { variant: "success" });
+      redirect("./", RedirectType.push);
+    }
+  }, [createProductData]);
 
   const options =
     getAllCategoriesData?.categories.map((category) => ({
