@@ -1,15 +1,21 @@
 import { fetcher } from "@/helpers/fetcher";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetAllCategories(page: number = 1, limit: number = 5) {
+export function useGetAllCategories(
+  page: number = 1,
+  limit: number = 5,
+  hasLimit: boolean = true,
+) {
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
     ResponseError,
     { categories: CategoryDto[]; total: number }
   >({
     queryFn: () =>
-      fetcher({ url: `/admin/categories?page=${page}&limit=${limit}` }),
-    queryKey: ["categories", page, limit],
+      fetcher({
+        url: `/admin/categories?page=${hasLimit ? page : undefined}&limit=${hasLimit ? limit : undefined}`,
+      }),
+    queryKey: ["categories", page, limit, hasLimit],
   });
 
   return {
