@@ -82,7 +82,8 @@ export default function UpdateCategoryPage() {
             placeholder="Enter name"
             register={register("name")}
             error={
-              errors.name?.message || updateCategoryError?.validationErrors.name
+              errors.name?.message ||
+              updateCategoryError?.validationErrors?.name
             }
           />
 
