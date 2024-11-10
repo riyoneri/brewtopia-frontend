@@ -63,11 +63,12 @@ export default function CreateProductPage() {
     }
   }, [createProductData]);
 
-  const options =
-    getAllCategoriesData?.categories.map((category) => ({
-      key: category.id,
-      text: category.name,
-    })) ?? [];
+  const options = getAllCategoriesData?.categories.length
+    ? getAllCategoriesData?.categories.map((category) => ({
+        key: category.id,
+        text: category.name,
+      }))
+    : [{ key: "1", text: "No categories available" }];
 
   const onSubmit: SubmitHandler<InputsType> = (data) => {
     const formData = new FormData();
@@ -123,6 +124,7 @@ export default function CreateProductPage() {
               hasHeaderButton={false}
               title="Category"
               name="category"
+              firstOptionDisabled={options.length === 0}
               selectOptions={options}
               error={
                 methods.formState.errors.category?.message ||
