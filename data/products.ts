@@ -3,6 +3,10 @@ import { faker } from "@faker-js/faker";
 const Products: ProductDto[] = [
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -11,6 +15,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -20,6 +28,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -30,6 +42,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -38,6 +54,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -46,6 +66,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
@@ -54,6 +78,10 @@ const Products: ProductDto[] = [
   },
   {
     id: faker.string.uuid(),
+    category: {
+      id: faker.string.uuid(),
+      name: faker.commerce.department(),
+    },
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.url(),
     name: faker.commerce.productName(),
