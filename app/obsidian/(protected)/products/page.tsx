@@ -3,12 +3,11 @@
 import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import Products from "@/data/products";
+import { useGetAllProducts } from "@/hooks/admin/use-admin-get-products";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Pagination,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +18,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FaPenToSquare, FaTrash } from "react-icons/fa6";
 import { z } from "zod";
@@ -46,11 +45,6 @@ const columns = [
     key: "price",
   },
   {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
     title: "Actions",
     dataIndex: "actions",
     key: "actions",
@@ -74,27 +68,28 @@ export default function ProductsListPage() {
     },
   });
 
-  const [isMounted, setIsMounted] = useState(false);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const rowsWatcher = methods.watch("rows");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const pages = Math.ceil(Products.length / rowsPerPage);
-
-  const products = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return Products.slice(start, end);
-  }, [page, rowsPerPage]);
+  const { getAllProductsData, getAllProductsError, getAllProductsLoading } =
+    useGetAllProducts(page, rowsPerPage);
 
   useEffect(() => {
-    !isMounted && setIsMounted(true);
-
     setRowsPerPage(rowsWatcher ?? 5);
     setPage(1);
-  }, [isMounted, rowsWatcher]);
+  }, [rowsWatcher]);
+
+  useEffect(() => {
+    if (getAllProductsData) {
+      if (getAllProductsData.products.length === 0 && page > 1)
+        setPage((previousPage) => --previousPage);
+
+      setTotalPages(Math.ceil(getAllProductsData.total / rowsPerPage));
+    }
+  }, [getAllProductsData, page, rowsPerPage]);
 
   return (
     <>
@@ -136,8 +131,22 @@ export default function ProductsListPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"You don't have any products yet."}>
-            {products.map((product) => (
+          <TableBody
+            isLoading={getAllProductsLoading}
+            loadingContent={
+              <span className="dui-loading dui-loading-spinner dui-loading-lg h-min"></span>
+            }
+            emptyContent={
+              getAllProductsError ? (
+                <p className="text-center text-accent-red">
+                  {getAllProductsError?.message}
+                </p>
+              ) : (
+                "You don't have any products yet."
+              )
+            }
+          >
+            {getAllProductsData?.products?.map((product) => (
               <TableRow key={product.id} className="*:whitespace-nowrap">
                 <TableCell>
                   <Image
@@ -156,15 +165,8 @@ export default function ProductsListPage() {
                     {product.name}
                   </Link>
                 </TableCell>
-                <TableCell>First category</TableCell>
+                <TableCell>{product.category.name}</TableCell>
                 <TableCell>${product.price}</TableCell>
-                <TableCell>
-                  <Switch
-                    size="sm"
-                    defaultSelected
-                    aria-label="Product status"
-                  />
-                </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-5">
                     <Link href={`${pathname}/${product.id}/update`}>
@@ -184,11 +186,11 @@ export default function ProductsListPage() {
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            )) ?? []}
           </TableBody>
         </Table>
 
-        <div className="flex max-w-full flex-col items-center justify-between gap-5 overflow-x-auto overflow-y-visible  xs:overflow-x-hidden lg:flex-row">
+        <div className="flex flex-col items-center justify-between gap-5 lg:flex-row">
           <div className="flex flex-col items-center gap-3 text-neutral-500 xs:flex-row">
             <span className="hidden sm:block">View</span>
             <FormProvider {...methods}>
@@ -203,10 +205,10 @@ export default function ProductsListPage() {
           <Pagination
             isCompact
             showControls
-            radius="none"
+            className="max-w-full"
             page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
+            total={totalPages}
+            onChange={setPage}
           />
         </div>
       </div>

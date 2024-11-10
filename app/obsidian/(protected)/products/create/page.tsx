@@ -124,7 +124,7 @@ export default function CreateProductPage() {
               hasHeaderButton={false}
               title="Category"
               name="category"
-              firstOptionDisabled={options.length === 0}
+              firstOptionDisabled={options.length > 0}
               selectOptions={options}
               error={
                 methods.formState.errors.category?.message ||
