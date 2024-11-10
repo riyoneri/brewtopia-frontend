@@ -9,6 +9,7 @@ interface ProductDto {
   hasDiscountInApp?: boolean;
   description: string;
   quantity: number;
+  category: Omit<CategoryDto, "createdAt">;
 }
 
 interface WorkspaceDto {
