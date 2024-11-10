@@ -2,7 +2,6 @@
 
 import AuthLoading from "@/components/auth-loading";
 import DeactivatedAccount from "@/components/deactivated-account";
-import { connectSocketServer } from "@/helpers/socket";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -13,7 +12,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status, data: session, update } = useSession();
+  const { status, data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -28,15 +27,15 @@ export default function RootLayout({
     }
   }, [pathname, router, session, status]);
 
-  useEffect(() => {
-    if (!session) return;
-    let socket;
-    socket = connectSocketServer(session?.user.token, session?.user.role);
+  // useEffect(() => {
+  //   if (!session) return;
+  //   let socket;
+  //   socket = connectSocketServer(session?.user.token, session?.user.role);
 
-    socket.on("client:status", (data) => {
-      update({ active: data.active });
-    });
-  }, [session, update]);
+  //   socket.on("client:status", (data) => {
+  //     update({ active: data.active });
+  //   });
+  // }, [session, update]);
 
   if (status === "loading") return <AuthLoading fullHeight={false} />;
 

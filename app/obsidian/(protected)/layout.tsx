@@ -2,7 +2,6 @@
 
 import AdminHeader from "@/components/admin/admin-header";
 import AuthLoading from "@/components/auth-loading";
-import { connectSocketServer } from "@/helpers/socket";
 import {
   Disclosure,
   DisclosureButton,
@@ -87,9 +86,9 @@ export default function AdminRootLayout({
     }
   }, [status, router, session, redirectUrl]);
 
-  useEffect(() => {
-    if (session) connectSocketServer(session?.user.token, session?.user.role);
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) connectSocketServer(session?.user.token, session?.user.role);
+  // }, [session]);
 
   if (status === "loading") return <AuthLoading />;
 
