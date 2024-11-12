@@ -90,7 +90,7 @@ interface CartItemDto {
   id: string;
   quantity: number;
   totalPrice: number;
-  product: ProductDto;
+  product: PopulatedProductDto;
 }
 
 interface OrderDto {
