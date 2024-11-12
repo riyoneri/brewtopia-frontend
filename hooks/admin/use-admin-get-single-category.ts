@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetSingleCategory(categoryId: string) {
@@ -11,7 +12,7 @@ export function useGetSingleCategory(categoryId: string) {
       fetcher({
         url: `/admin/categories/${categoryId}`,
       }),
-    queryKey: ["category", categoryId],
+    queryKey: [QUERY_KEYS.SINGLE_CATEGORY, categoryId],
   });
 
   return {

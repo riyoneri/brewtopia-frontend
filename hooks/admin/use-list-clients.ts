@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
 export function useListClients(page: number = 1, limit: number = 5) {
@@ -9,7 +10,7 @@ export function useListClients(page: number = 1, limit: number = 5) {
   >({
     queryFn: () =>
       fetcher({ url: `/admin/clients?page=${page}&limit=${limit}` }),
-    queryKey: ["clients", page, limit],
+    queryKey: [QUERY_KEYS.ALL_CLIENTS, page, limit],
   });
 
   return { data, isLoading, error, refetch };

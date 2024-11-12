@@ -1,5 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
-import { FETCH_METHOD } from "@/utils/constants/enums";
+import { FETCH_METHOD, QUERY_KEYS } from "@/utils/constants/enums";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useAdminUpdateProduct<T>(productId: string) {
@@ -16,7 +16,9 @@ export default function useAdminUpdateProduct<T>(productId: string) {
         method: FETCH_METHOD.PATCH,
       }),
     onSuccess() {
-      client.invalidateQueries({ queryKey: ["products", "product"] });
+      client.invalidateQueries({
+        queryKey: [QUERY_KEYS.ALL_PRODUCTS, QUERY_KEYS.SINGLE_PRODUCT],
+      });
     },
   });
 

@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetAllProducts(
@@ -15,7 +16,7 @@ export function useGetAllProducts(
       fetcher({
         url: `/admin/products?page=${hasLimit ? page : undefined}&limit=${hasLimit ? limit : undefined}`,
       }),
-    queryKey: ["products", page, limit, hasLimit],
+    queryKey: [QUERY_KEYS.ALL_PRODUCTS, page, limit, hasLimit],
   });
 
   return {

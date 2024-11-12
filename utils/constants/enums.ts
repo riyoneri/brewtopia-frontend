@@ -13,3 +13,11 @@ export enum FETCH_METHOD {
   PATCH = "PATCH",
   DELETE = "DELETE",
 }
+
+export enum QUERY_KEYS {
+  ALL_PRODUCTS = "products",
+  SINGLE_PRODUCT = "product",
+  ALL_CATEGORIES = "categories",
+  SINGLE_CATEGORY = "category",
+  ALL_CLIENTS = "clients",
+}

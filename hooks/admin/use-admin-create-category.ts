@@ -1,5 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
-import { FETCH_METHOD } from "@/utils/constants/enums";
+import { FETCH_METHOD, QUERY_KEYS } from "@/utils/constants/enums";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useAdminCreateCategory<T>() {
@@ -11,12 +11,12 @@ export default function useAdminCreateCategory<T>() {
   >({
     mutationFn: (body) =>
       fetcher({
-        url: `/admin/categories`,
+        url: "/admin/categories",
         body,
         method: FETCH_METHOD.POST,
       }),
     onSuccess() {
-      client.invalidateQueries({ queryKey: ["categories"] });
+      client.invalidateQueries({ queryKey: [QUERY_KEYS.ALL_CATEGORIES] });
     },
   });
 

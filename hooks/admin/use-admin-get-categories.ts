@@ -1,4 +1,5 @@
 import { fetcher } from "@/helpers/fetcher";
+import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetAllCategories(
@@ -15,7 +16,7 @@ export function useGetAllCategories(
       fetcher({
         url: `/admin/categories?page=${hasLimit ? page : undefined}&limit=${hasLimit ? limit : undefined}`,
       }),
-    queryKey: ["categories", page, limit, hasLimit],
+    queryKey: [QUERY_KEYS.ALL_CATEGORIES, page, limit, hasLimit],
   });
 
   return {
