@@ -2,8 +2,8 @@
 
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import { useAdminListClients } from "@/hooks/admin/use-list-clients";
-import useAdminUpdateClientStatus from "@/hooks/admin/use-update-client-status";
+import { useAdminListClients } from "@/hooks/admin/use-admin-list-clients";
+import useAdminUpdateClientStatus from "@/hooks/admin/use-admin-update-client-status";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
