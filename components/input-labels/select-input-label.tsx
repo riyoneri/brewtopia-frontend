@@ -15,13 +15,16 @@ export default function SelectInputLabel({
   name,
   hasHeader = false,
   selectOptions,
+  defaultKey,
   className,
   firstOptionDisabled = true,
   hasHeaderButton = true,
   resetInput,
   error,
 }: SelectInputLabelProperties) {
-  const defaultOptionKey = selectOptions[0].key;
+  const defaultOptionKey =
+    selectOptions.find((selectOption) => selectOption.key === defaultKey)
+      ?.key ?? selectOptions[0].key;
   const [value, setValue] = useState(defaultOptionKey);
 
   return (
