@@ -9,6 +9,18 @@ interface ProductDto {
   hasDiscountInApp?: boolean;
   description: string;
   quantity: number;
+  category: string;
+}
+
+interface PopulatedProductDto {
+  id: string;
+  imageUrl: string;
+  name: string;
+  price: number;
+  previousPrice?: number;
+  hasDiscountInApp?: boolean;
+  description: string;
+  quantity: number;
   category: Omit<CategoryDto, "createdAt">;
 }
 
@@ -102,6 +114,7 @@ interface FilterSortInputProperties {
   hasHeaderButton?: boolean;
   resetInput?: () => void;
   selectOptions: SelectOption[];
+  defaultKey?: string;
   name: string;
   className?: string;
   error?: string;

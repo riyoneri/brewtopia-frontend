@@ -9,7 +9,7 @@ export function useGetAllProducts(
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
     ResponseError,
-    { products: ProductDto[]; total: number }
+    { products: PopulatedProductDto[]; total: number }
   >({
     queryFn: () =>
       fetcher({
