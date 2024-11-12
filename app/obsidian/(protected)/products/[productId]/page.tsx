@@ -48,13 +48,13 @@ export default function ProductDetailsPage() {
 
         {getSingleProductData && (
           <>
-            <div>
+            <div className="w-full">
               <Image
                 src={getSingleProductData.imageUrl}
                 height={500}
                 width={500}
                 alt={`${getSingleProductData.name} Image`}
-                className="w-1/2 object-cover"
+                className="max-h-72 bg-tertiary object-contain"
               />
               <div className="mt-4 space-y-3">
                 <h2 className="text-lg xs:text-xl sm:text-2xl md:line-clamp-1 md:text-3xl lg:text-4xl">
@@ -87,7 +87,7 @@ export default function ProductDetailsPage() {
                   <div className="space-y-3 text-neutral-400">
                     {getSingleProductData.description
                       .split("\n")
-                      .map((paragraph) => (
+                      .map((paragraph: string) => (
                         <p key={paragraph}>{paragraph}</p>
                       ))}
                   </div>
