@@ -2,7 +2,7 @@
 
 import SearchInputLabel from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import { useListClients } from "@/hooks/admin/use-list-clients";
+import { useAdminListClients } from "@/hooks/admin/use-list-clients";
 import useAdminUpdateClientStatus from "@/hooks/admin/use-update-client-status";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,7 +67,7 @@ export default function CustomersPage() {
     error: clientsError,
     isLoading,
     refetch: refetchClients,
-  } = useListClients(page, rowsPerPage);
+  } = useAdminListClients(page, rowsPerPage);
 
   const rowsWatcher = methods.watch("rows");
 

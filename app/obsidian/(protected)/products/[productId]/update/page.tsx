@@ -5,8 +5,8 @@ import ImageInputLabel from "@/components/input-labels/image-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import TextAreaInputLabel from "@/components/input-labels/textarea-input-label";
-import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
-import { useGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
+import { useAdminGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
+import { useAdminGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
 import useAdminUpdateProduct from "@/hooks/admin/use-admin-update-product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RedirectType, notFound, redirect, useParams } from "next/navigation";
@@ -55,13 +55,13 @@ export default function UpdateProductPage() {
     getSingleProductData,
     getSingleProductError,
     getSingleProductLoading,
-  } = useGetSingleProduct(productId);
+  } = useAdminGetSingleProduct(productId);
 
   const {
     getAllCategoriesData,
     getAllCategoriesError,
     getAllCategoriesLoading,
-  } = useGetAllCategories(undefined, undefined, false);
+  } = useAdminGetAllCategories(undefined, undefined, false);
 
   const {
     updateProductData,

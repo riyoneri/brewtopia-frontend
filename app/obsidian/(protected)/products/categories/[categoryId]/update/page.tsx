@@ -2,8 +2,8 @@
 
 import Button from "@/components/button";
 import TextInputLabel from "@/components/input-labels/text-input-label";
-import { useGetSingleCategory } from "@/hooks/admin/use-admin-get-single-category";
-import useUpdateCategory from "@/hooks/admin/use-admin-update-category";
+import { useAdminGetSingleCategory } from "@/hooks/admin/use-admin-get-single-category";
+import useAdminUpdateCategory from "@/hooks/admin/use-admin-update-category";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RedirectType, notFound, redirect, useParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -32,14 +32,14 @@ export default function UpdateCategoryPage() {
     getSingleCategoryData,
     getSingleCategoryError,
     getSingleCategoryLoading,
-  } = useGetSingleCategory(categoryId);
+  } = useAdminGetSingleCategory(categoryId);
 
   const {
     updateCategoryData,
     updateCategoryError,
     updateCategoryIsLoading,
     updateCategoryMutate,
-  } = useUpdateCategory<InputsType>(categoryId);
+  } = useAdminUpdateCategory<InputsType>(categoryId);
 
   useEffect(() => {
     getSingleCategoryData && setValue("name", getSingleCategoryData.name);

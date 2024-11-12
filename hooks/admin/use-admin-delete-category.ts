@@ -2,7 +2,7 @@ import { fetcher } from "@/helpers/fetcher";
 import { FETCH_METHOD, QUERY_KEYS } from "@/utils/constants/enums";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function useDeleteCategory() {
+export default function useAdminDeleteCategory() {
   const client = useQueryClient();
   const { isPending, mutate, error, data } = useMutation<
     ResponseData,

@@ -3,7 +3,7 @@
 import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
-import { useGetAllProducts } from "@/hooks/admin/use-admin-get-products";
+import { useAdminGetAllProducts } from "@/hooks/admin/use-admin-get-products";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -75,7 +75,7 @@ export default function ProductsListPage() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const { getAllProductsData, getAllProductsError, getAllProductsLoading } =
-    useGetAllProducts(page, rowsPerPage);
+    useAdminGetAllProducts(page, rowsPerPage);
 
   useEffect(() => {
     setRowsPerPage(rowsWatcher ?? 5);

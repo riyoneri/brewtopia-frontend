@@ -2,7 +2,7 @@ import { fetcher } from "@/helpers/fetcher";
 import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetAllProducts(
+export function useAdminGetAllProducts(
   page: number = 1,
   limit: number = 5,
   hasLimit: boolean = true,

@@ -4,8 +4,8 @@ import Button from "@/components/button";
 import SearchFilterInput from "@/components/input-labels/search-input-label";
 import SelectInputLabel from "@/components/input-labels/select-input-label";
 import DeleteModal from "@/components/modals/delete-modal";
-import useDeleteCategory from "@/hooks/admin/use-admin-delete-category";
-import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
+import useAdminDeleteCategory from "@/hooks/admin/use-admin-delete-category";
+import { useAdminGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
 import { rowsPerPageSelections } from "@/utils/constants/sort-filter-options";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -63,7 +63,7 @@ export default function CategoriesListPage() {
     getAllCategoriesData,
     getAllCategoriesError,
     getAllCategoriesLoading,
-  } = useGetAllCategories(page, rowsPerPage);
+  } = useAdminGetAllCategories(page, rowsPerPage);
 
   useEffect(() => {
     setRowsPerPage(rowsWatcher ?? 5);
@@ -86,7 +86,7 @@ export default function CategoriesListPage() {
         <DeleteModal
           item={itemToDelete}
           type="category"
-          fetchData={useDeleteCategory}
+          fetchData={useAdminDeleteCategory}
           closeModal={() => setItemToDelete(undefined)}
         />
       )}

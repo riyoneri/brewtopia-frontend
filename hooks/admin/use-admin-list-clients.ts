@@ -2,7 +2,7 @@ import { fetcher } from "@/helpers/fetcher";
 import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
-export function useListClients(page: number = 1, limit: number = 5) {
+export function useAdminListClients(page: number = 1, limit: number = 5) {
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
     ResponseError,

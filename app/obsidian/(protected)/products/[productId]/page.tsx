@@ -2,7 +2,7 @@
 
 import Button from "@/components/button";
 import Products from "@/data/products";
-import { useGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
+import { useAdminGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, useParams, usePathname } from "next/navigation";
@@ -17,7 +17,7 @@ export default function ProductDetailsPage() {
     getSingleProductData,
     getSingleProductError,
     getSingleProductLoading,
-  } = useGetSingleProduct(productId);
+  } = useAdminGetSingleProduct(productId);
 
   if (!productId) notFound();
 

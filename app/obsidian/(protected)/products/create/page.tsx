@@ -6,7 +6,7 @@ import SelectInputLabel from "@/components/input-labels/select-input-label";
 import TextInputLabel from "@/components/input-labels/text-input-label";
 import TextAreaInputLabel from "@/components/input-labels/textarea-input-label";
 import useAdminCreateProduct from "@/hooks/admin/use-admin-create-product";
-import { useGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
+import { useAdminGetAllCategories } from "@/hooks/admin/use-admin-get-categories";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RedirectType, redirect } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -54,7 +54,7 @@ export default function CreateProductPage() {
     getAllCategoriesData,
     getAllCategoriesError,
     getAllCategoriesLoading,
-  } = useGetAllCategories(undefined, undefined, false);
+  } = useAdminGetAllCategories(undefined, undefined, false);
 
   useEffect(() => {
     if (createProductData) {

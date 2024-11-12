@@ -2,7 +2,7 @@ import { fetcher } from "@/helpers/fetcher";
 import { QUERY_KEYS } from "@/utils/constants/enums";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetSingleCategory(categoryId: string) {
+export function useAdminGetSingleCategory(categoryId: string) {
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
     ResponseError,
