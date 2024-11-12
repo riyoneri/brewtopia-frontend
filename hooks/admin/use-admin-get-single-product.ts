@@ -5,7 +5,7 @@ export function useGetSingleProduct(productId: string) {
   const { data, isLoading, error, refetch } = useQuery<
     unknown,
     ResponseError,
-    ProductDto
+    SimpleProductDto
   >({
     queryFn: () =>
       fetcher({

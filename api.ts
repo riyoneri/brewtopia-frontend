@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-interface ProductDto {
+interface SimpleProductDto {
   id: string;
   imageUrl: string;
   name: string;
@@ -12,7 +12,7 @@ interface ProductDto {
   category: string;
 }
 
-interface PopulatedProductDto {
+interface ProductDto {
   id: string;
   imageUrl: string;
   name: string;
@@ -90,7 +90,7 @@ interface CartItemDto {
   id: string;
   quantity: number;
   totalPrice: number;
-  product: PopulatedProductDto;
+  product: ProductDto;
 }
 
 interface OrderDto {
