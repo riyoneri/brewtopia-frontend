@@ -59,7 +59,7 @@ export default function CreateProductPage() {
   useEffect(() => {
     if (createProductData) {
       enqueueSnackbar("New product was created", { variant: "success" });
-      redirect("./", RedirectType.push);
+      redirect(".", RedirectType.push);
     }
   }, [createProductData]);
 
