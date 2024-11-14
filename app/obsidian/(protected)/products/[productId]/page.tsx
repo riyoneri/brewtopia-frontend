@@ -1,36 +1,50 @@
 "use client";
 
 import Button from "@/components/button";
+import DeleteModal from "@/components/modals/delete-modal";
 import Products from "@/data/products";
+import useAdminDeleteProduct from "@/hooks/admin/use-admin-delete-product";
 import { useAdminGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, useParams, usePathname } from "next/navigation";
+import { notFound, useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 
 export default function ProductDetailsPage() {
   const pathname = usePathname();
-  const [_itemToDelete, setItemToDelete] = useState<ItemToDelete | undefined>();
+  const [itemToDelete, setItemToDelete] = useState<ItemToDelete | undefined>();
   const { productId } = useParams<{ productId: string }>();
+  const router = useRouter();
   const {
     getSingleProductData,
     getSingleProductError,
     getSingleProductLoading,
   } = useAdminGetSingleProduct(productId);
 
-  if (!productId) notFound();
+  if (!productId || getSingleProductError?.statusCode === 404) notFound();
+
+  const descriptionParagraphs = getSingleProductData?.description
+    .split("\n")
+    .map((paragraph: string, index) => ({ id: index, text: paragraph }));
 
   return (
     <>
       <title>Product Details</title>
-      {/* {itemToDelete && (
+      {itemToDelete && (
         <DeleteModal
-          item={itemToDelete}
-          closeModal={() => setItemToDelete(undefined)}
+          item={{
+            id: getSingleProductData!.id,
+            name: getSingleProductData!.name,
+          }}
+          closeModal={() => {
+            router.replace(".");
+            setItemToDelete(undefined);
+          }}
           type="product"
+          fetchData={useAdminDeleteProduct}
         />
-      )} */}
+      )}
 
       <div className="flex w-full flex-col gap-5 lg:flex-row">
         {getSingleProductLoading && (
@@ -85,11 +99,9 @@ export default function ProductDetailsPage() {
                 <div className="mt-5 xs:space-y-3">
                   <h4 className="text-lg font-medium">Description:</h4>
                   <div className="space-y-3 text-neutral-400">
-                    {getSingleProductData.description
-                      .split("\n")
-                      .map((paragraph: string) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
+                    {descriptionParagraphs?.map((paragraph) => (
+                      <p key={paragraph.id}>{paragraph.text}</p>
+                    ))}
                   </div>
                 </div>
               </div>
