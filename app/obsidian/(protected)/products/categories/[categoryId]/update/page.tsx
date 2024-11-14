@@ -50,7 +50,7 @@ export default function UpdateCategoryPage() {
     }
   }, [getSingleCategoryData, setValue, updateCategoryData]);
 
-  if (!categoryId) notFound();
+  if (!categoryId || getSingleCategoryError?.statusCode === 404) notFound();
 
   const onSubmit: SubmitHandler<InputsType> = (data) => {
     updateCategoryMutate(JSON.stringify(data));

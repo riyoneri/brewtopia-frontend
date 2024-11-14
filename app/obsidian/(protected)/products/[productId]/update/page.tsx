@@ -85,7 +85,7 @@ export default function UpdateProductPage() {
     }
   }, [getSingleProductData, methods, updateProductData]);
 
-  if (!productId) notFound();
+  if (!productId || getSingleProductError?.statusCode === 404) notFound();
 
   const options = getAllCategoriesData?.categories.length
     ? getAllCategoriesData?.categories.map((category) => ({
