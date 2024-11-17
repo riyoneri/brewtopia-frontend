@@ -2,7 +2,6 @@
 
 import Button from "@/components/button";
 import DeleteModal from "@/components/modals/delete-modal";
-import Products from "@/data/products";
 import useAdminDeleteProduct from "@/hooks/admin/use-admin-delete-product";
 import { useAdminGetSingleProduct } from "@/hooks/admin/use-admin-get-single-product";
 import Image from "next/image";
@@ -22,7 +21,7 @@ export default function ProductDetailsPage() {
     getSingleProductLoading,
   } = useAdminGetSingleProduct(productId);
 
-  if (!productId || getSingleProductError?.statusCode === 404) notFound();
+  if (getSingleProductError?.statusCode === 404) notFound();
 
   const descriptionParagraphs = getSingleProductData?.description
     .split("\n")
@@ -33,10 +32,7 @@ export default function ProductDetailsPage() {
       <title>Product Details</title>
       {itemToDelete && (
         <DeleteModal
-          item={{
-            id: getSingleProductData!.id,
-            name: getSingleProductData!.name,
-          }}
+          item={itemToDelete}
           closeModal={() => {
             router.replace(".");
             setItemToDelete(undefined);
@@ -110,14 +106,16 @@ export default function ProductDetailsPage() {
               <Link href={`${pathname}/update`}>
                 <Button className="w-full">Update Product</Button>
               </Link>
-              <Link href={`/obsidian/promotions/create?p=${Products[0].id}`}>
+              <Link
+                href={`/obsidian/promotions/create?p=${getSingleProductData.id}`}
+              >
                 <Button className="w-full">Add discount</Button>
               </Link>
               <Button
                 onClick={() =>
                   setItemToDelete({
-                    id: Products[0].id,
-                    name: Products[0].name,
+                    id: getSingleProductData.id,
+                    name: getSingleProductData.name,
                   })
                 }
                 className="!border-transparent !bg-accent-red hover:!bg-accent-red/80"
