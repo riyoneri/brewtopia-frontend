@@ -111,15 +111,15 @@ export default function CategoriesListPage() {
           removeWrapper
           fullWidth
         >
-          <TableHeader>
-            {columns.map((column) => (
+          <TableHeader columns={columns}>
+            {(column) => (
               <TableColumn
                 className="border-y-2 border-black bg-transparent text-base text-black hover:text-black"
                 key={column.key}
               >
                 {column.title}
               </TableColumn>
-            ))}
+            )}
           </TableHeader>
           <TableBody
             isLoading={getAllCategoriesLoading}
@@ -135,8 +135,9 @@ export default function CategoriesListPage() {
                 "You don't have any categories yet."
               )
             }
+            items={getAllCategoriesData?.categories ?? []}
           >
-            {getAllCategoriesData?.categories?.map((category) => (
+            {(category) => (
               <TableRow key={category.id} className="*:whitespace-nowrap">
                 <TableCell className="w-full">{category.name}</TableCell>
                 <TableCell>
@@ -161,7 +162,7 @@ export default function CategoriesListPage() {
                   </div>
                 </TableCell>
               </TableRow>
-            )) ?? []}
+            )}
           </TableBody>
         </Table>
 
