@@ -20,4 +20,6 @@ export enum QUERY_KEYS {
   ALL_CATEGORIES = "categories",
   SINGLE_CATEGORY = "category",
   ALL_CLIENTS = "clients",
+  ALL_PROMOTIONS = "promotions",
+  SINGLE_PROMOTION = "promotion",
 }
